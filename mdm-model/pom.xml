@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>mdm_application</artifactId>
+        <artifactId>mdm.application</artifactId>
         <groupId>com.avatech.edi</groupId>
         <version>0.0.1</version>
     </parent>
@@ -11,5 +11,17 @@
 
     <artifactId>mdm-model</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.avatech.edi</groupId>
+            <artifactId>edi-freamwork-common</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.avatech.edi</groupId>
+            <artifactId>edi-freamwork-model</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+    </dependencies>
 
 </project>
