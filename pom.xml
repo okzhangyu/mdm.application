@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.avatech.edi</groupId>
-    <artifactId>mdm_application</artifactId>
+    <artifactId>mdm.application</artifactId>
     <version>0.0.1</version>
     <modules>
         <module>mdm-common</module>
@@ -16,7 +16,7 @@
     </modules>
     <packaging>pom</packaging>
 
-    <name>mdm_application</name>
+    <name>mdm.application</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
