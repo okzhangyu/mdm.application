@@ -9,12 +9,27 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mdm-service</artifactId>
+    <artifactId>mdm-api</artifactId>
+
 
     <dependencies>
         <dependency>
             <groupId>com.avatech.edi</groupId>
-            <artifactId>edi-freamwork-model</artifactId>
+            <artifactId>mdm-model</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.avatech.edi</groupId>
+            <artifactId>edi-freamwork-common</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.avatech.edi</groupId>
+            <artifactId>mdm-service</artifactId>
             <version>0.0.1</version>
         </dependency>
     </dependencies>

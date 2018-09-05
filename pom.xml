@@ -12,6 +12,7 @@
         <module>mdm-repository</module>
         <module>mdm-repository-mssql</module>
         <module>mdm-repository-hana</module>
+        <module>mdm-api</module>
         <module>mdm-service</module>
     </modules>
     <packaging>pom</packaging>
