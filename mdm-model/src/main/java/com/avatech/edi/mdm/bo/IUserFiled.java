@@ -6,6 +6,10 @@ package com.avatech.edi.mdm.bo;
  */
 public interface IUserFiled {
 
+    Object getUniqueKey();
+
+    void setUniqueKey(Object uniqueKey);
+
     String getName();
 
     void setName(String name);

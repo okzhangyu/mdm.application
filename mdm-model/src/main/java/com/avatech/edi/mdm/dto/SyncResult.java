@@ -4,7 +4,17 @@ package com.avatech.edi.mdm.dto;
  * @author Fancy
  * @date 2018/9/5
  */
-public class MDMSyncMsg {
+public class SyncResult {
+
+    public final static String ERROR = "-1";
+
+    public static SyncResult error(String objectKey, String message){
+        SyncResult syncResult = new SyncResult();
+        syncResult.setCode(ERROR) ;
+        syncResult.setMessage(message);
+        syncResult.setObjectKey(objectKey);
+        return syncResult;
+    }
 
     private String code;
 

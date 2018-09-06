@@ -11,5 +11,12 @@
 
     <artifactId>mdm-repository</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.avatech.edi</groupId>
+            <artifactId>mdm-model</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+    </dependencies>
 
 </project>

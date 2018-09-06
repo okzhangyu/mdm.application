@@ -7,8 +7,19 @@ package com.avatech.edi.mdm.bo;
  */
 public class UserFiled implements IUserFiled {
 
-   private String name;
+   private Object uniqueKey;
 
+    @Override
+    public Object getUniqueKey() {
+        return uniqueKey;
+    }
+
+    @Override
+    public void setUniqueKey(Object uniqueKey) {
+        uniqueKey = uniqueKey;
+    }
+
+    private String name;
     @Override
     public String getName() {
         return name;

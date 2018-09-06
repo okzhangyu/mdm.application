@@ -6,9 +6,9 @@ import java.util.List;
  * @author Fancy
  * @date 2018/9/4
  */
-public class MDMMasterData {
+public class MasterData {
 
-    public MDMMasterData() {
+    public MasterData() {
     }
 
     private String tenantCode;

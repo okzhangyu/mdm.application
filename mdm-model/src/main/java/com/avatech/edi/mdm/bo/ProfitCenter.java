@@ -1,10 +1,12 @@
 package com.avatech.edi.mdm.bo;
 
+import com.avatech.edi.mdm.MDMMasterData;
+
 /**
  * @author Fancy
  * @date 2018/9/4
  */
-public class CostCenter implements ICostCenter{
+public class ProfitCenter extends MDMMasterData implements IProfitCenter {
 
 
     private String prcCode;

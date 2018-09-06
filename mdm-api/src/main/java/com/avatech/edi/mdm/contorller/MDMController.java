@@ -3,8 +3,8 @@ package com.avatech.edi.mdm.contorller;
 import com.avatech.edi.mdm.config.ServiceParam;
 import com.avatech.edi.mdm.data.ArrayList;
 import com.avatech.edi.mdm.data.List;
-import com.avatech.edi.mdm.dto.MDMMasterData;
-import com.avatech.edi.mdm.dto.MDMSyncMsg;
+import com.avatech.edi.mdm.dto.MasterData;
+import com.avatech.edi.mdm.dto.SyncResult;
 import com.avatech.edi.mdm.dto.Result;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,20 +18,16 @@ public class MDMController {
 
     @RequestMapping(value = "b1/masterdata",method ={RequestMethod.POST})
     public @ResponseBody Result postMasterData(@RequestParam(ServiceParam.TOKEN) String token,
-                                  @RequestBody MDMMasterData mdmMasterData){
+                                  @RequestBody MasterData mdmMasterData){
 
-
-
-
-
-        List<MDMSyncMsg> mdmSyncMsgList = new ArrayList<>();
-        MDMSyncMsg mdmSyncMsg = new MDMSyncMsg();
+        List<SyncResult> mdmSyncMsgList = new ArrayList<>();
+        SyncResult mdmSyncMsg = new SyncResult();
         mdmSyncMsg.setCode("0");
         mdmSyncMsg.setMessage("successful");
         mdmSyncMsg.setObjectKey("1");
         mdmSyncMsg.setReturnKey("2");
         mdmSyncMsgList.add(mdmSyncMsg);
-        mdmSyncMsg = new MDMSyncMsg();
+        mdmSyncMsg = new SyncResult();
         mdmSyncMsg.setCode("10002");
         mdmSyncMsg.setMessage("failed");
         mdmSyncMsg.setObjectKey("2");
@@ -43,7 +39,7 @@ public class MDMController {
 
     @GetMapping("b1/masterdata")
     public Result getMasterData(){
-        MDMMasterData mdmMasterData = new MDMMasterData();
+        MasterData mdmMasterData = new MasterData();
         mdmMasterData.setObjectCode("4");
         mdmMasterData.setSourceCompany("SUN");
         mdmMasterData.setSourceServer("192.168.1.13");

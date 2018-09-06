@@ -1,10 +1,12 @@
 package com.avatech.edi.mdm.bo;
 
+import com.avatech.edi.mdm.MDMMasterData;
+
 /**
  * @author Fancy
  * @date 2018/9/5
  */
-public class BusinessPartnerGroup implements IBusinessPartnerGroup {
+public class BusinessPartnerGroup extends MDMMasterData implements IBusinessPartnerGroup {
 
     private String grpCode;
 
