@@ -9,7 +9,8 @@ public class BusinessType {
     /**
      * 会计科目
      */
-    public static final String ACCOUNT = "1";
+    public static final String
+            ACCOUNT = "1";
 
     /**
      * 业务伙伴
