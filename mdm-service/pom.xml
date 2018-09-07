@@ -14,16 +14,6 @@
     <dependencies>
         <dependency>
             <groupId>com.avatech.edi</groupId>
-            <artifactId>mdm-common</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.avatech.edi</groupId>
-            <artifactId>edi-freamwork-model</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.avatech.edi</groupId>
             <artifactId>mdm-model</artifactId>
             <version>0.0.1</version>
         </dependency>
@@ -32,5 +22,26 @@
             <artifactId>mdm-repository</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.avatech.edi</groupId>
+            <artifactId>mdm-repository-hana</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>lib</directory>
+                <targetPath>BOOT-INF/lib/</targetPath>
+                <includes>
+                    <include>**/*.jar</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>BOOT-INF/classes/</targetPath>
+            </resource>
+        </resources>
+    </build>
 </project>

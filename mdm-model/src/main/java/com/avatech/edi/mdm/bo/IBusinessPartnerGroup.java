@@ -8,11 +8,15 @@ import com.avatech.edi.mdm.IMDMMasterData;
  */
 public interface IBusinessPartnerGroup extends IMDMMasterData {
 
-    String getGrpCode();
+    Integer getGrpCode();
 
-    void setGrpCode(String grpCode);
+    void setGrpCode(Integer grpCode);
 
     String getGrpName();
 
     void setGrpName(String grpName);
+
+    Integer getType();
+
+    void setType(Integer type);
 }

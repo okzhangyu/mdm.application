@@ -1,6 +1,7 @@
-package com.avatech.edi.mdm.repository;
+package com.avatech.edi.mdm.repository.hana;
 
 import com.avatech.edi.mdm.bo.IProfitCenter;
+import com.avatech.edi.mdm.repository.IBORepositoryProfitCenter;
 
 /**
  * @author Fancy

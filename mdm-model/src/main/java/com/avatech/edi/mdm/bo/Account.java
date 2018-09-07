@@ -86,4 +86,52 @@ public class Account extends MDMMasterData implements IAccount {
     public void setActCur(String actCur) {
         this.actCur = actCur;
     }
+
+    private String fatherAccountKey;
+
+    @Override
+    public String getFatherAccountKey() {
+        return fatherAccountKey;
+    }
+
+    private String finase;
+
+    @Override
+    public String getFinase() {
+        return finase;
+    }
+
+    @Override
+    public void setFinase(String finase) {
+        this.finase = finase;
+    }
+
+    @Override
+    public void setFatherAccountKey(String fatherAccountKey) {
+        this.fatherAccountKey = fatherAccountKey;
+    }
+
+    private String cfwRlvnt;
+
+    @Override
+    public String getCfwRlvnt() {
+        return cfwRlvnt;
+    }
+
+    @Override
+    public void setCfwRlvnt(String cfwRlvnt) {
+        this.cfwRlvnt = cfwRlvnt;
+    }
+
+    private String actType;
+
+    @Override
+    public String getActType() {
+        return actType;
+    }
+
+    @Override
+    public void setActType(String actType) {
+        this.actType = actType;
+    }
 }

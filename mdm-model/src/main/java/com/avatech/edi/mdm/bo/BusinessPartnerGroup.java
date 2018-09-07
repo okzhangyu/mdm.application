@@ -8,17 +8,19 @@ import com.avatech.edi.mdm.MDMMasterData;
  */
 public class BusinessPartnerGroup extends MDMMasterData implements IBusinessPartnerGroup {
 
-    private String grpCode;
+    private Integer grpCode;
 
     private String grpName;
 
+    private Integer type;
+
     @Override
-    public String getGrpCode() {
+    public Integer getGrpCode() {
         return grpCode;
     }
 
     @Override
-    public void setGrpCode(String grpCode) {
+    public void setGrpCode(Integer grpCode) {
         this.grpCode = grpCode;
     }
 
@@ -30,5 +32,15 @@ public class BusinessPartnerGroup extends MDMMasterData implements IBusinessPart
     @Override
     public void setGrpName(String grpName) {
         this.grpName = grpName;
+    }
+
+    @Override
+    public Integer getType() {
+        return type;
+    }
+
+    @Override
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

@@ -1,13 +1,17 @@
-package com.avatech.edi.mdm.repository;
+package com.avatech.edi.mdm.repository.hana;
 
 import com.avatech.edi.mdm.bo.Account;
 import com.avatech.edi.mdm.bo.IAccount;
+import com.avatech.edi.mdm.repository.IBORepositoryAccount;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Fancy
  * @date 2018/9/6
  */
-public class BORepositoryAccount implements IBORepositoryAccount{
+@Repository
+public class BORepositoryAccount implements IBORepositoryAccount {
     @Override
     public IAccount fetchAccount(String code) {
         IAccount account = new Account();
