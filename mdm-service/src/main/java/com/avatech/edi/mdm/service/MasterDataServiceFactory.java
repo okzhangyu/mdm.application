@@ -13,7 +13,16 @@ import org.springframework.stereotype.Component;
 public class MasterDataServiceFactory {
 
     @Autowired
-    private AcountService acountService;
+    private AccountService acountService;
+
+    @Autowired
+    private BusinessPartnerService businessPartnerService;
+
+    @Autowired
+    private BusinessPartnerGroupService businessPartnerGroupService;
+
+    @Autowired
+    private ProfitCenterService profitCenterService;
 
     private BaseMasterDataService service;
 
@@ -21,7 +30,9 @@ public class MasterDataServiceFactory {
         if(masterData.getObjectCode() != null && !masterData.getObjectCode().isEmpty()){
             switch (masterData.getObjectCode()){
                 case BusinessType.ACCOUNT:service = acountService;break;
-
+                case BusinessType.BUSINESSPARTNER :service = businessPartnerService;break;
+                case BusinessType.BUSINESSPARTNERGROUP :service = businessPartnerGroupService;break;
+                case BusinessType.PROFITCENTER :service = profitCenterService;break;
             }
         }
         return service;

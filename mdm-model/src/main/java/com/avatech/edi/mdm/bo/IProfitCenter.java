@@ -24,5 +24,15 @@ public interface IProfitCenter extends IMDMMasterData {
 
     void setActive(String active);
 
+    String getCostCenterType();
 
+    void setCostCenterType(String costCenterType);
+
+    String getGroupCode();
+
+    void setGroupCode(String groupCode);
+
+    String getLocked();
+
+    void setLocked(String locked);
 }

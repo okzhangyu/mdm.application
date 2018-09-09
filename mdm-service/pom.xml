@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>com.avatech.edi</groupId>
-            <artifactId>mdm-repository-hana</artifactId>
+            <artifactId>mdm-repository-businessone</artifactId>
             <version>0.0.1</version>
         </dependency>
     </dependencies>

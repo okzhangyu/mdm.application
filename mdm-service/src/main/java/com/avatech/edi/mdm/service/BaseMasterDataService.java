@@ -10,5 +10,5 @@ import com.avatech.edi.mdm.dto.SyncResult;
  */
 public interface BaseMasterDataService {
 
-    List<SyncResult> syncMasterData(MasterData mdmMasterData);
+    List<SyncResult> syncMasterData(MasterData mdmMasterData) throws Exception;
 }

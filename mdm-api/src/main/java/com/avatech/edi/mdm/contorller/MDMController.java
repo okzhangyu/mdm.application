@@ -28,10 +28,15 @@ public class MDMController {
     @RequestMapping(value = "b1/masterdata",method ={RequestMethod.POST})
     public @ResponseBody Result postMasterData( //@RequestParam(ServiceParam.TOKEN) String token,
                                   @RequestBody MasterData mdmMasterData){
+        try
+        {
+            BaseMasterDataService service = masterDataServiceFactory.getServiceInstance(mdmMasterData);
+            List<SyncResult> results = service.syncMasterData(mdmMasterData);
+            return Result.ok(results);
+        }catch (Exception e){
+            return Result.error("-1",e);
+        }
 
-        BaseMasterDataService service = masterDataServiceFactory.getServiceInstance(mdmMasterData);
-        List<SyncResult> results = service.syncMasterData(mdmMasterData);
-        return Result.ok(results);
     }
 
 

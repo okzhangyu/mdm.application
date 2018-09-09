@@ -4,17 +4,17 @@ import com.avatech.edi.mdm.MDMMasterData;
 
 public class CashFlow extends MDMMasterData implements ICashFlow {
 
-    private String cashFlowCode;
+    private Integer cashFlowCode;
 
     private String cashFlowName;
 
     @Override
-    public String getCashFlowCode() {
+    public Integer getCashFlowCode() {
         return cashFlowCode;
     }
 
     @Override
-    public void setCashFlowCode(String cashFlowCode) {
+    public void setCashFlowCode(Integer cashFlowCode) {
         this.cashFlowCode = cashFlowCode;
     }
 

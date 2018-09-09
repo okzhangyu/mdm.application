@@ -8,7 +8,20 @@ import com.avatech.edi.mdm.IMDMMasterData;
  */
 public interface  IBusinessPartner extends IMDMMasterData {
 
-    String getCode();
+    String getCardCode();
 
-    void setCode(String code);
+    void setCardCode(String cardCode);
+
+    String getCardName();
+
+    void setCardName(String cardName);
+
+    String getCardType();
+
+    void setCardType(String cardType);
+
+    String getGroupCode();
+
+    void setGroupCode(String groupCode);
+
 }
