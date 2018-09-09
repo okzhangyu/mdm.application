@@ -2,17 +2,41 @@ package com.avatech.edi.mdm.bo;
 
 import com.avatech.edi.mdm.MDMMasterData;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @author Fancy
  * @date 2018/9/5
  */
+@Entity
+@Table(name = "AVA_MDM_VIEW_OCRG")
 public class BusinessPartnerGroup extends MDMMasterData implements IBusinessPartnerGroup {
 
+    @Id
+    @Column(name = "Groupcode")
     private Integer grpCode;
 
+    @Column(name = "Groupname")
     private String grpName;
 
-    private Integer type;
+    @Column(name = "Grouptype")
+    private String type;
+
+    @Column(name = "Locked")
+    private String locked;
+
+    @Override
+    public String getLocked() {
+        return locked;
+    }
+
+    @Override
+    public void setLocked(String locked) {
+        this.locked = locked;
+    }
 
     @Override
     public Integer getGrpCode() {
@@ -35,12 +59,12 @@ public class BusinessPartnerGroup extends MDMMasterData implements IBusinessPart
     }
 
     @Override
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
     @Override
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

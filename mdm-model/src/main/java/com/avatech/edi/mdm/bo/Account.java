@@ -2,12 +2,21 @@ package com.avatech.edi.mdm.bo;
 
 import com.avatech.edi.mdm.MDMMasterData;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @author Fancy
  * @date 2018/9/4
  */
+@Entity
+@Table(name = "AVA_MDM_VIEW_OACT")
 public class Account extends MDMMasterData implements IAccount {
 
+    @Id
+    @Column(name = "Acctcode")
     private String acctCode;
 
     @Override
@@ -20,6 +29,7 @@ public class Account extends MDMMasterData implements IAccount {
         this.acctCode = acctCode;
     }
 
+    @Column(name = "Acctname")
     private String acctName;
     @Override
     public String getAcctName() {
@@ -31,6 +41,7 @@ public class Account extends MDMMasterData implements IAccount {
         this.acctName = acctName;
     }
 
+    @Column(name = "Levels")
     private Integer levels;
 
     @Override
@@ -43,6 +54,7 @@ public class Account extends MDMMasterData implements IAccount {
         this.levels = levels;
     }
 
+    @Column(name = "Locmantran")
     private String locManTran;
     @Override
     public String getLocManTran() {
@@ -54,6 +66,7 @@ public class Account extends MDMMasterData implements IAccount {
         this.locManTran = locManTran;
     }
 
+    @Column(name = "Postable")
     private String postable;
     @Override
     public String getPostable() {
@@ -65,7 +78,9 @@ public class Account extends MDMMasterData implements IAccount {
         this.postable = postable;
     }
 
+    @Column(name = "Accntntcod")
     private String acctntCod;
+
     @Override
     public String getAcctntCod() {
         return acctntCod;
@@ -76,7 +91,9 @@ public class Account extends MDMMasterData implements IAccount {
         this.acctntCod = acctntCod;
     }
 
+    @Column(name = "Actcurr")
     private String actCur;
+
     @Override
     public String getActCur() {
         return actCur;
@@ -87,6 +104,7 @@ public class Account extends MDMMasterData implements IAccount {
         this.actCur = actCur;
     }
 
+    @Column(name ="Fathernum")
     private String fatherAccountKey;
 
     @Override
@@ -94,6 +112,12 @@ public class Account extends MDMMasterData implements IAccount {
         return fatherAccountKey;
     }
 
+    @Override
+    public void setFatherAccountKey(String fatherAccountKey) {
+        this.fatherAccountKey = fatherAccountKey;
+    }
+
+    @Column(name = "Finanse")
     private String finase;
 
     @Override
@@ -106,11 +130,7 @@ public class Account extends MDMMasterData implements IAccount {
         this.finase = finase;
     }
 
-    @Override
-    public void setFatherAccountKey(String fatherAccountKey) {
-        this.fatherAccountKey = fatherAccountKey;
-    }
-
+    @Column(name = "Cfwrlvnt")
     private String cfwRlvnt;
 
     @Override
@@ -123,6 +143,7 @@ public class Account extends MDMMasterData implements IAccount {
         this.cfwRlvnt = cfwRlvnt;
     }
 
+    @Column(name = "Acttype")
     private String actType;
 
     @Override

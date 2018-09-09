@@ -1,15 +1,17 @@
-package com.avatech.edi.businessone.masterdata;
+package com.avatech.edi.mdm.businessone.masterdata;
 
-import com.avatech.edi.businessone.B1Exception;
-import com.avatech.edi.businessone.BORepositoryBusinessOne;
+import com.avatech.edi.mdm.businessone.B1Exception;
+import com.avatech.edi.mdm.businessone.BORepositoryBusinessOne;
 import com.avatech.edi.mdm.bo.IAccount;
 import com.avatech.edi.mdm.config.B1Connection;
 import com.sap.smb.sbo.api.*;
+import org.springframework.stereotype.Component;
 
 /**
  * 科目生成服务
  */
-public class AccoutService {
+@Component
+public class B1AccountServiceImp implements B1AccountService {
 
     private static final String YES = "Y";
     private static final String NO = "N";
@@ -19,6 +21,7 @@ public class AccoutService {
 
 
 
+    @Override
     public String syncAccount(IAccount account, B1Connection b1Connection){
         BORepositoryBusinessOne boRepositoryBusinessOne = null;
         ICompany company = null;

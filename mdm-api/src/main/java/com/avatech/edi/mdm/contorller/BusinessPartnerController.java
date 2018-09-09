@@ -20,7 +20,7 @@ public class BusinessPartnerController {
     public List<IBusinessPartner> getBusinessPartner(){
         List<IBusinessPartner> businessPartners = new ArrayList();
         IBusinessPartner businessPartner = new BusinessPartner();
-        businessPartner.setCode("111");
+        businessPartner.setCardCode("111");
         businessPartners.add(businessPartner);
         return  businessPartners;
     }

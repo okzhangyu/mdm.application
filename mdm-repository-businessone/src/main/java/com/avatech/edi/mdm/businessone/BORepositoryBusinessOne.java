@@ -1,4 +1,4 @@
-package com.avatech.edi.businessone;
+package com.avatech.edi.mdm.businessone;
 
 import com.avatech.edi.mdm.config.B1Connection;
 import com.sap.smb.sbo.api.ICompany;

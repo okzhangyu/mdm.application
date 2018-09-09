@@ -16,7 +16,11 @@ public interface IBusinessPartnerGroup extends IMDMMasterData {
 
     void setGrpName(String grpName);
 
-    Integer getType();
+    String getType();
 
-    void setType(Integer type);
+    void setType(String type);
+
+    String getLocked();
+
+    void setLocked(String locked);
 }

@@ -4,9 +4,9 @@ import com.avatech.edi.mdm.IMDMMasterData;
 
 public interface ICashFlow extends IMDMMasterData {
 
-    String getCashFlowCode();
+    Integer getCashFlowCode();
 
-    void setCashFlowCode(String cashFlowCode);
+    void setCashFlowCode(Integer cashFlowCode);
 
     String getCashFlowName();
 
