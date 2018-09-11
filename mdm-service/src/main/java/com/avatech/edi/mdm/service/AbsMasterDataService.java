@@ -1,9 +1,7 @@
 package com.avatech.edi.mdm.service;
 
 import com.avatech.edi.mdm.IMDMMasterData;
-import com.avatech.edi.mdm.config.B1Connection;
-import com.avatech.edi.mdm.config.DataTemple;
-import com.avatech.edi.mdm.config.DataTempleKey;
+import com.avatech.edi.mdm.config.*;
 import com.avatech.edi.mdm.data.ArrayList;
 import com.avatech.edi.mdm.data.List;
 import com.avatech.edi.mdm.dto.MasterData;
@@ -11,6 +9,8 @@ import com.avatech.edi.mdm.dto.SyncResult;
 import com.avatech.edi.mdm.repository.config.IRepositoryDataTemple;
 import org.hibernate.annotations.AttributeAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.xml.ws.Service;
 
 /**
  * @author Fancy
@@ -34,13 +34,22 @@ public abstract class AbsMasterDataService implements BaseMasterDataService{
     @Autowired
     private IRepositoryDataTemple repositoryDataTemple;
 
+    @Autowired
+    private B1Manager b1Manager;
+
     @Override
     public List<SyncResult> syncMasterData(MasterData mdmMasterData) throws Exception{
         List<SyncResult> syncResults = new ArrayList<>();
-        // TODO 获取B1配置信息
-        B1Connection b1Connection = new B1Connection();
+        // 获取B1配置信息
+        B1Connection b1Connection;
+        try{
+            b1Connection = b1Manager.getB1ConnInstance(mdmMasterData.getTargetCompany());
+        }catch (ServiceException e){
+            throw e;
+        }
 
-        java.util.List<DataTemple> dataTemples = repositoryDataTemple.findByDataTempleKey_Code(mdmMasterData.getObjectCode());
+        // 获取B1同步模板
+        java.util.List<DataTemple> dataTemples = repositoryDataTemple.findByDataTempleKey_Code(mdmMasterData.getTempleCode());
         if(dataTemples == null || dataTemples.size() == 0){
             throw new Exception("未找到匹配的同步模板");
         }
@@ -61,6 +70,7 @@ public abstract class AbsMasterDataService implements BaseMasterDataService{
                }
            }
            SyncResult syncResult;
+           // 同步
            for (IMDMMasterData data:masterDatas) {
                try
                {

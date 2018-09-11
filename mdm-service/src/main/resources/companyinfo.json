@@ -1,0 +1,16 @@
+[
+  {
+    "B1CompanyName":"STAFF",
+    "DBServer":"192.168.1.70",
+    "B1Company":"TEST_HT024_02",
+    "B1User":"AVACLOUD\ht024099",
+    "B1Password":"Aa123456!",
+    "B1LicenseServer":"192.168.1.70:30000",
+    "B1SLDServer":"192.168.1.70:30015",
+    "B1DbType":"dst_MSSQL2012",
+    "B1DbUser":"avasa6",
+    "B1DbPassword":"AVAtechAVA2018!",
+    "B1Language":"ln_Chinese",
+    "B1DbUseTrusted":"True"
+  }
+]

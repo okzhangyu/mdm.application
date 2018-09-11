@@ -4,15 +4,18 @@ import com.avatech.edi.mdm.businessone.B1Exception;
 import com.avatech.edi.mdm.businessone.BORepositoryBusinessOne;
 import com.avatech.edi.mdm.bo.IProfitCenter;
 import com.avatech.edi.mdm.config.B1Connection;
+import com.avatech.edi.mdm.config.DataTemple;
 import com.sap.smb.sbo.api.*;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class B1ProfitCenterServiceImp implements B1ProfitCenterService {
 
     private static final String YES = "Y";
     @Override
-    public String syncProfitCenter(IProfitCenter profitCenter, B1Connection b1Connection){
+    public String syncProfitCenter(IProfitCenter profitCenter, B1Connection b1Connection,List<DataTemple> dataTempleList){
         BORepositoryBusinessOne boRepositoryBusinessOne = null;
         ICompany company = null;
         try {

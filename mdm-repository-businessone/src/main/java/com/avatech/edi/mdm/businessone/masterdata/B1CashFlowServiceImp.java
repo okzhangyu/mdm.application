@@ -4,8 +4,11 @@ import com.avatech.edi.mdm.businessone.B1Exception;
 import com.avatech.edi.mdm.businessone.BORepositoryBusinessOne;
 import com.avatech.edi.mdm.bo.ICashFlow;
 import com.avatech.edi.mdm.config.B1Connection;
+import com.avatech.edi.mdm.config.DataTemple;
 import com.sap.smb.sbo.api.*;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * 现金流生成服务
@@ -14,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class B1CashFlowServiceImp implements B1CashFlowService {
 
     @Override
-    public String syncCashFlow(ICashFlow cashFlow, B1Connection b1Connection){
+    public String syncCashFlow(ICashFlow cashFlow, B1Connection b1Connection,List<DataTemple> dataTempleList){
         BORepositoryBusinessOne boRepositoryBusinessOne = null;
         ICompany company = null;
         try {

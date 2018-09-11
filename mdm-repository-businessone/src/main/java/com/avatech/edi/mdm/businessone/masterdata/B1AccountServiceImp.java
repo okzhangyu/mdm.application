@@ -4,8 +4,12 @@ import com.avatech.edi.mdm.businessone.B1Exception;
 import com.avatech.edi.mdm.businessone.BORepositoryBusinessOne;
 import com.avatech.edi.mdm.bo.IAccount;
 import com.avatech.edi.mdm.config.B1Connection;
+import com.avatech.edi.mdm.config.DataTemple;
 import com.sap.smb.sbo.api.*;
 import org.springframework.stereotype.Component;
+
+import java.security.acl.Group;
+import java.util.List;
 
 /**
  * 科目生成服务
@@ -19,10 +23,11 @@ public class B1AccountServiceImp implements B1AccountService {
     private static final String REVENUES = "I";
     private static final String OTHER = "N";
 
+    private static final String ACCTTYPE = "GroupType";
 
 
     @Override
-    public String syncAccount(IAccount account, B1Connection b1Connection){
+    public String syncAccount(IAccount account, B1Connection b1Connection,List<DataTemple> dataTempleList){
         BORepositoryBusinessOne boRepositoryBusinessOne = null;
         ICompany company = null;
         try {
@@ -33,6 +38,12 @@ public class B1AccountServiceImp implements B1AccountService {
             IChartOfAccounts chartOfAccounts = SBOCOMUtil.newChartOfAccounts(company);
             chartOfAccounts.setCode(account.getAcctCode());
             chartOfAccounts.setName(account.getAcctName());
+
+            for (DataTemple temple:dataTempleList) {
+                if(temple.getFieldName().toUpperCase().equals(ACCTTYPE)){
+                    //chartOfAccounts.set
+                }
+            }
             chartOfAccounts.setAcctCurrency(account.getActCur());
             if(account.getFinase()!= null && account.getFinase().equals(YES)){
                 chartOfAccounts.setCashAccount(SBOCOMConstants.BoYesNoEnum_tYES);
