@@ -24,7 +24,6 @@ public class AccountService extends AbsMasterDataService{
     @Autowired
     private B1AccountService b1AccountService;
 
-
     @Override
     public IMDMMasterData fetchMasterData(Object key) {
         return boRepositoryAccount.findByAcctCode(key.toString());
@@ -37,7 +36,7 @@ public class AccountService extends AbsMasterDataService{
 
         try{
             if(masterData instanceof IAccount){
-                String key = b1AccountService.syncAccount((IAccount) masterData,b1Connection);
+                String key = b1AccountService.syncAccount((IAccount) masterData,b1Connection,dataTemples);
                 result.setCode(B1Data.SYNC_OK);
                 result.setMessage(B1Data.SYNC_OK_MSG);
                 result.setReturnKey(key);

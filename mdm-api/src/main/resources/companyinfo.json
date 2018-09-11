@@ -1,0 +1,29 @@
+[
+  {
+    "companyName":"SBO_JS_KFCS02",
+    "server":"192.168.1.70",
+    "companyDB":"TEST_HT024_02",
+    "userName":"AVACLOUDht024099",
+    "password":"Aa123456!",
+    "licenseServer":"192.168.1.70:30000",
+    "sldServer":"192.168.1.70:30015",
+    "dbServiceType":9,
+    "dbUsername":"avasa6",
+    "dbPassword":"AVAtechAVA2018!",
+    "laguage":15,
+    "useTrusted":"True"
+  }, {
+  "companyName":"SBO_JS_KFCS03",
+  "server":"192.168.1.70",
+  "companyDB":"TEST_HT024_02",
+  "userName":"AVACLOUDht024099",
+  "password":"Aa123456!",
+  "licenseServer":"192.168.1.70:30000",
+  "sldServer":"192.168.1.70:30015",
+  "dbServiceType":9,
+  "dbUsername":"avasa6",
+  "dbPassword":"AVAtechAVA2018!",
+  "laguage":15,
+  "useTrusted":"True"
+}
+]

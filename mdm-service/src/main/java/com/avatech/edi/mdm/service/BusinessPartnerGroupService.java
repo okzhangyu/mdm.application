@@ -37,7 +37,7 @@ public class BusinessPartnerGroupService extends AbsMasterDataService{
 
         try{
             if(masterData instanceof IBusinessPartnerGroup){
-                String key = b1BusinessPartnerGroupService.syncBPGroup((IBusinessPartnerGroup) masterData,b1Connection);
+                String key = b1BusinessPartnerGroupService.syncBPGroup((IBusinessPartnerGroup) masterData,b1Connection,dataTemples);
                 result.setCode(B1Data.SYNC_OK);
                 result.setMessage(B1Data.SYNC_OK_MSG);
                 result.setReturnKey(key);

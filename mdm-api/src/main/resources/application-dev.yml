@@ -2,10 +2,10 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:sqlserver://192.168.3.14;databaseName=SBODemoCN
-    username: sa
-    password: avatech
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sap://10.10.8.41:30015?currentschema=SBO_JS_KFCS01
+    username: SYSTEM
+    password: Consen2018
+    driver-class-name: com.sap.db.jdbc.Driver
   jpa:
     hibernate:
               ddl-auto: none
@@ -15,5 +15,3 @@ logging:
     org:
       hibernate:
               SQL: DEBUG
-
-

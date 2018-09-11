@@ -15,11 +15,21 @@ public class MasterData {
 
     private String objectCode;
 
+    private String templeCode;
+
     private String sourceServer;
 
     private String targetServer;
 
     private String sourceCompany;
+
+    public String getTempleCode() {
+        return templeCode;
+    }
+
+    public void setTempleCode(String templeCode) {
+        this.templeCode = templeCode;
+    }
 
     private String targetCompany;
 

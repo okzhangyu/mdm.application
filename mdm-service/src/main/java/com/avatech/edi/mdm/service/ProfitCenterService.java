@@ -39,7 +39,7 @@ public class ProfitCenterService extends AbsMasterDataService{
 
         try{
             if(masterData instanceof IProfitCenter){
-                String key = b1ProfitCenterService.syncProfitCenter((IProfitCenter) masterData,b1Connection);
+                String key = b1ProfitCenterService.syncProfitCenter((IProfitCenter) masterData,b1Connection,dataTemples);
                 result.setCode(B1Data.SYNC_OK);
                 result.setMessage(B1Data.SYNC_OK_MSG);
                 result.setReturnKey(key);
