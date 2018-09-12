@@ -11,8 +11,8 @@ public interface IBORepositoryProfitCenter extends CrudRepository<ProfitCenter,S
 
     /**
      * 查找成本中心
-     * @param code 成本中心编码
+     * @param uniqueKey 主键
      * @return
      */
-    ProfitCenter findByPrcCode(String code);
+    ProfitCenter findProfitCenterByUniqueKey(String uniqueKey);
 }

@@ -1,5 +1,6 @@
 package com.avatech.edi.mdm.service;
 
+import com.avatech.edi.mdm.bo.ProfitCenterType;
 import com.avatech.edi.mdm.config.BusinessType;
 import com.avatech.edi.mdm.dto.MasterData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class MasterDataServiceFactory {
     @Autowired
     private ProfitCenterService profitCenterService;
 
+    @Autowired
+    private ProfitCenterTypeService profitCenterTypeService;
+
     private BaseMasterDataService service;
 
     public BaseMasterDataService getServiceInstance(MasterData masterData){
@@ -33,6 +37,7 @@ public class MasterDataServiceFactory {
                 case BusinessType.BUSINESSPARTNER :service = businessPartnerService;break;
                 case BusinessType.BUSINESSPARTNERGROUP :service = businessPartnerGroupService;break;
                 case BusinessType.PROFITCENTER :service = profitCenterService;break;
+                case BusinessType.PROFITCENTERTYPE:service = profitCenterTypeService;break;
             }
         }
         return service;

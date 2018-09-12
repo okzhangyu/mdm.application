@@ -26,7 +26,7 @@ public class BusinessPartnerGroupService extends AbsMasterDataService{
 
     @Override
     public IMDMMasterData fetchMasterData(Object key) {
-        return boRepositoryBusinessPartnerGroup.findByGrpCode(new Integer(key.toString()));
+        return boRepositoryBusinessPartnerGroup.findBusinessPartnerGroupByUniqueKey(new Integer(key.toString()));
     }
 
     @Override

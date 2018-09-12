@@ -1,6 +1,14 @@
 package com.avatech.edi.mdm.bo;
 
-public class CashFlow extends MDMMasterData implements ICashFlow {
+import javax.persistence.Column;
+import javax.persistence.Id;
+import java.io.Serializable;
+
+public class CashFlow extends MDMMasterData implements ICashFlow ,Serializable {
+
+    @Id
+    @Column(name = "Uniquekey")
+    private String uniqueKey;
 
     private Integer cashFlowCode;
 

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2018/9/4
  */
 @SpringBootApplication
-@ComponentScan(basePackages = "com.avatech.edi.common")
+@ComponentScan(basePackages = "com.avatech.edi")
 public class MDMApplication {
 
     public static void main(String args[]){
