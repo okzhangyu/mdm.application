@@ -1,4 +1,5 @@
-package com.avatech.edi.mdm;
+package com.avatech.edi.mdm.bo;
+
 
 public class MDMMasterData implements IMDMMasterData {
 

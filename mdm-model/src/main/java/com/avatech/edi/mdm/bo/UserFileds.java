@@ -1,6 +1,6 @@
 package com.avatech.edi.mdm.bo;
 
-import com.avatech.edi.mdm.data.List;
+import com.avatech.edi.common.data.List;
 
 /**
  * @author Fancy

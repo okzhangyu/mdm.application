@@ -1,6 +1,6 @@
 package com.avatech.edi.mdm.config;
 
-import com.avatech.edi.mdm.Exception.BaseException;
+import com.avatech.edi.common.Exception.BaseException;
 
 public class ServiceException extends BaseException {
 

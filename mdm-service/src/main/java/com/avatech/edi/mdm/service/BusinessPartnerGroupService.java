@@ -1,7 +1,6 @@
 package com.avatech.edi.mdm.service;
 
-import com.avatech.edi.mdm.IMDMMasterData;
-import com.avatech.edi.mdm.bo.IBusinessPartner;
+import com.avatech.edi.mdm.bo.IMDMMasterData;
 import com.avatech.edi.mdm.bo.IBusinessPartnerGroup;
 import com.avatech.edi.mdm.businessone.masterdata.B1BusinessPartnerGroupService;
 import com.avatech.edi.mdm.config.B1Connection;

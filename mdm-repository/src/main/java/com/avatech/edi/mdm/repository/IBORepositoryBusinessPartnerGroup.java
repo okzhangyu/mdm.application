@@ -1,9 +1,7 @@
 package com.avatech.edi.mdm.repository;
 
 import com.avatech.edi.mdm.bo.BusinessPartnerGroup;
-import com.avatech.edi.mdm.bo.IBusinessPartnerGroup;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  * @author Fancy

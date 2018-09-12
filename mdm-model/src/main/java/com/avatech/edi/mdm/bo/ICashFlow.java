@@ -1,7 +1,5 @@
 package com.avatech.edi.mdm.bo;
 
-import com.avatech.edi.mdm.IMDMMasterData;
-
 public interface ICashFlow extends IMDMMasterData {
 
     Integer getCashFlowCode();

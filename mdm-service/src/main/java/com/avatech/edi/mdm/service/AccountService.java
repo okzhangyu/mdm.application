@@ -2,7 +2,7 @@ package com.avatech.edi.mdm.service;
 
 import com.avatech.edi.mdm.bo.IAccount;
 import com.avatech.edi.mdm.businessone.masterdata.B1AccountService;
-import com.avatech.edi.mdm.IMDMMasterData;
+import com.avatech.edi.mdm.bo.IMDMMasterData;
 import com.avatech.edi.mdm.config.B1Connection;
 import com.avatech.edi.mdm.config.B1Data;
 import com.avatech.edi.mdm.config.DataTemple;
@@ -26,7 +26,7 @@ public class AccountService extends AbsMasterDataService{
 
     @Override
     public IMDMMasterData fetchMasterData(Object key) {
-        return boRepositoryAccount.findByAcctCode(key.toString());
+        return boRepositoryAccount.findAccountByUniqueKey(key.toString());
     }
 
     @Override

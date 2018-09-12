@@ -1,7 +1,5 @@
 package com.avatech.edi.mdm.bo;
 
-import com.avatech.edi.mdm.MDMMasterData;
-
 public class CashFlow extends MDMMasterData implements ICashFlow {
 
     private Integer cashFlowCode;

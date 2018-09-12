@@ -1,6 +1,6 @@
 package com.avatech.edi.mdm.service;
 
-import com.avatech.edi.mdm.IMDMMasterData;
+import com.avatech.edi.mdm.bo.IMDMMasterData;
 import com.avatech.edi.mdm.bo.IBusinessPartner;
 import com.avatech.edi.mdm.businessone.masterdata.B1BusinessPartnerService;
 import com.avatech.edi.mdm.config.B1Connection;
@@ -27,7 +27,7 @@ public class BusinessPartnerService extends AbsMasterDataService{
 
     @Override
     public IMDMMasterData fetchMasterData(Object key) {
-        return boRepositoryBusinessPartner.findByCardCode(key.toString());
+        return boRepositoryBusinessPartner.findBusinessPartnerByUniqueKey(key.toString());
     }
 
 
