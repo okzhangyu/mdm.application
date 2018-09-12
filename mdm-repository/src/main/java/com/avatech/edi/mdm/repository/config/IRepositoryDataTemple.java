@@ -2,7 +2,6 @@ package com.avatech.edi.mdm.repository.config;
 
 import com.avatech.edi.mdm.config.DataTemple;
 import com.avatech.edi.mdm.config.DataTempleKey;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

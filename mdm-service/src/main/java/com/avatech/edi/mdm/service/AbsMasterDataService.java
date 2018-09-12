@@ -1,16 +1,16 @@
 package com.avatech.edi.mdm.service;
 
-import com.avatech.edi.mdm.IMDMMasterData;
-import com.avatech.edi.mdm.config.*;
-import com.avatech.edi.mdm.data.ArrayList;
-import com.avatech.edi.mdm.data.List;
+import com.avatech.edi.mdm.bo.IMDMMasterData;
+import com.avatech.edi.common.data.ArrayList;
+import com.avatech.edi.common.data.List;
+import com.avatech.edi.mdm.config.B1Connection;
+import com.avatech.edi.mdm.config.B1Manager;
+import com.avatech.edi.mdm.config.DataTemple;
+import com.avatech.edi.mdm.config.ServiceException;
 import com.avatech.edi.mdm.dto.MasterData;
 import com.avatech.edi.mdm.dto.SyncResult;
 import com.avatech.edi.mdm.repository.config.IRepositoryDataTemple;
-import org.hibernate.annotations.AttributeAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.xml.ws.Service;
 
 /**
  * @author Fancy
@@ -29,7 +29,7 @@ public abstract class AbsMasterDataService implements BaseMasterDataService{
      * @param dataTemples 同步模版
      * @return
      */
-    public abstract SyncResult saveMasterData(IMDMMasterData masterData, B1Connection b1Connection,java.util.List<DataTemple> dataTemples);
+    public abstract SyncResult saveMasterData(IMDMMasterData masterData, B1Connection b1Connection, java.util.List<DataTemple> dataTemples);
 
     @Autowired
     private IRepositoryDataTemple repositoryDataTemple;

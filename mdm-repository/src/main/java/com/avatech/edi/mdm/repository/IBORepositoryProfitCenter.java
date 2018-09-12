@@ -1,9 +1,7 @@
 package com.avatech.edi.mdm.repository;
 
-import com.avatech.edi.mdm.bo.IProfitCenter;
 import com.avatech.edi.mdm.bo.ProfitCenter;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  * @author Fancy

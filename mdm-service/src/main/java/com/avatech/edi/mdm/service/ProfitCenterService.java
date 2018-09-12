@@ -1,14 +1,12 @@
 package com.avatech.edi.mdm.service;
 
-import com.avatech.edi.mdm.IMDMMasterData;
-import com.avatech.edi.mdm.bo.IBOMasterData;
+import com.avatech.edi.mdm.bo.IMDMMasterData;
 import com.avatech.edi.mdm.bo.IProfitCenter;
 import com.avatech.edi.mdm.businessone.masterdata.B1ProfitCenterService;
 import com.avatech.edi.mdm.config.B1Connection;
 import com.avatech.edi.mdm.config.B1Data;
 import com.avatech.edi.mdm.config.DataTemple;
 import com.avatech.edi.mdm.dto.SyncResult;
-import com.avatech.edi.mdm.repository.IBORepositoryAccount;
 import com.avatech.edi.mdm.repository.IBORepositoryProfitCenter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

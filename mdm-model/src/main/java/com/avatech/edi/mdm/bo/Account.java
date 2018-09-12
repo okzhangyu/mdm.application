@@ -1,7 +1,5 @@
 package com.avatech.edi.mdm.bo;
 
-import com.avatech.edi.mdm.MDMMasterData;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +14,9 @@ import javax.persistence.Table;
 public class Account extends MDMMasterData implements IAccount {
 
     @Id
+    @Column(name = "Uniquekey")
+    private String uniqueKey;
+
     @Column(name = "Acctcode")
     private String acctCode;
 

@@ -1,7 +1,5 @@
 package com.avatech.edi.mdm.bo;
 
-import com.avatech.edi.mdm.MDMMasterData;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;

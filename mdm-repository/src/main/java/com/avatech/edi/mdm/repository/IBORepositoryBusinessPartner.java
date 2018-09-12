@@ -1,7 +1,6 @@
 package com.avatech.edi.mdm.repository;
 
 import com.avatech.edi.mdm.bo.BusinessPartner;
-import com.avatech.edi.mdm.bo.IBusinessPartner;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,9 +13,9 @@ public interface IBORepositoryBusinessPartner extends CrudRepository<BusinessPar
 
     /**
      * 查找业务伙伴
-     * @param cardCode 业务伙伴编码
+     * @param uniqueKey 业务伙伴编码
      * @return
      */
-    BusinessPartner findByCardCode(String cardCode);
+    BusinessPartner findBusinessPartnerByUniqueKey(String uniqueKey);
 
 }

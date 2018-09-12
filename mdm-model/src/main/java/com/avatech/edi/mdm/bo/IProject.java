@@ -1,7 +1,5 @@
 package com.avatech.edi.mdm.bo;
 
-import com.avatech.edi.mdm.IMDMMasterData;
-
 /**
  * @author Fancy
  * @date 2018/9/6

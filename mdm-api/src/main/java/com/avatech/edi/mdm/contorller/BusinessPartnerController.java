@@ -2,8 +2,8 @@ package com.avatech.edi.mdm.contorller;
 
 import com.avatech.edi.mdm.bo.BusinessPartner;
 import com.avatech.edi.mdm.bo.IBusinessPartner;
-import com.avatech.edi.mdm.data.ArrayList;
-import com.avatech.edi.mdm.data.List;
+import com.avatech.edi.common.data.ArrayList;
+import com.avatech.edi.common.data.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

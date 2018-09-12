@@ -1,14 +1,10 @@
 package com.avatech.edi.mdm.contorller;
 
-import com.avatech.edi.mdm.bo.IAccount;
-import com.avatech.edi.mdm.config.ServiceParam;
-import com.avatech.edi.mdm.data.ArrayList;
-import com.avatech.edi.mdm.data.List;
+import com.avatech.edi.common.data.ArrayList;
+import com.avatech.edi.common.data.List;
 import com.avatech.edi.mdm.dto.MasterData;
 import com.avatech.edi.mdm.dto.SyncResult;
-import com.avatech.edi.mdm.dto.Result;
-import com.avatech.edi.mdm.repository.IBORepositoryAccount;
-import com.avatech.edi.mdm.service.AbsMasterDataService;
+import com.avatech.edi.model.dto.Result;
 import com.avatech.edi.mdm.service.BaseMasterDataService;
 import com.avatech.edi.mdm.service.MasterDataServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
