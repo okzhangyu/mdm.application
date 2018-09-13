@@ -3,13 +3,18 @@ package com.avatech.edi.mdm.bo;
 import com.sun.tools.javac.api.ClientCodeWrapper;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * @author Fancy
  * @date 2018/9/6
  */
-public class ProfitCenterType extends MDMMasterData implements IProfitCenterType {
+@Entity
+@Table(name = "AVA_MDM_VIEW_ODIM")
+public class ProfitCenterType extends MDMMasterData implements IProfitCenterType,Serializable {
 
     @Id
     @Column(name = "Uniquekey")
