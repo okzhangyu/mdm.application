@@ -38,6 +38,7 @@ public class AccountService extends AbsMasterDataService{
             if(masterData instanceof IAccount){
                 String key = b1AccountService.syncAccount((IAccount) masterData,b1Connection,dataTemples);
                 result.setCode(B1Data.SYNC_OK);
+                result.setObjectKey(masterData.getUniqueKey());
                 result.setMessage(B1Data.SYNC_OK_MSG);
                 result.setReturnKey(key);
             }

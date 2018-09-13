@@ -24,7 +24,7 @@ public class BORepositoryBusinessOne {
 
     public final static BORepositoryBusinessOne getInstance(B1Connection ib1Connection) {
         synchronized (BORepositoryBusinessOne.class) {
-            if (null == boRepositoryBusinessOne) {
+            if (null == boRepositoryBusinessOne || (boRepositoryBusinessOne != null && !boRepositoryBusinessOne.getCompany().getCompanyDB().equals(ib1Connection.getCompanyDB()))) {
                 boRepositoryBusinessOne = new BORepositoryBusinessOne(ib1Connection);
             }
         }
@@ -42,15 +42,19 @@ public class BORepositoryBusinessOne {
         this.sldServer = connection.getSLDServer();
         this.dbServerType = connection.getDBServerType();
         this.dbUsername = connection.getDBUserName();
-        this.dbPassword = connection.getPassword();
+        this.dbPassword = connection.getDBPassword();
         this.useTrusted = connection.getIsUserTrusted();
     }
 
     public final ICompany getCompany() throws B1Exception {
         synchronized (BORepositoryBusinessOne.class) {
-            if (null == company || !company.isConnected()) {
+            if (null == company) {
                 return this.connect();
             } else {
+                if(!company.isConnected() || !companyDB.equals(company.getCompanyDB())){
+                    company.disconnect();
+                    return this.connect();
+                }
                 return company;
             }
         }

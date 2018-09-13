@@ -22,4 +22,7 @@ public interface  IBusinessPartner extends IMDMMasterData {
 
     void setGroupCode(String groupCode);
 
+    String getCurrency();
+
+    void setCurrency(String currency);
 }

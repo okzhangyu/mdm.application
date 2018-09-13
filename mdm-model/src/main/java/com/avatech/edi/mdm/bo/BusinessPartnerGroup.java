@@ -69,4 +69,14 @@ public class BusinessPartnerGroup extends MDMMasterData implements IBusinessPart
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String getUniqueKey() {
+        return uniqueKey;
+    }
+
+    @Override
+    public void setUniqueKey(String uniqueKey) {
+        this.uniqueKey = uniqueKey;
+    }
 }
