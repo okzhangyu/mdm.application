@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * @author Fancy
@@ -11,9 +12,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "AVA_MDM_VIEW_OCRD")
-public class BusinessPartner extends MDMMasterData implements IBusinessPartner {
+public class BusinessPartner extends MDMMasterData implements IBusinessPartner,Serializable {
 
     @Id
+    @Column(name = "Uniquekey")
+    private String uniqueKey;
+
     @Column(name = "Cardcode")
     private String cardCode;
 

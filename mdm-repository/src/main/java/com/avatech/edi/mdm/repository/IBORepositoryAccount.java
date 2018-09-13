@@ -11,7 +11,7 @@ public interface IBORepositoryAccount extends CrudRepository<Account,String> {
 
     /**
      * 查找科目
-     * @param uniqueKey 科目代码
+     * @param uniqueKey 主键
      * @return
      */
     Account findAccountByUniqueKey(String uniqueKey);

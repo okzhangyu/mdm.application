@@ -1,6 +1,6 @@
 package com.avatech.edi.mdm.businessone;
 
-import com.avatech.edi.common.Exception.BaseException;
+import com.avatech.edi.common.exception.BaseException;
 
 public class B1Exception extends BaseException {
 

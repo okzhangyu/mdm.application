@@ -13,7 +13,7 @@ public interface IBORepositoryBusinessPartner extends CrudRepository<BusinessPar
 
     /**
      * 查找业务伙伴
-     * @param uniqueKey 业务伙伴编码
+     * @param uniqueKey 主键
      * @return
      */
     BusinessPartner findBusinessPartnerByUniqueKey(String uniqueKey);

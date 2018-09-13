@@ -11,9 +11,9 @@ public interface IBORepositoryBusinessPartnerGroup extends CrudRepository<Busine
 
     /**
      * 查找业务伙伴组
-     * @param code 组代码
+     * @param uniqueKey 主键
      * @return
      */
-    BusinessPartnerGroup findByGrpCode(Integer code);
+    BusinessPartnerGroup findBusinessPartnerGroupByUniqueKey(Integer uniqueKey);
 
 }

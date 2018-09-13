@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * @author Fancy
@@ -11,7 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "AVA_MDM_VIEW_OACT")
-public class Account extends MDMMasterData implements IAccount {
+public class Account extends MDMMasterData implements IAccount,Serializable {
 
     @Id
     @Column(name = "Uniquekey")

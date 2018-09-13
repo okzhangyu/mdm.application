@@ -21,7 +21,15 @@ public class BusinessType {
      */
     public static final String BUSINESSPARTNERGROUP = "10";
 
-    public static final String PROFITCENTER = "PROFITCENTER";
+    /**
+     * 成本中心
+     */
+    public static final String PROFITCENTER = "61";
+
+    /**
+     * 成本中心类型
+     */
+    public static final String PROFITCENTERTYPE = "540000042";
 
 
 }

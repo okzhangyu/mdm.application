@@ -7,7 +7,7 @@ package com.avatech.edi.mdm.bo;
  */
 public class UserFiled implements IUserFiled {
 
-   private Object uniqueKey;
+    private Object uniqueKey;
 
     @Override
     public Object getUniqueKey() {

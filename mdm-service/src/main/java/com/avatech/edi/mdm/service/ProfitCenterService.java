@@ -26,7 +26,7 @@ public class ProfitCenterService extends AbsMasterDataService{
 
     @Override
     public IMDMMasterData fetchMasterData(Object key) {
-        return boRepositoryProfitCenter.findByPrcCode(key.toString());
+        return boRepositoryProfitCenter.findProfitCenterByUniqueKey(key.toString());
     }
 
 
