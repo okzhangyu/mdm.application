@@ -91,4 +91,18 @@ public class MasterData {
     public void setData(List<String> data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "MasterData{" +
+                "tenantCode:'" + tenantCode + '\'' +
+                ", objectCode:'" + objectCode + '\'' +
+                ", templeCode:'" + templeCode + '\'' +
+                ", sourceServer:'" + sourceServer + '\'' +
+                ", targetServer:'" + targetServer + '\'' +
+                ", sourceCompany:'" + sourceCompany + '\'' +
+                ", targetCompany:'" + targetCompany + '\'' +
+                ", data:" + data +
+                '}';
+    }
 }

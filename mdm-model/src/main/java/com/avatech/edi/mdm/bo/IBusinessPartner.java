@@ -18,9 +18,9 @@ public interface  IBusinessPartner extends IMDMMasterData {
 
     void setCardType(String cardType);
 
-    String getGroupCode();
+    Integer getGroupCode();
 
-    void setGroupCode(String groupCode);
+    void setGroupCode(Integer groupCode);
 
     String getCurrency();
 

@@ -7,8 +7,11 @@ import com.avatech.edi.mdm.dto.SyncResult;
 import com.avatech.edi.model.dto.Result;
 import com.avatech.edi.mdm.service.BaseMasterDataService;
 import com.avatech.edi.mdm.service.MasterDataServiceFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 /**
  * @author Fancy
@@ -18,21 +21,27 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("mdm/v1/*")
 public class MDMController {
 
+    private final Logger logger = LoggerFactory.getLogger(MDMController.class);
     @Autowired
     private MasterDataServiceFactory masterDataServiceFactory;
 
     @RequestMapping(value = "b1/masterdata",method ={RequestMethod.POST})
     public @ResponseBody Result postMasterData( //@RequestParam(ServiceParam.TOKEN) String token,
                                   @RequestBody MasterData mdmMasterData){
+        Result rt;
         try
         {
+            logger.info("接收主数据信息》》》》》"+ mdmMasterData.toString());
             BaseMasterDataService service = masterDataServiceFactory.getServiceInstance(mdmMasterData);
             List<SyncResult> results = service.syncMasterData(mdmMasterData);
-            return Result.ok(results);
-        }catch (Exception e){
-            return Result.error("-1",e);
-        }
+            rt = Result.ok(results);
 
+        }catch (Exception e){
+            logger.error(mdmMasterData.toString(),e);
+            rt = Result.error("-1",e);
+        }
+        logger.info("主数据推送返回信息》》》》》"+ rt.toString());
+        return rt;
     }
 
 

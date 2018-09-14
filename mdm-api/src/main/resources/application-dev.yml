@@ -11,6 +11,10 @@ spring:
               ddl-auto: none
               show-sql: true
 logging:
+  pattern:
+    console: "%d - %msg%n"
+    path: /mdmservice/log/
+    file: /mdmservice/log/service
   level:
     org:
       hibernate:

@@ -67,15 +67,15 @@ public class BusinessPartner extends MDMMasterData implements IBusinessPartner,S
     }
 
     @Column(name = "Groupcode")
-    private String groupCode;
+    private Integer groupCode;
 
     @Override
-    public String getGroupCode() {
+    public Integer getGroupCode() {
         return groupCode;
     }
 
     @Override
-    public void setGroupCode(String groupCode) {
+    public void setGroupCode(Integer groupCode) {
         this.groupCode = groupCode;
     }
 

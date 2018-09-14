@@ -4,8 +4,12 @@ import com.avatech.edi.mdm.config.B1Connection;
 import com.sap.smb.sbo.api.ICompany;
 import com.sap.smb.sbo.api.SBOCOMUtil;
 import com.sap.smb.sbo.api.SBOErrorMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BORepositoryBusinessOne {
+
+    private final Logger logger = LoggerFactory.getLogger(BORepositoryBusinessOne.class);
     private String server;
     private String companyDB;
     private String userName;
@@ -86,7 +90,7 @@ public class BORepositoryBusinessOne {
 
             int connectionResult = company.connect();
             if (connectionResult == 0) {
-                //XxlJobLogger.log("Successfully connected to " + company.getCompanyName());
+                logger.info("Successfully connected to " + company.getCompanyName());
             } else {
                 SBOErrorMessage errMsg = company.getLastError();
                 throw new B1Exception("Cannot connect to server: "

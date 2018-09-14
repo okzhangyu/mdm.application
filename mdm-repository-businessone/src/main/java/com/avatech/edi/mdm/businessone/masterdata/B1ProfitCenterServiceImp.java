@@ -23,7 +23,8 @@ public class B1ProfitCenterServiceImp implements B1ProfitCenterService {
             boRepositoryBusinessOne = BORepositoryBusinessOne.getInstance(b1Connection);
             company = boRepositoryBusinessOne.getCompany();
 
-            IProfitCentersService profitCentersService = SBOCOMUtil.newProfitCentersService(company.getCompanyService());
+            //IProfitCentersService profitCentersService = SBOCOMUtil.newProfitCentersService(company.getCompanyService());
+            IProfitCentersService profitCentersService = (IProfitCentersService)company.getCompanyService().getBusinessService(SBOCOMConstants.ServiceTypes_ProfitCentersService);
 //            com.sap.smb.sbo.api.IProfitCenter iProfitCenter = (com.sap.smb.sbo.api.IProfitCenter)profitCentersService
 //                    .getDataInterface(SBOCOMConstants.ProfitCentersServiceDataInterfaces_pcsProfitCenter);
             IProfitCenterParams profitCenterParams = (IProfitCenterParams) profitCentersService
@@ -46,10 +47,7 @@ public class B1ProfitCenterServiceImp implements B1ProfitCenterService {
             }else {
                 profitCentersService.updateProfitCenter(iProfitCenter);
             }
-
             return profitCenter.getPrcCode();
-        }catch (SBOCOMException e) {
-            throw new B1Exception(e);
         }catch (Exception e){
             throw e;
         }

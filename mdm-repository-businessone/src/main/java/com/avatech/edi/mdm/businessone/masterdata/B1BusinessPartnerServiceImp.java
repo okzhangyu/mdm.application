@@ -25,10 +25,16 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
             company = boRepositoryBusinessOne.getCompany();
 
             IBusinessPartners businessPartners = SBOCOMUtil.newBusinessPartners(company);
+            Boolean isExist ;
+            if(businessPartners.getByKey(businessPartner.getCardCode())){
+                isExist = true;
+            }else {
+                isExist = false;
+            }
             businessPartners.setCardCode(businessPartner.getCardCode());
             businessPartners.setCardName(businessPartner.getCardName());
             businessPartners.setCardType(getTypeValue(businessPartner.getCardType()));
-            businessPartners.setGroupCode(getTypeValue(businessPartner.getGroupCode()));
+            businessPartners.setGroupCode(businessPartner.getGroupCode());
 
             // TODO temple filed
             for (DataTemple temple:dataTempleList) {
@@ -36,11 +42,9 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
                     businessPartners.setCurrency(businessPartner.getCurrency());
                 }
             }
-
-
             // TODO userfileds
             int rstCode;
-            if(businessPartners.getByKey(businessPartner.getCardCode())){
+            if(isExist){
                 rstCode = businessPartners.update();
             }else {
                 rstCode = businessPartners.add();
