@@ -10,6 +10,16 @@ public class CashFlow extends MDMMasterData implements ICashFlow ,Serializable {
     @Column(name = "Uniquekey")
     private String uniqueKey;
 
+    @Override
+    public String getUniqueKey() {
+        return uniqueKey;
+    }
+
+    @Override
+    public void setUniqueKey(String uniqueKey) {
+        this.uniqueKey = uniqueKey;
+    }
+
     private Integer cashFlowCode;
 
     private String cashFlowName;

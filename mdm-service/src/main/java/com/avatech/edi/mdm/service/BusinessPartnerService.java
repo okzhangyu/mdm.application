@@ -40,6 +40,7 @@ public class BusinessPartnerService extends AbsMasterDataService{
             if(masterData instanceof IBusinessPartner){
                 String key = b1BusinessPartnerService.syncBusinessPartner((IBusinessPartner) masterData,b1Connection,dataTemples);
                 result.setCode(B1Data.SYNC_OK);
+                result.setObjectKey(masterData.getUniqueKey());
                 result.setMessage(B1Data.SYNC_OK_MSG);
                 result.setReturnKey(key);
             }

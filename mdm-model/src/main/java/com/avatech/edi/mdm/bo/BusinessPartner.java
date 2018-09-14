@@ -18,9 +18,18 @@ public class BusinessPartner extends MDMMasterData implements IBusinessPartner,S
     @Column(name = "Uniquekey")
     private String uniqueKey;
 
+    @Override
+    public String getUniqueKey() {
+        return uniqueKey;
+    }
+
+    @Override
+    public void setUniqueKey(String uniqueKey) {
+        this.uniqueKey = uniqueKey;
+    }
+
     @Column(name = "Cardcode")
     private String cardCode;
-
 
     @Override
     public String getCardCode() {
@@ -58,15 +67,28 @@ public class BusinessPartner extends MDMMasterData implements IBusinessPartner,S
     }
 
     @Column(name = "Groupcode")
-    private String groupCode;
+    private Integer groupCode;
 
     @Override
-    public String getGroupCode() {
+    public Integer getGroupCode() {
         return groupCode;
     }
 
     @Override
-    public void setGroupCode(String groupCode) {
+    public void setGroupCode(Integer groupCode) {
         this.groupCode = groupCode;
+    }
+
+    @Column(name = "Currency")
+    private String currency;
+
+    @Override
+    public String getCurrency() {
+        return currency;
+    }
+
+    @Override
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

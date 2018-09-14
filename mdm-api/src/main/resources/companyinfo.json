@@ -1,29 +1,29 @@
 [
   {
     "companyName":"技术公司-开发测试02",
-    "server":"192.168.1.70",
-    "companyDB":"TEST_HT024_02",
-    "userName":"AVACLOUDht024099",
-    "password":"Aa123456!",
-    "licenseServer":"192.168.1.70:30000",
-    "sldServer":"192.168.1.70:30015",
+    "server":"10.10.8.41:30015",
+    "companyDB":"SBO_JS_KFCS02",
+    "userName":"A100",
+    "password":"123456",
+    "licenseServer":"10.10.8.41:40000",
+    "sldServer":"10.10.8.41:40000",
     "dbServiceType":9,
-    "dbUsername":"avasa6",
-    "dbPassword":"AVAtechAVA2018!",
+    "dbUsername":"SYSTEM",
+    "dbPassword":"Consen2018",
     "laguage":15,
-    "useTrusted":"True"
+    "useTrusted":"false"
   }, {
   "companyName":"技术公司-开发测试03",
-  "server":"192.168.1.70",
-  "companyDB":"TEST_HT024_02",
-  "userName":"AVACLOUDht024099",
-  "password":"Aa123456!",
-  "licenseServer":"192.168.1.70:30000",
-  "sldServer":"192.168.1.70:30015",
+  "server":"10.10.8.41:30015",
+  "companyDB":"SBO_JS_KFCS03",
+  "userName":"A100",
+  "password":"123456",
+  "licenseServer":"10.10.8.41:40000",
+  "sldServer":"10.10.8.41:40000",
   "dbServiceType":9,
-  "dbUsername":"avasa6",
-  "dbPassword":"AVAtechAVA2018!",
+  "dbUsername":"SYSTEM",
+  "dbPassword":"Consen2018",
   "laguage":15,
-  "useTrusted":"True"
+  "useTrusted":"false"
 }
 ]

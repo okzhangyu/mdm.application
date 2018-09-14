@@ -26,7 +26,7 @@ public class BusinessPartnerGroupService extends AbsMasterDataService{
 
     @Override
     public IMDMMasterData fetchMasterData(Object key) {
-        return boRepositoryBusinessPartnerGroup.findBusinessPartnerGroupByUniqueKey(new Integer(key.toString()));
+        return boRepositoryBusinessPartnerGroup.findBusinessPartnerGroupByUniqueKey(key.toString());
     }
 
     @Override
@@ -38,6 +38,7 @@ public class BusinessPartnerGroupService extends AbsMasterDataService{
             if(masterData instanceof IBusinessPartnerGroup){
                 String key = b1BusinessPartnerGroupService.syncBPGroup((IBusinessPartnerGroup) masterData,b1Connection,dataTemples);
                 result.setCode(B1Data.SYNC_OK);
+                result.setObjectKey(masterData.getUniqueKey());
                 result.setMessage(B1Data.SYNC_OK_MSG);
                 result.setReturnKey(key);
             }

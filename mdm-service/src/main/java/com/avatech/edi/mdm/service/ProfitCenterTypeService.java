@@ -37,6 +37,7 @@ public class ProfitCenterTypeService extends AbsMasterDataService {
             if(masterData instanceof IProfitCenterType){
                 String key = b1ProfitCenterTypeService.syncProfitCenterType((IProfitCenterType) masterData,b1Connection,dataTemples);
                 result.setCode(B1Data.SYNC_OK);
+                result.setObjectKey(masterData.getUniqueKey());
                 result.setMessage(B1Data.SYNC_OK_MSG);
                 result.setReturnKey(key);
             }

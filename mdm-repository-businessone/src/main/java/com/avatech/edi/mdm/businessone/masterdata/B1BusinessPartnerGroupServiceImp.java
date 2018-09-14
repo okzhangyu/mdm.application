@@ -27,8 +27,9 @@ public class B1BusinessPartnerGroupServiceImp implements B1BusinessPartnerGroupS
 
             IBusinessPartnerGroups bpGroup = SBOCOMUtil.newBusinessPartnerGroups(company);
 
-            boolean isExist = bpGroup.getByKey(businessPartnerGroup.getGrpCode());
+            Boolean isExist = bpGroup.getByKey(businessPartnerGroup.getGrpCode());
             bpGroup.setName(businessPartnerGroup.getGrpName());
+
             //bpGroup.s
             //bpGroup.setType(businessPartnerGroup.getType());
 

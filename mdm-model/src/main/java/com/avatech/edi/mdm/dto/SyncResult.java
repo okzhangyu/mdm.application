@@ -55,4 +55,14 @@ public class SyncResult {
     public void setReturnKey(String returnKey) {
         this.returnKey = returnKey;
     }
+
+    @Override
+    public String toString() {
+        return "SyncResult{" +
+                "code:'" + code + '\'' +
+                ", objectKey:'" + objectKey + '\'' +
+                ", message:'" + message + '\'' +
+                ", returnKey:'" + returnKey + '\'' +
+                '}';
+    }
 }

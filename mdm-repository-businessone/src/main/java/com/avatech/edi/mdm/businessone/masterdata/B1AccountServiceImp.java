@@ -1,11 +1,14 @@
 package com.avatech.edi.mdm.businessone.masterdata;
 
+import com.avatech.edi.mdm.bo.IAccount;
 import com.avatech.edi.mdm.businessone.B1Exception;
 import com.avatech.edi.mdm.businessone.BORepositoryBusinessOne;
-import com.avatech.edi.mdm.bo.IAccount;
+import com.avatech.edi.mdm.businessone.config.B1Data;
 import com.avatech.edi.mdm.config.B1Connection;
 import com.avatech.edi.mdm.config.DataTemple;
 import com.sap.smb.sbo.api.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,14 +19,11 @@ import java.util.List;
 @Component
 public class B1AccountServiceImp implements B1AccountService {
 
-    private static final String YES = "Y";
-    private static final String NO = "N";
+    private final Logger logger = LoggerFactory.getLogger(B1AccountServiceImp.class);
     private static final String EXPRESS = "E";
     private static final String REVENUES = "I";
     private static final String OTHER = "N";
-
     private static final String ACCTTYPE = "GroupType";
-
 
     @Override
     public String syncAccount(IAccount account, B1Connection b1Connection,List<DataTemple> dataTempleList){
@@ -35,36 +35,37 @@ public class B1AccountServiceImp implements B1AccountService {
             company = boRepositoryBusinessOne.getCompany();
 
             IChartOfAccounts chartOfAccounts = SBOCOMUtil.newChartOfAccounts(company);
+
+            Boolean isExist;
+            if(chartOfAccounts.getByKey(account.getAcctCode())){
+                isExist = true;
+            }else {
+                isExist = false;
+            }
             chartOfAccounts.setCode(account.getAcctCode());
             chartOfAccounts.setName(account.getAcctName());
-
-            for (DataTemple temple:dataTempleList) {
-                if(temple.getFieldName().toUpperCase().equals(ACCTTYPE)){
-                    //chartOfAccounts.set
-                }
-            }
             chartOfAccounts.setAcctCurrency(account.getActCur());
-            if(account.getFinase()!= null && account.getFinase().equals(YES)){
+            if(account.getFinase()!= null && account.getFinase().equals(B1Data.YES)){
                 chartOfAccounts.setCashAccount(SBOCOMConstants.BoYesNoEnum_tYES);
             }else {
                 chartOfAccounts.setCashAccount(SBOCOMConstants.BoYesNoEnum_tNO);
             }
-            if(account.getPostable() != null && account.getPostable().equals(YES)){
+            if(account.getPostable() != null && account.getPostable().equals(B1Data.YES)){
                 chartOfAccounts.setActiveAccount(SBOCOMConstants.BoYesNoEnum_tYES);
             }else {
                 chartOfAccounts.setActiveAccount(SBOCOMConstants.BoYesNoEnum_tNO);
             }
-
             if(account.getFatherAccountKey() != null && !account.getFatherAccountKey().isEmpty()){
                 chartOfAccounts.setFatherAccountKey(account.getFatherAccountKey());
             }
-
-            if(account.getActType() != null) {
-                chartOfAccounts.setAccountType(getActType(account.getActType()));
+            for (DataTemple temple:dataTempleList) {
+                if(temple.getIsSync().equals(B1Data.YES) && temple.getFieldName().toUpperCase().equals(ACCTTYPE)) {
+                    chartOfAccounts.setAccountType(getActType(account.getActType()));
+                }
             }
 
             int rstCode;
-            if(chartOfAccounts.getByKey(account.getAcctCode())){
+            if(isExist){
                 rstCode = chartOfAccounts.update();
             }else {
                 rstCode = chartOfAccounts.add();
@@ -76,8 +77,10 @@ public class B1AccountServiceImp implements B1AccountService {
                 throw new B1Exception(company.getLastErrorCode() + ":" + company.getLastErrorDescription());
             }
         }catch (SBOCOMException e){
+            logger.error("同步科目发生异常",e);
             throw new B1Exception(e);
         }catch (Exception e){
+            logger.error("",e);
             throw e;
         }
     }
