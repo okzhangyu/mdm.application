@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Fancy
@@ -111,5 +112,30 @@ public class ProfitCenter extends MDMMasterData implements IProfitCenter,Seriali
     @Override
     public void setLocked(String locked) {
         this.locked = locked;
+    }
+
+    @Column(name = "Validfrom")
+    private Date validFrom;
+
+    @Override
+    public Date getValidFrom() {
+        return validFrom;
+    }
+
+    @Override
+    public void setValidFrom(Date validFrom) {
+        this.validFrom = validFrom;
+    }
+
+    @Column(name = "Validto")
+    private Date validTo;
+    @Override
+    public Date getValidTo() {
+        return validTo;
+    }
+
+    @Override
+    public void setValidTo(Date validTo) {
+        this.validTo = validTo;
     }
 }

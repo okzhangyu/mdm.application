@@ -3,12 +3,10 @@ package com.avatech.edi.mdm.businessone.masterdata;
 import com.avatech.edi.mdm.businessone.B1Exception;
 import com.avatech.edi.mdm.businessone.BORepositoryBusinessOne;
 import com.avatech.edi.mdm.bo.IBusinessPartnerGroup;
+import com.avatech.edi.mdm.businessone.config.B1Data;
 import com.avatech.edi.mdm.config.B1Connection;
 import com.avatech.edi.mdm.config.DataTemple;
-import com.sap.smb.sbo.api.IBusinessPartnerGroups;
-import com.sap.smb.sbo.api.ICompany;
-import com.sap.smb.sbo.api.SBOCOMException;
-import com.sap.smb.sbo.api.SBOCOMUtil;
+import com.sap.smb.sbo.api.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -29,7 +27,7 @@ public class B1BusinessPartnerGroupServiceImp implements B1BusinessPartnerGroupS
 
             Boolean isExist = bpGroup.getByKey(businessPartnerGroup.getGrpCode());
             bpGroup.setName(businessPartnerGroup.getGrpName());
-
+            bpGroup.setType(getTypeValue(businessPartnerGroup.getType()));
             //bpGroup.s
             //bpGroup.setType(businessPartnerGroup.getType());
 
@@ -53,6 +51,14 @@ public class B1BusinessPartnerGroupServiceImp implements B1BusinessPartnerGroupS
         }
         catch (Exception e){
             throw e;
+        }
+    }
+
+    private Integer getTypeValue(String typeName){
+        switch (typeName){
+            case B1Data.CUSTOMER:return SBOCOMConstants.BoBusinessPartnerGroupTypes_bbpgt_CustomerGroup;
+            case B1Data.SUPPLIER:return SBOCOMConstants.BoBusinessPartnerGroupTypes_bbpgt_VendorGroup;
+            default:throw new B1Exception("类型为空或不匹配");
         }
     }
 }
