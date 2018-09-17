@@ -1,16 +1,17 @@
 package com.avatech.edi.mdm.contorller;
 
-import com.avatech.edi.common.data.ArrayList;
-import com.avatech.edi.common.data.List;
 import com.avatech.edi.mdm.dto.MasterData;
+import com.avatech.edi.mdm.dto.Result;
 import com.avatech.edi.mdm.dto.SyncResult;
-import com.avatech.edi.model.dto.Result;
 import com.avatech.edi.mdm.service.BaseMasterDataService;
 import com.avatech.edi.mdm.service.MasterDataServiceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -27,7 +28,7 @@ public class MDMController {
 
     @RequestMapping(value = "b1/masterdata",method ={RequestMethod.POST})
     public @ResponseBody Result postMasterData( //@RequestParam(ServiceParam.TOKEN) String token,
-                                  @RequestBody MasterData mdmMasterData){
+                           @RequestBody MasterData mdmMasterData){
         Result rt;
         try
         {

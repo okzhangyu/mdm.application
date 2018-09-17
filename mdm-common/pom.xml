@@ -11,11 +11,4 @@
 
     <artifactId>mdm-common</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.avatech.edi</groupId>
-            <artifactId>edi-freamwork-model</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-    </dependencies>
 </project>

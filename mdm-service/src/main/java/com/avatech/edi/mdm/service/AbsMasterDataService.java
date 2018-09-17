@@ -1,8 +1,6 @@
 package com.avatech.edi.mdm.service;
 
 import com.avatech.edi.mdm.bo.IMDMMasterData;
-import com.avatech.edi.common.data.ArrayList;
-import com.avatech.edi.common.data.List;
 import com.avatech.edi.mdm.config.B1Connection;
 import com.avatech.edi.mdm.config.B1Manager;
 import com.avatech.edi.mdm.config.DataTemple;
@@ -11,6 +9,9 @@ import com.avatech.edi.mdm.dto.MasterData;
 import com.avatech.edi.mdm.dto.SyncResult;
 import com.avatech.edi.mdm.repository.config.IRepositoryDataTemple;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Fancy
