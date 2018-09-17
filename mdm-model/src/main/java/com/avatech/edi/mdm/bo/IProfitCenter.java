@@ -1,5 +1,7 @@
 package com.avatech.edi.mdm.bo;
 
+import java.util.Date;
+
 /**
  * @author Fancy
  * @date 2018/9/4
@@ -33,4 +35,12 @@ public interface IProfitCenter extends IMDMMasterData {
     String getLocked();
 
     void setLocked(String locked);
+
+    Date getValidFrom();
+
+    void setValidFrom(Date validFrom);
+
+    Date getValidTo();
+
+    void setValidTo(Date validTo);
 }
