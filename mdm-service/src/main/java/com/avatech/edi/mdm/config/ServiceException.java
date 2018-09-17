@@ -1,8 +1,6 @@
 package com.avatech.edi.mdm.config;
 
-import com.avatech.edi.common.exception.BaseException;
-
-public class ServiceException extends BaseException {
+public class ServiceException extends RuntimeException{
 
     private String code;
 
@@ -12,6 +10,8 @@ public class ServiceException extends BaseException {
     }
 
     public ServiceException(String code,String message){
-        super(code,message);
+        super();
+        this.code = code;
+        this.message = message;
     }
 }

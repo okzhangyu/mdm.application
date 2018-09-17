@@ -1,8 +1,9 @@
 package com.avatech.edi.mdm.service;
 
-import com.avatech.edi.common.data.List;
 import com.avatech.edi.mdm.dto.MasterData;
 import com.avatech.edi.mdm.dto.SyncResult;
+
+import java.util.List;
 
 /**
  * @author Fancy

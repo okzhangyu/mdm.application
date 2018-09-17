@@ -64,8 +64,6 @@ public class B1ProfitCenterServiceImp implements B1ProfitCenterService {
                 profitCentersService.updateProfitCenter(iProfitCenter);
             }
             return profitCenter.getPrcCode();
-        }catch (SBOCOMException e){
-            throw new B1Exception(e.getMessage());
         }catch (Exception e){
             throw new B1Exception(e.getMessage());
         }finally {
