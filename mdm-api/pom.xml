@@ -40,7 +40,7 @@
     </dependencies>
 
     <build>
-        <finalName>mdm.application.service</finalName>
+        <finalName>mdm.application.server</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -49,6 +49,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+
                     <compilerArguments>
                         <extdirs>${project.basedir}/lib</extdirs>
                     </compilerArguments>
@@ -58,8 +59,24 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.avatech.edi.mdm.MDMApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>lib</directory>
+                <targetPath>BOOT-INF/lib/</targetPath>
+                <includes>
+                    <include>**/*.jar</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>BOOT-INF/classes/</targetPath>
+            </resource>
+        </resources>
     </build>
 
 </project>
