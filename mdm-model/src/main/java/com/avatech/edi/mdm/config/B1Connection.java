@@ -118,4 +118,22 @@ public class B1Connection {
     public void setIsUserTrusted(String value) {
         this.setIsUserTrusted(Boolean.valueOf(value));
     }
+
+    @Override
+    public String toString() {
+        return "B1Connection{" +
+                "server:'" + server + '\'' +
+                ", companyDB:'" + companyDB + '\'' +
+                ", userName:'" + userName + '\'' +
+                ", password:'" + password + '\'' +
+                ", laguage=" + laguage +
+                ", licenseServer:'" + licenseServer + '\'' +
+                ", sldServer:'" + sldServer + '\'' +
+                ", dbServiceType:" + dbServiceType +
+                ", dbUsername:'" + dbUsername + '\'' +
+                ", dbPassword:'" + dbPassword + '\'' +
+                ", useTrusted:" + useTrusted +
+                ", companyName:'" + companyName + '\'' +
+                '}';
+    }
 }

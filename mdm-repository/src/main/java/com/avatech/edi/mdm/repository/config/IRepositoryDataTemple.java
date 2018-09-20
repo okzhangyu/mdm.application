@@ -3,6 +3,8 @@ package com.avatech.edi.mdm.repository.config;
 import com.avatech.edi.mdm.config.DataTemple;
 import com.avatech.edi.mdm.config.DataTempleKey;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
