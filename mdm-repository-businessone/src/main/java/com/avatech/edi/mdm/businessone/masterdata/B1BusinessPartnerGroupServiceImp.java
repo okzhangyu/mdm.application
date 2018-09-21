@@ -49,9 +49,6 @@ public class B1BusinessPartnerGroupServiceImp implements B1BusinessPartnerGroupS
         }catch (SBOCOMException e){
             throw new B1Exception(e);
         }
-        catch (Exception e){
-            throw e;
-        }
     }
 
     private Integer getTypeValue(String typeName){

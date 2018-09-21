@@ -50,8 +50,6 @@ public class B1ProfitCenterTypeServiceImp implements B1ProfitCenterTypeService {
             return profitCenterType.getDimCode().toString();
         }catch (SBOCOMException e){
             throw new B1Exception(e);
-        }catch (Exception e){
-            throw e;
         }
     }
 }

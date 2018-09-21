@@ -61,8 +61,6 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
         }catch (SBOCOMException e){
             logger.info("",e.getMessage());
             throw new B1Exception(e);
-        }catch (Exception e){
-            throw e;
         }
     }
 
