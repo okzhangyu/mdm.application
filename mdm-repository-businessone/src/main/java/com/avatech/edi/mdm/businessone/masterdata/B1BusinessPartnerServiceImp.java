@@ -7,6 +7,8 @@ import com.avatech.edi.mdm.businessone.config.B1Data;
 import com.avatech.edi.mdm.config.B1Connection;
 import com.avatech.edi.mdm.config.DataTemple;
 import com.sap.smb.sbo.api.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 @Component
 public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
 
+    private final Logger logger = LoggerFactory.getLogger(B1BusinessPartnerServiceImp.class);
     private static final String CURRENCY = "CURRENCY";
     @Override
     public String syncBusinessPartner(IBusinessPartner businessPartner, B1Connection b1Connection,List<DataTemple> dataTempleList){
@@ -23,7 +26,7 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
             //get company info
             boRepositoryBusinessOne = BORepositoryBusinessOne.getInstance(b1Connection);
             company = boRepositoryBusinessOne.getCompany();
-
+            logger.info("hashcode"+boRepositoryBusinessOne.hashCode());
             IBusinessPartners businessPartners = SBOCOMUtil.newBusinessPartners(company);
             Boolean isExist ;
             if(businessPartners.getByKey(businessPartner.getCardCode())){
@@ -56,9 +59,8 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
             }
 
         }catch (SBOCOMException e){
+            logger.info("",e.getMessage());
             throw new B1Exception(e);
-        }catch (Exception e){
-            throw e;
         }
     }
 

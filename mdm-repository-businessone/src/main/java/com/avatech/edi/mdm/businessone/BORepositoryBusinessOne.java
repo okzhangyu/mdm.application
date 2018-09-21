@@ -28,8 +28,20 @@ public class BORepositoryBusinessOne {
 
     public final static BORepositoryBusinessOne getInstance(B1Connection ib1Connection) {
         synchronized (BORepositoryBusinessOne.class) {
-            if (null == boRepositoryBusinessOne || (boRepositoryBusinessOne != null && !boRepositoryBusinessOne.getCompany().getCompanyDB().equals(ib1Connection.getCompanyDB()))) {
+            if (null == boRepositoryBusinessOne ) {
                 boRepositoryBusinessOne = new BORepositoryBusinessOne(ib1Connection);
+            }else if( boRepositoryBusinessOne != null && !boRepositoryBusinessOne.getCompany().getCompanyDB().equals(ib1Connection.getCompanyDB())){
+                boRepositoryBusinessOne.server = ib1Connection.getServer();
+                boRepositoryBusinessOne.companyDB = ib1Connection.getCompanyDB();
+                boRepositoryBusinessOne.userName = ib1Connection.getUserName();
+                boRepositoryBusinessOne.password = ib1Connection.getPassword();
+                boRepositoryBusinessOne.laguage = ib1Connection.getLanguage();
+                boRepositoryBusinessOne.licenseServer = ib1Connection.getLicenseServer();
+                boRepositoryBusinessOne.sldServer = ib1Connection.getSLDServer();
+                boRepositoryBusinessOne.dbServerType = ib1Connection.getDBServerType();
+                boRepositoryBusinessOne.dbUsername = ib1Connection.getDBUserName();
+                boRepositoryBusinessOne.dbPassword = ib1Connection.getDBPassword();
+                boRepositoryBusinessOne.useTrusted = ib1Connection.getIsUserTrusted();
             }
         }
         return boRepositoryBusinessOne;
@@ -51,14 +63,17 @@ public class BORepositoryBusinessOne {
     }
 
     public final ICompany getCompany() throws B1Exception {
+        logger.info("",boRepositoryBusinessOne.hashCode());
         synchronized (BORepositoryBusinessOne.class) {
             if (null == company) {
                 return this.connect();
             } else {
-                if(!company.isConnected() || !companyDB.equals(company.getCompanyDB())){
+                if(!companyDB.equals(company.getCompanyDB())){
                     company.disconnect();
                     return this.connect();
                 }
+                if(!company.isConnected())
+                    return this.connect();
                 return company;
             }
         }
@@ -75,7 +90,8 @@ public class BORepositoryBusinessOne {
 
     private ICompany connect()throws B1Exception {
         try{
-            company = SBOCOMUtil.newCompany();
+            if(company == null)
+                company = SBOCOMUtil.newCompany();
             company.setServer(this.server);
             company.setCompanyDB(this.companyDB);
             company.setUserName(this.userName);
@@ -100,7 +116,21 @@ public class BORepositoryBusinessOne {
             }
             return company;
         }catch (Exception e){
-            throw new B1Exception(e);
+            logger.error("",e);
+            String errorMsg = "server:'" + server + '\'' +
+                    ", companyDB:'" + companyDB + '\'' +
+                    ", userName:'" + userName + '\'' +
+                    ", password:'" + password + '\'' +
+                    ", laguage=" + laguage +
+                    ", licenseServer:'" + licenseServer + '\'' +
+                    ", sldServer:'" + sldServer + '\'' +
+                    ", dbServiceType:" + this.dbServerType +
+                    ", dbUsername:'" + dbUsername + '\'' +
+                    ", dbPassword:'" + dbPassword + '\'' +
+                    ", useTrusted:" + useTrusted +
+                    '}';
+            logger.info("连接DI失败："+ errorMsg);
+            throw new B1Exception(e.getMessage());
         }
     }
 }

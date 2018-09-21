@@ -42,8 +42,6 @@ public class B1CashFlowServiceImp implements B1CashFlowService {
 
         }catch (SBOCOMException e){
          throw new B1Exception(e);
-        }catch (Exception e){
-            throw e;
         }
         return null;
     }
