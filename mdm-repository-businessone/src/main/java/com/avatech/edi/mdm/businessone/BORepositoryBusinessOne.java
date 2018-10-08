@@ -63,7 +63,6 @@ public class BORepositoryBusinessOne {
     }
 
     public final ICompany getCompany() throws B1Exception {
-        logger.info("",boRepositoryBusinessOne.hashCode());
         synchronized (BORepositoryBusinessOne.class) {
             if (null == company) {
                 return this.connect();
