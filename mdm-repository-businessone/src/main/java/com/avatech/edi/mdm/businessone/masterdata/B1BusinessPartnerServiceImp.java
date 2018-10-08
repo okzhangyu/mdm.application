@@ -26,7 +26,6 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
             //get company info
             boRepositoryBusinessOne = BORepositoryBusinessOne.getInstance(b1Connection);
             company = boRepositoryBusinessOne.getCompany();
-            logger.info("hashcode"+boRepositoryBusinessOne.hashCode());
             IBusinessPartners businessPartners = SBOCOMUtil.newBusinessPartners(company);
             Boolean isExist ;
             if(businessPartners.getByKey(businessPartner.getCardCode())){
@@ -41,7 +40,9 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
 
             // TODO temple filed
             for (DataTemple temple:dataTempleList) {
-                if(B1Data.YES.equals(temple.getIsSync()) && CURRENCY.equals(temple.getFieldName().toUpperCase())){
+                if(temple.getFieldName().isEmpty() || !B1Data.YES.equals(temple.getIsSync()))
+                    continue;
+                if(temple.getFieldName().toUpperCase().equals(CURRENCY)){
                     businessPartners.setCurrency(businessPartner.getCurrency());
                 }
             }

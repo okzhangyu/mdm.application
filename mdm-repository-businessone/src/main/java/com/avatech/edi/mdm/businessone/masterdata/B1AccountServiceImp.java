@@ -59,7 +59,8 @@ public class B1AccountServiceImp implements B1AccountService {
                 chartOfAccounts.setFatherAccountKey(account.getFatherAccountKey());
             }
             for (DataTemple temple:dataTempleList) {
-                if(temple.getIsSync().equals(B1Data.YES) && temple.getFieldName().toUpperCase().equals(ACCTTYPE)) {
+                if(temple.getFieldName().isEmpty() || !temple.getIsSync().equals(B1Data.YES))
+                if(temple.getFieldName().toUpperCase().equals(ACCTTYPE)) {
                     chartOfAccounts.setAccountType(getActType(account.getActType()));
                 }
             }
