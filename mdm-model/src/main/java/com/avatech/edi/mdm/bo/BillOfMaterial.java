@@ -11,6 +11,8 @@ public class BillOfMaterial implements IBillOfMaterial {
 
     private Integer docEntry;
 
+    private String bpCode;
+
     private String itemCode;
 
     private String itemName;
@@ -39,7 +41,9 @@ public class BillOfMaterial implements IBillOfMaterial {
 
     private Integer bPLId;
 
-    private List<ICompontOfMaterialListItem> compontOfMaterialListItems;
+    private String remarks;
+
+    private List<CompontOfMaterialListItem> compontOfMaterialListItems;
 
     public BillOfMaterial(){
         this.compontOfMaterialListItems = new ArrayList<>();
@@ -63,6 +67,16 @@ public class BillOfMaterial implements IBillOfMaterial {
     @Override
     public void setDocEntry(Integer docEntry) {
         this.docEntry = docEntry;
+    }
+
+    @Override
+    public String getBPCode() {
+        return bpCode;
+    }
+
+    @Override
+    public void setBPCode(String bPCode) {
+        this.bpCode = bPCode;
     }
 
     @Override
@@ -195,21 +209,33 @@ public class BillOfMaterial implements IBillOfMaterial {
         this.validDateT = validDateT;
     }
 
+    @Override
     public Integer getBPLId() {
         return bPLId;
     }
 
+    @Override
     public void setBPLId(Integer bPLId) {
         this.bPLId = bPLId;
     }
 
     @Override
-    public List<ICompontOfMaterialListItem> getCompontOfMaterialListItems() {
+    public String getRemarks() {
+        return remarks;
+    }
+
+    @Override
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    @Override
+    public List<CompontOfMaterialListItem> getCompontOfMaterialListItems() {
         return compontOfMaterialListItems;
     }
 
     @Override
-    public void setCompontOfMaterialListItems(List<ICompontOfMaterialListItem> compontOfMaterialListItems) {
+    public void setCompontOfMaterialListItems(List<CompontOfMaterialListItem> compontOfMaterialListItems) {
         this.compontOfMaterialListItems = compontOfMaterialListItems;
     }
 }

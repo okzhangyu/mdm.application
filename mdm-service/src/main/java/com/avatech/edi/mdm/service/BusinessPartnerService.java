@@ -2,6 +2,7 @@ package com.avatech.edi.mdm.service;
 
 import com.avatech.edi.mdm.bo.IMDMMasterData;
 import com.avatech.edi.mdm.bo.IBusinessPartner;
+import com.avatech.edi.mdm.businessone.B1Exception;
 import com.avatech.edi.mdm.businessone.masterdata.B1BusinessPartnerService;
 import com.avatech.edi.mdm.config.B1Connection;
 import com.avatech.edi.mdm.config.B1Data;
@@ -45,7 +46,11 @@ public class BusinessPartnerService extends AbsMasterDataService{
                 result.setReturnKey(key);
             }
 
-        }catch (Exception e){
+        }catch (B1Exception e){
+            result.setCode("-1");
+            result.setMessage(e.getMessage());
+        }
+        catch (Exception e){
             result.setCode("-1");
             result.setMessage(e.getMessage());
         }
