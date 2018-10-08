@@ -55,9 +55,8 @@ public class B1Manager {
             if(b1Connections == null || b1Connections.size() == 0){
                 b1Connections = getB1Connections();
             }
-            logger.info(b1Connections.toString());
             for (B1Connection conn:b1Connections) {
-                if(companyName.equals(conn.getCompanyName())){
+                if(companyName.equals(conn.getCompanyName()) || companyName.equals(conn.getCompanyDB())){
                     connection = conn;
                 }
             }
@@ -72,4 +71,5 @@ public class B1Manager {
         }
         return connection;
     }
+
 }

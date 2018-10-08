@@ -14,6 +14,10 @@ public interface IBillOfMaterial {
 
      void setDocEntry(Integer docEntry);
 
+     String getBPCode();
+
+     void setBPCode(String bpCode);
+
      String getItemCode();
 
      void setItemCode(String itemCode);
@@ -70,7 +74,11 @@ public interface IBillOfMaterial {
 
      void setBPLId(Integer bplId);
 
-    List<ICompontOfMaterialListItem> getCompontOfMaterialListItems();
+     String getRemarks();
 
-    void setCompontOfMaterialListItems( List<ICompontOfMaterialListItem> compontOfMaterialListItems);
+     void setRemarks(String remarks);
+
+    List<CompontOfMaterialListItem> getCompontOfMaterialListItems();
+
+    void setCompontOfMaterialListItems( List<CompontOfMaterialListItem> compontOfMaterialListItems);
 }

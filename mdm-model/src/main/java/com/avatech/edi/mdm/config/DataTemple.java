@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * 数据模板
  */
 @Entity
-@Table(name="[@AVA_MDM_DTM1]")
+@Table(name="AVA_MDM_VIEW_DTM1")
 public class DataTemple {
 
     @EmbeddedId

@@ -7,6 +7,7 @@ package com.avatech.edi.mdm.dto;
 public class SyncResult {
 
     public final static String ERROR = "-1";
+    public final static String OK = "0";
 
     public static SyncResult error(String objectKey, String message){
         SyncResult syncResult = new SyncResult();
@@ -15,6 +16,15 @@ public class SyncResult {
         syncResult.setObjectKey(objectKey);
         return syncResult;
     }
+
+    public static SyncResult ok(String objectKey){
+        SyncResult syncResult = new SyncResult();
+        syncResult.setCode(OK) ;
+        syncResult.setMessage("同步成功");
+        syncResult.setObjectKey(objectKey);
+        return syncResult;
+    }
+
 
     private String code;
 

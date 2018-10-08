@@ -4,6 +4,7 @@ import com.avatech.edi.mdm.bo.BillOfMaterial;
 import com.avatech.edi.mdm.bo.CompontOfMaterialListItem;
 import com.avatech.edi.mdm.bo.IBillOfMaterial;
 import com.avatech.edi.mdm.bo.ICompontOfMaterialListItem;
+import com.avatech.edi.mdm.config.ServiceException;
 import com.avatech.edi.mdm.dto.Result;
 import com.avatech.edi.mdm.dto.SyncResult;
 import com.avatech.edi.mdm.service.BillOfMaterialService;
@@ -24,7 +25,7 @@ public class BOMController {
     @GetMapping("bom")
     public IBillOfMaterial getBillOfMaterial(){
         IBillOfMaterial bom = new BillOfMaterial();
-        ICompontOfMaterialListItem compontOfMaterialListItem = new CompontOfMaterialListItem();
+        CompontOfMaterialListItem compontOfMaterialListItem = new CompontOfMaterialListItem();
         compontOfMaterialListItem.setBOMVer("1");
         compontOfMaterialListItem.setItemCode("10001");
         bom.setCompanyName("TEST1");
@@ -44,7 +45,11 @@ public class BOMController {
             SyncResult results = billOfMaterialService.syncBOM(bom);
             rt = Result.ok(results);
 
-        }catch (Exception e){
+        }catch (ServiceException e){
+            logger.error(bom.toString(),e);
+            rt = Result.error("-1",e);
+        }
+        catch (Exception e){
             logger.error(bom.toString(),e);
             rt = Result.error("-1",e);
         }
