@@ -1,8 +1,7 @@
-package com.avatech.edi.mdm.businessone.BOM;
+package com.avatech.edi.mdm.businessone.bom;
 
 import com.avatech.edi.mdm.bo.IBillOfMaterial;
 import com.avatech.edi.mdm.config.B1Connection;
-import com.avatech.edi.mdm.dto.SyncResult;
 
 public interface B1BillOfMaterialService {
 

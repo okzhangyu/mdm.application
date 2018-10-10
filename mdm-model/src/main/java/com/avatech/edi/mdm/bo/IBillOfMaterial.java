@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IBillOfMaterial {
 
-     String getCompanyName();
+     String getCompanyDB();
 
-     void setCompanyName(String companyName);
+     void setCompanyDB(String companyName);
 
      Integer getDocEntry();
 

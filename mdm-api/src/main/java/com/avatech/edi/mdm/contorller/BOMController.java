@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("approver/v1/*")
+@RequestMapping("bom/v1/*")
 public class BOMController {
 
     private final Logger logger = LoggerFactory.getLogger(BOMController.class);
@@ -28,15 +28,15 @@ public class BOMController {
         CompontOfMaterialListItem compontOfMaterialListItem = new CompontOfMaterialListItem();
         compontOfMaterialListItem.setBOMVer("1");
         compontOfMaterialListItem.setItemCode("10001");
-        bom.setCompanyName("TEST1");
+        bom.setCompanyDB("TEST1");
         bom.setActived("Y");
         bom.getCompontOfMaterialListItems().add(compontOfMaterialListItem);
         return  bom;
     }
 
 
-    @RequestMapping(value = "b1/bom",method ={RequestMethod.POST})
-    public @ResponseBody Result postMasterData( //@RequestParam(ServiceParam.TOKEN) String token,
+    @RequestMapping(value = "bomversion",method ={RequestMethod.POST})
+    public @ResponseBody Result postBOMVersion( //@RequestParam(ServiceParam.TOKEN) String token,
                            @RequestBody BillOfMaterial bom){
         Result rt;
         try

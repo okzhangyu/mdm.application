@@ -16,4 +16,35 @@ public class B1Data {
     public final static String SUPPLIER = "S";
 
     public final static String LEAD_CUSTOMER = "L";
+
+    /**
+     * 采购报价单
+     */
+    public static final Integer PURCHASEQUOTE = 540000006;
+
+    /**
+     * 虚拟客户
+     */
+    public static final String VISUAL_CARDCODE = "C000999";
+
+    /**
+     * 虚拟供应商
+     */
+    public static final String VISUAL_SUPPLIER = "V000999";
+
+    /**
+     * 虚拟物料
+     */
+    public static final String VISUAL_ITEMCODE = "V000999";
+
+    /**
+     * 虚拟仓库
+     */
+    public static final String VISUAL_WHSCODE1 = "W999";
+
+    /**
+     * 虚拟仓库
+     */
+    public static final String VISUAL_WHSCODE2 = "W998";
+
 }
