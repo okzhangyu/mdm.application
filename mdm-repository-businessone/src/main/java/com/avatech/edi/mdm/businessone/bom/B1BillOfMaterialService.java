@@ -6,4 +6,6 @@ import com.avatech.edi.mdm.config.B1Connection;
 public interface B1BillOfMaterialService {
 
     String syncBillOfMaterial(IBillOfMaterial billOfMaterial, B1Connection b1Connection);
+
+    String approvedBillOfMaterial(IBillOfMaterial billOfMaterial,B1Connection b1Connection);
 }

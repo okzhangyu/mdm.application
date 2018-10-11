@@ -1,38 +1,85 @@
 package com.avatech.edi.mdm.bo;
 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "AVA_PM_VIEW_BOM1")
 public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
 
+    @Id
+    @Column(name = "Uniquekey")
+    private String  uniqueKey;
+
+    @Column(name = "Companydb")
+    private String companyDB;
+
+    @Column(name = "Docentry")
     private Integer docEntry;
 
+    @Column(name = "Lineid")
     private Integer lineId;
-    
+
+    @Column(name = "Linestatus")
     private String lineStatus;
-    
+
+    @Column(name = "Childnum")
     private Integer childNum;
 
+    @Column(name = "Itemcode")
     private String itemCode;
-    
+
+    @Column(name = "Itemname")
     private String itemName;
 
+    @Column(name = "Bomver")
     private String bomVer;
 
+    @Column(name = "Quantity")
     private Double quantity;
 
+    @Column(name = "Whscode")
     private String whsCode;
 
+    @Column(name = "Price")
     private Double price;
 
+    @Column(name = "Uom")
     private String uom;
 
+    @Column(name = "Udf1")
     private String udf1;
-    
+
+    @Column(name = "Udf2")
     private String udf2;
-    
+
+    @Column(name = "Udf3")
     private String udf3;
-    
+
+    @Column(name = "Udf4")
     private String udf4;
-    
+
+    @Column(name = "Udf5")
     private String udf5;
+
+    public String getUniqueKey() {
+        return uniqueKey;
+    }
+
+    public void setUniqueKey(String uniqueKey) {
+        this.uniqueKey = uniqueKey;
+    }
+
+    public String getCompanyDB() {
+        return companyDB;
+    }
+
+    public void setCompanyDB(String companyDB) {
+        this.companyDB = companyDB;
+    }
 
     @Override
     public Integer getDocEntry() {

@@ -1,51 +1,97 @@
 package com.avatech.edi.mdm.bo;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name = "AVA_PM_VIEW_OBOM")
 public class BillOfMaterial implements IBillOfMaterial {
 
+    @Id
+    @Column(name = "Uniquekey")
+    private String uniqueKey;
+
+    @Column(name = "Companydb")
     private String companyDB;
 
+    @Column(name = "Docentry")
     private Integer docEntry;
 
+    @Column(name = "Bpcode")
     private String bpCode;
 
+    @Column(name = "Itemcode")
     private String itemCode;
 
+    @Column(name = "Itemname")
     private String itemName;
 
+    @Column(name = "Version")
     private String version;
 
+    @Column(name = "Actived")
     private String actived;
 
+    @Column(name = "Treetype")
     private String treeType;
 
+    @Column(name = "Unitqty")
     private Double unitQty;
 
+    @Column(name = "Uom")
     private String uom;
 
+    @Column(name = "Towh")
     private String toWH;
 
+    @Column(name = "Project")
     private String project;
 
+    @Column(name = "Routcode")
     private String routCode;
 
+    @Column(name = "Outputwkc")
     private String outPutWkc;
 
+    @Column(name = "Validdatef")
     private Date validDateF;
 
+    @Column(name = "Validdatet")
     private Date validDateT;
 
+    @Column(name = "Bplid")
     private Integer bPLId;
 
+    @Column(name = "Remarks")
     private String remarks;
 
+    @Column(name = "Optype")
+    private String opType;
+
+    public String getOpType(){
+        return opType;
+    }
+
+    public void setOpType(String opType){
+        this.opType = opType;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "Docentry")
     private List<CompontOfMaterialListItem> compontOfMaterialListItems;
 
     public BillOfMaterial(){
         this.compontOfMaterialListItems = new ArrayList<>();
+    }
+
+    public String getUniqueKey() {
+        return uniqueKey;
+    }
+
+    public void setUniqueKey(String uniqueKey) {
+        this.uniqueKey = uniqueKey;
     }
 
     @Override

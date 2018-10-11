@@ -76,4 +76,108 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             throw new B1Exception(e);
         }
     }
+
+    /**
+     * BOM审批完成后，生成生产订单和采购申请
+     * @param billOfMaterial
+     * @param b1Connection
+     * @return
+     */
+    @Override
+    public String approvedBillOfMaterial(IBillOfMaterial billOfMaterial, B1Connection b1Connection) {
+        if(billOfMaterial.getOpType().equals("A")){
+            // BOM新增 生成生产订单和采购申请
+        }else if(billOfMaterial.getOpType().equals("U")){
+            // 更新生产订单
+        }
+        return null;
+    }
+
+    private String createProduceOrder(IBillOfMaterial billOfMaterial, B1Connection b1Connection){
+        BORepositoryBusinessOne boRepositoryBusinessOne = null;
+        ICompany company = null;
+        try {
+            boRepositoryBusinessOne = BORepositoryBusinessOne.getInstance(b1Connection);
+            company = boRepositoryBusinessOne.getCompany();
+
+            IDocuments document = SBOCOMUtil.newDocuments(company, SBOCOMConstants.BoObjectTypes_oProductionOrders);
+            document.setCardCode(billOfMaterial.getBPCode());
+            document.setDocDate(new Date());
+            document.setTaxDate(new Date());
+            document.setVatDate(new Date());
+            document.setRequriedDate(new Date());
+            document.setComments(billOfMaterial.getRemarks());
+            document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
+            document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(billOfMaterial.getDocEntry());
+            document.getUserFields().getFields().item(BOM_ITEMCODE).setValue(billOfMaterial.getItemCode());
+            document.getUserFields().getFields().item(BOM_ITEMNAME).setValue(billOfMaterial.getItemName());
+            document.getUserFields().getFields().item(BOM_TREETYPE).setValue(billOfMaterial.getTreeType());
+            document.getUserFields().getFields().item(BOM_UOM).setValue(billOfMaterial.getUom());
+            if(billOfMaterial.getProject() != null)
+                document.getUserFields().getFields().item(BOM_PROJECT).setValue(billOfMaterial.getProject());
+            if(billOfMaterial.getActived() != null)
+                document.getUserFields().getFields().item(BOM_ACTIVTED).setValue(billOfMaterial.getActived());
+
+            for (ICompontOfMaterialListItem item:billOfMaterial.getCompontOfMaterialListItems()) {
+                document.getLines().setItemCode(item.getItemCode());
+                document.getLines().setQuantity(item.getQuantity());
+                document.getLines().setPrice(item.getPrice());
+                document.getLines().getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
+                document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry());
+                document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId());
+                document.getLines().add();
+            }
+            int rt = document.add();
+            if(rt == 0 )
+                return company.getNewObjectKey();
+            else throw new B1Exception(company.getLastErrorCode() + ":" + company.getLastErrorDescription());
+        }catch (SBOCOMException e){
+            logger.error("BOM生成生产订单发生异常",e);
+            throw new B1Exception(e);
+        }
+    }
+
+    private String createPurchaseOrder(IBillOfMaterial billOfMaterial, B1Connection b1Connection){
+        BORepositoryBusinessOne boRepositoryBusinessOne = null;
+        ICompany company = null;
+        try {
+            boRepositoryBusinessOne = BORepositoryBusinessOne.getInstance(b1Connection);
+            company = boRepositoryBusinessOne.getCompany();
+
+            IDocuments document = SBOCOMUtil.newDocuments(company, SBOCOMConstants.BoObjectTypes_Document_oPurchaseRequest);
+            document.setCardCode(billOfMaterial.getBPCode());
+            document.setDocDate(new Date());
+            document.setTaxDate(new Date());
+            document.setVatDate(new Date());
+            document.setRequriedDate(new Date());
+            document.setComments(billOfMaterial.getRemarks());
+            document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
+            document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(billOfMaterial.getDocEntry());
+            document.getUserFields().getFields().item(BOM_ITEMCODE).setValue(billOfMaterial.getItemCode());
+            document.getUserFields().getFields().item(BOM_ITEMNAME).setValue(billOfMaterial.getItemName());
+            document.getUserFields().getFields().item(BOM_TREETYPE).setValue(billOfMaterial.getTreeType());
+            document.getUserFields().getFields().item(BOM_UOM).setValue(billOfMaterial.getUom());
+            if(billOfMaterial.getProject() != null)
+                document.getUserFields().getFields().item(BOM_PROJECT).setValue(billOfMaterial.getProject());
+            if(billOfMaterial.getActived() != null)
+                document.getUserFields().getFields().item(BOM_ACTIVTED).setValue(billOfMaterial.getActived());
+
+            for (ICompontOfMaterialListItem item:billOfMaterial.getCompontOfMaterialListItems()) {
+                document.getLines().setItemCode(item.getItemCode());
+                document.getLines().setQuantity(item.getQuantity());
+                document.getLines().setPrice(item.getPrice());
+                document.getLines().getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
+                document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry());
+                document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId());
+                document.getLines().add();
+            }
+            int rt = document.add();
+            if(rt == 0 )
+                return company.getNewObjectKey();
+            else throw new B1Exception(company.getLastErrorCode() + ":" + company.getLastErrorDescription());
+        }catch (SBOCOMException e){
+            logger.error("BOM生成采购申请发生异常",e);
+            throw new B1Exception(e);
+        }
+    }
 }
