@@ -14,6 +14,10 @@ public interface IBillOfMaterial {
 
      void setDocEntry(Integer docEntry);
 
+     String getOpType();
+
+     void setOpType(String opType);
+
      String getBPCode();
 
      void setBPCode(String bpCode);

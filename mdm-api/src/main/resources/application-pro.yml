@@ -2,7 +2,7 @@ server:
   port: 9091
 spring:
   datasource:
-    url: jdbc:sap://10.10.8.41:30015?currentschema=SBO_JS_KFCS01
+    url: jdbc:sap://10.10.8.41:30015?currentschema=ADDON_MID_BASE_TEST
     username: SYSTEM
     password: Consen2018
     driver-class-name: com.sap.db.jdbc.Driver
