@@ -6,8 +6,7 @@ import java.util.List;
 
 public class BillOfMaterial implements IBillOfMaterial {
 
-
-    private String companyName;
+    private String companyDB;
 
     private Integer docEntry;
 
@@ -50,13 +49,13 @@ public class BillOfMaterial implements IBillOfMaterial {
     }
 
     @Override
-    public String getCompanyName() {
-        return companyName;
+    public String getCompanyDB() {
+        return companyDB;
     }
 
     @Override
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setCompanyDB(String companyDB) {
+        this.companyDB = companyDB;
     }
 
     @Override

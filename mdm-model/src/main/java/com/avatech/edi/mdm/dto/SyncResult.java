@@ -17,11 +17,12 @@ public class SyncResult {
         return syncResult;
     }
 
-    public static SyncResult ok(String objectKey){
+    public static SyncResult ok(String objectKey,String returnKey){
         SyncResult syncResult = new SyncResult();
         syncResult.setCode(OK) ;
         syncResult.setMessage("同步成功");
         syncResult.setObjectKey(objectKey);
+        syncResult.setReturnKey(returnKey);
         return syncResult;
     }
 

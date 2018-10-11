@@ -32,4 +32,5 @@ public class BusinessType {
     public static final String PROFITCENTERTYPE = "540000042";
 
 
+
 }
