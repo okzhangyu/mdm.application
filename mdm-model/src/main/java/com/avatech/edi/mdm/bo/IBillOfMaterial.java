@@ -22,6 +22,10 @@ public interface IBillOfMaterial {
 
      void setBPCode(String bpCode);
 
+     String getVersionDesc();
+
+     void setVersionDesc(String versionDesc);
+
      String getItemCode();
 
      void setItemCode(String itemCode);
@@ -57,6 +61,10 @@ public interface IBillOfMaterial {
      String getProject();
 
      void setProject(String project);
+
+     String getWorkOrderNo();
+
+     void setWorkOrderNo(String workOrderNo);
 
      String getRoutCode();
 

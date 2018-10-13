@@ -31,6 +31,9 @@ public class BillOfMaterial implements IBillOfMaterial {
     @Column(name = "Version")
     private String version;
 
+    @Column(name = "Versiondesc")
+    private String versionDesc;
+
     @Column(name = "Actived")
     private String actived;
 
@@ -48,6 +51,9 @@ public class BillOfMaterial implements IBillOfMaterial {
 
     @Column(name = "Project")
     private String project;
+
+    @Column(name = "Workorderno")
+    private String workOrderNo;
 
     @Column(name = "Routcode")
     private String routCode;
@@ -79,7 +85,7 @@ public class BillOfMaterial implements IBillOfMaterial {
     }
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "Docentry")
+    @JoinColumn(name = "Bomdocentry")
     private List<CompontOfMaterialListItem> compontOfMaterialListItems;
 
     public BillOfMaterial(){
@@ -92,6 +98,16 @@ public class BillOfMaterial implements IBillOfMaterial {
 
     public void setUniqueKey(String uniqueKey) {
         this.uniqueKey = uniqueKey;
+    }
+
+    @Override
+    public String getVersionDesc() {
+        return versionDesc;
+    }
+
+    @Override
+    public void setVersionDesc(String versionDesc) {
+        this.versionDesc = versionDesc;
     }
 
     @Override
@@ -212,6 +228,16 @@ public class BillOfMaterial implements IBillOfMaterial {
     @Override
     public void setProject(String project) {
         this.project = project;
+    }
+
+    @Override
+    public String getWorkOrderNo() {
+        return workOrderNo;
+    }
+
+    @Override
+    public void setWorkOrderNo(String workOrderNo) {
+        this.workOrderNo = workOrderNo;
     }
 
     @Override

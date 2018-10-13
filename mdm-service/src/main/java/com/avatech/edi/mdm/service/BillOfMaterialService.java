@@ -57,8 +57,8 @@ public class BillOfMaterialService {
      * @param docEntry 单据号
      * @return
      */
-    public BillOfMaterial fetchBillOfMaterial(String companDB,Integer docEntry){
-        Optional<BillOfMaterial> billOfMaterial = this.repositoryBillOfMaterial.findById("SBO_JS_KFCS02_1");
+    public BillOfMaterial fetchBillOfMaterial(String companDB,String docEntry){
+        Optional<BillOfMaterial> billOfMaterial = this.repositoryBillOfMaterial.findById(companDB+"_"+docEntry);
         return billOfMaterial.get();
     }
 }

@@ -1,0 +1,47 @@
+Create Procedure "AVA_SP_ADDON_TASKS"(
+ 	in object_type nvarchar(20), 	-- SBO Object Type
+	in transaction_type nchar(1),-- [A]dd, [U]pdate, [D]elete, [C]ancel, C[L]ose
+	in num_of_cols_in_key integer,
+	in list_of_key_cols_tab_del nvarchar(255),
+	in list_of_cols_val_tab_del nvarchar(255) )
+	LANGUAGE SQLSCRIPT
+	As
+	BEGIN
+	Declare DocEntry int;
+	Declare Flag int;
+	Declare CompanyDB nvarchar(30);
+	Declare Objtype varchar(30);
+	Declare Autokey int;
+	AutoKey := 1;
+	CompanyDB = 'SBO_JS_KFCS02';
+
+	SELECT COUNT(*) INTO Flag FROM ADDON_MID_BASE_TEST."AVA_PM_TASK";
+	IF (:FLAG > 0)
+	THEN
+		SELECT MAX(DocEntry) INTO AutoKey FROM ADDON_MID_BASE_TEST."AVA_PM_TASK";
+	END IF;
+	-------------------单据添加--------------------------------
+	IF :transaction_type = N'A' THEN
+		--草稿
+		-- BOM审批完成后 判断是新增的还是更新的，如果是更新的就插入进中间表
+		IF :object_type = N'122' THEN
+			insert into  "ADDON_MID_BASE_TEST"."AVA_PM_TASK"(DocEntry,CompanyCode,UniqueKey,ObjectCode,OpType,CreateDate,CreateTime)
+			select ROW_NUMBER() Over(Order by "ObjType") + AutoKey,CompanyDB,"DocEntry","ObjType",'A'
+				,CURRENT_DATE,concat(hour(current_time),minute(current_time))
+				FROM "ODRF" Where "DocEntry" = :list_of_cols_val_tab_del
+				and exists(select * from "@AVA_PM_OBOM" t0 inner join "@AVA_PM_BOM1" t1 on t0."DocEntry" = t1."DocEntry"
+									   inner join "ODRF" t2 on t0."U_ItemCode" = t2."U_ItemCode"
+									   where t2."ObjType" = '540000006' and t2."WddStatus" = 'Y'
+									    and t1."U_IsLock" = 'Y' and t2."DocEntry" = :list_of_cols_val_tab_del) ;
+		End IF;
+
+	END IF; -- INSERT
+
+	---------------------单据更新----------------------------------------
+
+	--更新单据
+	IF :transaction_type = N'U'
+	THEN
+
+	END IF;
+END;

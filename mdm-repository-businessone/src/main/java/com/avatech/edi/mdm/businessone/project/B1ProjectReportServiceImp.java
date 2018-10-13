@@ -19,7 +19,7 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
     private final Logger logger = LoggerFactory.getLogger(B1ProjectReportServiceImp.class);
 
     private final String BASE_TYPE = "U_BaseType";
-    private final String BASE_DOCENTRY = "U_BaseDocEntry";
+    private final String BASE_DOCENTRY = "U_BaseEntry";
     private final String BASE_LINENUM = "U_BaseLineNum";
 
     private final String OBJECT_CODE = "AVA_PM_ACTIVITY";

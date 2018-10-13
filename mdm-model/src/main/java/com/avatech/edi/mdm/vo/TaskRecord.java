@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="AVA_OA_TASK")
+@Table(name="AVA_PM_TASK")
 public class TaskRecord {
     @Id
     @Column(name="Docentry")

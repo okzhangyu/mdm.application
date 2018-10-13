@@ -35,7 +35,7 @@ public class BOMJob {
                 BillOfMaterial billOfMaterial;
                 for (TaskRecord taskRecord : taskRecordList) {
                     try {
-                        billOfMaterial = billOfMaterialService.fetchBillOfMaterial(taskRecord.getCompanyName(), taskRecord.getDocEntry());
+                        billOfMaterial = billOfMaterialService.fetchBillOfMaterial(taskRecord.getCompanyName(), taskRecord.getUniqueKey());
                         if (billOfMaterial == null)
                             throw new Exception("BOM[" + taskRecord.getCompanyName() + "_" + taskRecord.getDocEntry() + "]未找到");
                         billOfMaterialService.processApprovedResult(billOfMaterial);
