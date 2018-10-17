@@ -17,6 +17,8 @@ public class ProjectBudget implements IProjectBudget{
 
     private String prjName;
 
+    private String deptName;
+
     private String prjTypeCode;
 
     private String prjTypeName;
@@ -133,6 +135,16 @@ public class ProjectBudget implements IProjectBudget{
 
     public void setDeptId(String deptId) {
         this.deptId = deptId;
+    }
+
+    @Override
+    public String getDeptName() {
+        return deptName;
+    }
+
+    @Override
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 
     public Integer getBplId() {

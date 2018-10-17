@@ -17,46 +17,42 @@ public class B1Manager {
 
     private static List<B1Connection> b1Connections;
 
-    private List<B1Connection> getB1Connections(){
-
+    private List<B1Connection> getB1Connections() throws IOException {
+        FileInputStream fileInputStream = null;
+        InputStreamReader inputStreamReader = null;
+        BufferedReader bufferedReader = null;
         try {
-//            String path = getClass().getResourceAsStream(COMPANY_INFO_CONFIG).toString();
-//            logger.info(path);
-//            path = path.replace("\\", "/");
-//            if (path.contains(":")) {
-//                path = path.replace("file:", "");// 2
-//            }
-//            FileInputStream inputStream = null;
-//            inputStream = new FileInputStream(path);
-//            Reader reader = new InputStreamReader(inputStream, "UTF-8");
-//            Gson gson = new GsonBuilder().create();
-//            List<B1Connection> companyInfos = gson.fromJson(reader, new TypeToken<List<B1Connection>>(){}.getType());
-
-         Gson gson = new GsonBuilder().create();
-            List<B1Connection> companyInfos = gson.fromJson("[{\"companyName\":\"技术公司-开发测试02\",\"server\":\"10.10.8.41:30015\",\"companyDB\":\"SBO_JS_KFCS02\",\"userName\":\"A001\",\"password\":\"1234\",\"licenseServer\":\"10.10.8.41:40000\",\"sldServer\":\"10.10.8.41:40000\",\"dbServiceType\":9,\"dbUsername\":\"SYSTEM\",\"dbPassword\":\"Consen2018\",\"laguage\":15,\"useTrusted\":\"false\"},{\"companyName\":\"技术公司-开发测试03\",\"server\":\"10.10.8.41:30015\",\"companyDB\":\"SBO_JS_KFCS03\",\"userName\":\"A100\",\"password\":\"123456\",\"licenseServer\":\"10.10.8.41:40000\",\"sldServer\":\"10.10.8.41:40000\",dbServiceType\":9,\"dbUsername\":\"SYSTEM\",\"dbPassword\":\"Consen2018\",\"laguage\":15,\"useTrusted\":\"false\"}]"
-                    , new TypeToken<List<B1Connection>>(){}.getType());
+            InputStream stream = getClass().getClassLoader().getResourceAsStream(COMPANY_INFO_CONFIG);
+            inputStreamReader = new InputStreamReader(stream); // 建立一个输入流对象reader
+            bufferedReader = new BufferedReader(inputStreamReader); // 建立一个对象，它把文件内容转成计算机能读懂的语言
+            StringBuffer stringBuffer = new StringBuffer();
+            String line = bufferedReader.readLine().trim();
+            while (line != null) {
+                stringBuffer.append(line);
+                line = bufferedReader.readLine(); // 一次读入一行数据
+            }
+            Gson gson = new GsonBuilder().create();
+            List<B1Connection> companyInfos = gson.fromJson(stringBuffer.toString(), new TypeToken<List<B1Connection>>() {
+            }.getType());
             return companyInfos;
-//        } catch (FileNotFoundException e) {
-//            logger.info("公司信息配置文件未找到");
-//            throw new ServiceException("50001","公司信息配置文件未找到");
-//        } catch (UnsupportedEncodingException e) {
-//            logger.info("读取公司信息配置文件错误");
-//            throw new ServiceException("50002","读取公司信息配置文件错误");
-        }catch (Exception e){
-            logger.info("读取配置文件出错",e);
-            throw new ServiceException("50002","读取配置文件出错");
+        } catch (IOException e) {
+            logger.info("读取配置文件出错", e);
+            throw new ServiceException("50002", "读取配置文件出错");
+        } finally {
+            if (null != bufferedReader) bufferedReader.close();
+            if (null != inputStreamReader) inputStreamReader.close();
+            if (null != fileInputStream) fileInputStream.close();
         }
-
     }
 
-    public B1Connection getB1ConnInstance(String companyName){
+    public B1Connection getB1ConnInstance(String companDB){
         B1Connection connection = null;
         try{
             if(b1Connections == null || b1Connections.size() == 0){
                 b1Connections = getB1Connections();
             }
             for (B1Connection conn:b1Connections) {
-                if(companyName.equals(conn.getCompanyName()) || companyName.equals(conn.getCompanyDB())){
+                if(companDB.equals(conn.getCompanyDB())){
                     connection = conn;
                 }
             }

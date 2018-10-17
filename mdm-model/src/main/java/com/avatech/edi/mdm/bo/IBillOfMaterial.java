@@ -74,13 +74,13 @@ public interface IBillOfMaterial {
 
      void setOutPutWkc(String outPutWkc);
 
-     Date getValidDateF();
+     String getValidDateF();
 
-     void setValidDateF(Date validDateF);
+     void setValidDateF(String validDateF);
 
-     Date getValidDateT();
+     String getValidDateT();
 
-     void setValidDateT(Date validDateT);
+     void setValidDateT(String validDateT);
 
      Integer getBPLId();
 

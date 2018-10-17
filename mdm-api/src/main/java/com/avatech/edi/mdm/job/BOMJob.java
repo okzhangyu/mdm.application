@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -33,16 +35,26 @@ public class BOMJob {
             if (taskRecordList.size() > 0) {
                 logger.info("获取任务清单信息：" + taskRecordList.toString());
                 BillOfMaterial billOfMaterial;
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 for (TaskRecord taskRecord : taskRecordList) {
                     try {
                         billOfMaterial = billOfMaterialService.fetchBillOfMaterial(taskRecord.getCompanyName(), taskRecord.getUniqueKey());
                         if (billOfMaterial == null)
                             throw new Exception("BOM[" + taskRecord.getCompanyName() + "_" + taskRecord.getDocEntry() + "]未找到");
                         billOfMaterialService.processApprovedResult(billOfMaterial);
+                        taskRecord.setIsSync("Y");
+                        taskRecord.setSyncMessage("Successful");
+                        taskRecord.setSyncDate(formatter.format(new Date()));
+                        taskRecordService.updateTask(taskRecord);
                     } catch (Exception e) {
+                        taskRecord.setIsSync("N");
+                        taskRecord.setSyncMessage(e.getMessage());
+                        taskRecord.setSyncDate(formatter.format(new Date()));
+                        taskRecordService.updateTask(taskRecord);
                         logger.error("[" + taskRecord.getCompanyName() + "_" + taskRecord.getDocEntry() + taskRecord.getDocEntry() + "]BOM处理发生异常", e);
                     }
                 }
+                logger.info("BOM审批生成生产订单完成");
             }
         } catch (Exception e) {
             logger.error("处理BOM信息异常", e);

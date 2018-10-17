@@ -36,5 +36,7 @@ public class TaskRecordService {
         taskRepository.saveAll(taskRecords);
     }
 
-
+    public void updateTask(TaskRecord taskRecord){
+        taskRepository.save(taskRecord);
+    }
 }

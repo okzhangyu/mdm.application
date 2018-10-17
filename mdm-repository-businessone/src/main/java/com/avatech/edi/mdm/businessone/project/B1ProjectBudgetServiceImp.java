@@ -33,7 +33,7 @@ public class B1ProjectBudgetServiceImp implements B1ProjectBudgetService {
             company = boRepositoryBusinessOne.getCompany();
 
             IStockTransfer document = SBOCOMUtil.newStockTransfer(company,SBOCOMConstants.BoObjectTypes_StockTransfer_oInventoryTransferRequest);
-            document.setCardCode(B1Data.VISUAL_CARDCODE);
+            document.setCardCode(B1Data.VISUAL_SUPPLIER);
             document.setDocDate(new Date());
             document.setTaxDate(new Date());
             if(projectBudget.getRemarks() != null)

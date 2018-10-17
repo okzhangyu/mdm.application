@@ -62,10 +62,10 @@ public class BillOfMaterial implements IBillOfMaterial {
     private String outPutWkc;
 
     @Column(name = "Validdatef")
-    private Date validDateF;
+    private String validDateF;
 
     @Column(name = "Validdatet")
-    private Date validDateT;
+    private String validDateT;
 
     @Column(name = "Bplid")
     private Integer bPLId;
@@ -261,22 +261,22 @@ public class BillOfMaterial implements IBillOfMaterial {
     }
 
     @Override
-    public Date getValidDateF() {
+    public String getValidDateF() {
         return validDateF;
     }
 
     @Override
-    public void setValidDateF(Date validDateF) {
+    public void setValidDateF(String validDateF) {
         this.validDateF = validDateF;
     }
 
     @Override
-    public Date getValidDateT() {
+    public String getValidDateT() {
         return validDateT;
     }
 
     @Override
-    public void setValidDateT(Date validDateT) {
+    public void setValidDateT(String validDateT) {
         this.validDateT = validDateT;
     }
 

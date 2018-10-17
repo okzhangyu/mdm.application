@@ -1,6 +1,5 @@
 package com.avatech.edi.mdm.bo;
 
-import java.util.Date;
 
 public interface IProjectReportItem {
      Integer getDocEntry();
@@ -48,26 +47,27 @@ public interface IProjectReportItem {
 
      void setSrvcCntnt(String srvcCntnt) ;
 
-     Date getAtlStd() ;
+     String getAtlStd() ;
 
-     void setAtlStd(Date atlStd);
+     void setAtlStd(String atlStd);
 
-     Date getAtlStt() ;
+     Integer getAtlStt() ;
 
-     void setAtlStt(Date atlStt) ;
-     Date getAtlFnd() ;
+     void setAtlStt(Integer atlStt) ;
 
-     void setAtlFnd(Date atlFnd) ;
+     String getAtlFnd() ;
 
-     Date getAtlFnt() ;
+     void setAtlFnd(String atlFnd) ;
 
-     void setAtlFnt(Date atlFnt);
+     Integer getAtlFnt() ;
 
-     Date getAtlDur();
+     void setAtlFnt(Integer atlFnt);
 
-     void setAtlDur(Date atlDur);
+     Double getAtlDur();
 
-     String getAtlDurUn() ;
+     void setAtlDur(Double atlDur);
+
+     String  getAtlDurUn() ;
 
      void setAtlDurUn(String atlDurUn);
 
