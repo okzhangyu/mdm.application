@@ -11,9 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
@@ -28,7 +25,9 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
     private final String DEPATEMENT_NAME = "U_DeptName";
     private final String PROJECT_ID = "U_PrjCode";
     private final String PROJECT_NAME = "U_PrjName";
-    private final String PROJECT_STAGE = "U_StageName";
+    private final String CREATOR = "U_Creator";
+    private final String PROJECT_STAGE_CODE = "U_StageCode";
+    private final String PROJECT_STAGE_NAME = "U_StageName";
     private final String ACTIVITY_TYPE = "U_ActType";
     private final String CARDCODE = "U_CardCode";
     private final String SUBJECT = "U_SrvcSbjct";
@@ -39,7 +38,6 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
     private final String ATLFNT = "U_AtlFnt";
     private final String ATLDUR = "U_AtlDur";
     private final String ATLDURUN = "U_AtlDurUn";
-
     private final String OBJECT_CODE = "AVA_PM_ACTIVITY";
 
     @Override
@@ -57,6 +55,7 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
                 document.setComments(projectReport.getRemarks());
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
             document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(projectReport.getDocEntry());
+            document.getUserFields().getFields().item(CREATOR).setValue(projectReport.getCreator());
             if(projectReport.getEmpName() != null)
                 document.getUserFields().getFields().item(EMPLOYEE_NAME).setValue(projectReport.getEmpName());
             if(projectReport.getDeptName() != null)
@@ -74,8 +73,10 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
                     document.getLines().getUserFields().getFields().item(PROJECT_ID).setValue(item.getPrjCode());
                 if(item.getPrjName() != null)
                     document.getLines().getUserFields().getFields().item(PROJECT_NAME).setValue(item.getPrjName());
+                if(item.getStageCode() != null)
+                    document.getLines().getUserFields().getFields().item(PROJECT_STAGE_CODE).setValue(item.getStageCode());
                 if(item.getStageName() != null)
-                    document.getLines().getUserFields().getFields().item(PROJECT_STAGE).setValue(item.getStageName());
+                    document.getLines().getUserFields().getFields().item(PROJECT_STAGE_NAME).setValue(item.getStageName());
                 if(item.getCardCode() != null)
                     document.getLines().getUserFields().getFields().item(CARDCODE).setValue(item.getCardCode());
                 if(item.getSrvcSbjct() != null)

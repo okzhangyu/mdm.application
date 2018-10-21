@@ -20,6 +20,7 @@ public class ProjectReport implements IProjectReport{
 
     private String ref2;
 
+    private String creator;
 
     private String empId;
 
@@ -116,11 +117,39 @@ public class ProjectReport implements IProjectReport{
         this.bPLId = bPLId;
     }
 
+    @Override
+    public String getCreator() {
+        return creator;
+    }
+
+    @Override
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
     public List<ProjectReportItem> getProjectReportItems() {
         return projectReportItems;
     }
 
     public void setProjectReportItems(List<ProjectReportItem> projectReportItems) {
         this.projectReportItems = projectReportItems;
+    }
+
+    @Override
+    public String toString() {
+        return "ProjectReport{" +
+                "\"companyDB\":\"" + companyDB + '\'' +
+                "\",\" docEntry=" + docEntry +
+                "\",\" remarks\":\"" + remarks + '\'' +
+                "\",\" ref1\":\"" + ref1 + '\'' +
+                "\",\" ref2\":\"" + ref2 + '\'' +
+                "\",\" creator\":\"" + creator + '\'' +
+                "\",\" empId\":\"" + empId + '\'' +
+                "\",\" empName\":\"" + empName + '\'' +
+                "\",\" deptId\":\"" + deptId + '\'' +
+                "\",\" deptName\":\"" + deptName + '\'' +
+                "\",\" bPLId\":\"" + bPLId +
+                "\",\" projectReportItems\":" + projectReportItems +
+                '}';
     }
 }

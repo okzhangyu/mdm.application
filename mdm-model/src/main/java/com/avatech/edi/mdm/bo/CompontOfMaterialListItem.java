@@ -267,4 +267,30 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
     public void setUDF5(String udf5) {
         this.udf5 = udf5;
     }
+
+    @Override
+    public String toString() {
+        return "CompontOfMaterialListItem{" +
+                "\"uniqueKey\":\"" + uniqueKey + '\'' +
+                "\",\"bomDocEntry\":\"" + bomDocEntry + '\'' +
+                "\",\"companyDB\":\"" + companyDB + '\'' +
+                "\",\"docEntry\":\"" + docEntry +
+                "\",\"lineId\":\"" + lineId +
+                "\",\"lineStatus\":\"" + lineStatus + '\'' +
+                "\",\"childNum\":\"" + childNum +
+                "\",\"itemCode\":\"" + itemCode + '\'' +
+                "\",\"itemName\":\"" + itemName + '\'' +
+                "\",\"bomVer\":\"" + bomVer + '\'' +
+                "\",\"quantity\":\"" + quantity +
+                "\",\"whsCode\":\"" + whsCode + '\'' +
+                "\",\"price\":\"" + price +
+                "\",\"isLocked\":\"" + isLocked + '\'' +
+                "\",\"uom\":\"" + uom + '\'' +
+                "\",\"udf1\":\"" + udf1 + '\'' +
+                "\",\"udf2\":\"" + udf2 + '\'' +
+                "\",\"udf3\":\"" + udf3 + '\'' +
+                "\",\"udf4\":\"" + udf4 + '\'' +
+                "\",\"udf5\":\"" + udf5 + '\'' +
+                '}';
+    }
 }

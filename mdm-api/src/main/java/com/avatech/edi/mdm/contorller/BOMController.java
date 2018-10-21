@@ -42,9 +42,14 @@ public class BOMController {
         try
         {
             logger.info("接收BOM信息》》》》》"+ bom.toString());
-            SyncResult results = billOfMaterialService.syncBOM(bom);
-            rt = Result.ok(results);
-
+            if(bom.getProject() == null || bom.getProject().isEmpty())
+                rt =  Result.error("1001","项目信息为空");
+            else if(bom.getWorkOrderNo() == null || bom.getWorkOrderNo().isEmpty())
+                rt = Result.error("1002","工单号信息为空");
+            else {
+                SyncResult results = billOfMaterialService.syncBOM(bom);
+                rt = Result.ok(results);
+            }
         }catch (ServiceException e){
             logger.error(bom.toString(),e);
             rt = Result.error("-1",e);

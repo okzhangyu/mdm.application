@@ -61,9 +61,12 @@ public class ProjectController {
         try
         {
             logger.info("接收项目预算信息》》》》》"+ budget.toString());
-            SyncResult results = projectBudgetService.syncProjectBudget(budget);
-            rt = Result.ok(results);
-
+            if(budget.getPrjCode() == null || budget.getPrjName() == null || budget.getPrjCode().isEmpty() || budget.getPrjName().isEmpty())
+                rt = Result.error("1001","项目信息为空");
+            else {
+                SyncResult results = projectBudgetService.syncProjectBudget(budget);
+                rt = Result.ok(results);
+            }
         }catch (ServiceException e){
             logger.error(budget.toString(),e);
             rt = Result.error("-1",e);

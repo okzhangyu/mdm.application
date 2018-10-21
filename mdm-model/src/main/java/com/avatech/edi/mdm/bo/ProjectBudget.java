@@ -19,6 +19,8 @@ public class ProjectBudget implements IProjectBudget{
 
     private String deptName;
 
+    private String creator;
+
     private String prjTypeCode;
 
     private String prjTypeName;
@@ -202,11 +204,47 @@ public class ProjectBudget implements IProjectBudget{
         this.remarks = remarks;
     }
 
+    @Override
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
     public List<ProjectBudgetItem> getProjectBudgetItemList() {
         return projectBudgetItemList;
     }
 
     public void setProjectBudgetItemList(List<ProjectBudgetItem> projectBudgetItemList) {
         this.projectBudgetItemList = projectBudgetItemList;
+    }
+
+    @Override
+    public String toString() {
+        return "ProjectBudget{" +
+                "companyDB\":\"" + companyDB + '\'' +
+              "\",\" docEntry\":\"" + docEntry +
+              "\",\" prjCode\":\"" + prjCode + '\'' +
+              "\",\" prjName\":\"" + prjName + '\'' +
+              "\",\" deptName\":\"" + deptName + '\'' +
+              "\",\" creator\":\"" + creator + '\'' +
+              "\",\" prjTypeCode\":\"" + prjTypeCode + '\'' +
+              "\",\" prjTypeName\":\"" + prjTypeName + '\'' +
+              "\",\" cardCode\":\"" + cardCode + '\'' +
+              "\",\" cardName\":\"" + cardName + '\'' +
+              "\",\" managerId\":\"" + managerId + '\'' +
+              "\",\" managerName\":\"" + managerName + '\'' +
+              "\",\" deptId\":\"" + deptId + '\'' +
+              "\",\" bplId=" + bplId +
+              "\",\" remarks\":\"" + remarks + '\'' +
+              "\",\" udf1\":\"" + udf1 + '\'' +
+              "\",\" udf2\":\"" + udf2 + '\'' +
+              "\",\" udf3\":\"" + udf3 + '\'' +
+              "\",\" udf4\":\"" + udf4 + '\'' +
+              "\",\" udf5\":\"" + udf5 + '\'' +
+              "\",\" projectBudgetItemList\":\"" + projectBudgetItemList +
+                '}';
     }
 }

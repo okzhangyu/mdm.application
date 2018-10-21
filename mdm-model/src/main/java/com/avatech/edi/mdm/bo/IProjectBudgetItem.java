@@ -3,7 +3,7 @@ package com.avatech.edi.mdm.bo;
 public interface IProjectBudgetItem {
     Integer getDocEntry();
 
-    void setDocEntry(Integer docEntry);
+    void setDocEntry(Integer docEntry) ;
 
     Integer getLineNum();
 
@@ -13,123 +13,83 @@ public interface IProjectBudgetItem {
 
     void setRef1(String ref1);
 
-    String getRef2();
-
+    String getRef2() ;
     void setRef2(String ref2);
 
-    Double getCabQty();
+    String getPrjCode();
 
-    void setCabQty(Double cabQty);
+    void setPrjCode(String prjCode) ;
+    String getPrjName();
 
-    Double getCabRefQty();
+    void setPrjName(String prjName);
 
-    void setCabRefQty(Double cabRefQty);
+    String getStageCode() ;
 
-    Double getExtenRaNum();
+    void setStageCode(String stageCode);
 
-    void setExtenRaNum(Double extenRaNum);
+    String getStageName();
 
-    Double getRemoRaNum();
+    void setStageName(String stageName);
 
-    void setRemoRaNum(Double remoRaNum);
+    String getCardCode() ;
 
-    Double getAuxPlatNum();
+    void setCardCode(String cardCode) ;
+    String getCardName() ;
 
-    void setAuxPlatNum(Double auxPlatNum);
+    void setCardName(String cardName) ;
 
-    String getOvSpMachine();
+    String getSrvcSbjct();
 
-    void setOvSpMachine(String ovSpMachine);
+    void setSrvcSbjct(String srvcSbjct) ;
 
-    String getOvSpMaType();
+    String getSrvcCntnt() ;
 
-    void setOvSpMaType(String ovSpMaType);
+    void setSrvcCntnt(String srvcCntnt) ;
 
-    Double getdICaNum();
+    String getAtlStd() ;
 
-    void setdICaNum(Double dICaNum);
+    void setAtlStd(String atlStd);
 
-    Double getdICabReNum();
+    Integer getAtlStt() ;
 
-    void setdICabReNum(Double dICabReNum);
+    void setAtlStt(Integer atlStt) ;
 
-    Double getdIQuotNumber();
+    String getAtlFnd() ;
 
-    void setdIQuotNumber(Double dIQuotNumber);
+    void setAtlFnd(String atlFnd) ;
 
-    Double getdIPaPoNum();
+    Integer getAtlFnt() ;
 
-    void setdIPaPoNum(Double dIPaPoNum);
+    void setAtlFnt(Integer atlFnt);
 
-    Double getdOCaNum();
+    Double getAtlDur();
 
-    void setdOCaNum(Double dOCaNum);
+    void setAtlDur(Double atlDur);
 
-    Double getdOCabReNum();
+    String  getAtlDurUn() ;
 
-    void setdOCabReNum(Double dOCabReNum);
+    void setAtlDurUn(String atlDurUn);
 
-    Double getdOQuotNumber();
+    String getActType();
 
-    void setdOQuotNumber(Double dOQuotNumber);
+    void setActType(String actType) ;
+    String getUdf1() ;
 
-    Double getdOPaPoNum();
+    void setUdf1(String udf1) ;
 
-    void setdOPaPoNum(Double dOPaPoNum);
+    String getUdf2() ;
 
-    Double getaIDCaNum();
+    void setUdf2(String udf2) ;
 
-    void setaIDCaNum(Double aIDCaNum);
+    String getUdf3() ;
 
-    Double getaICabReNum();
+    void setUdf3(String udf3) ;
 
-    void setaICabReNum(Double aICabReNum);
+    String getUdf4() ;
 
-    Double getaIQuotNumber();
+    void setUdf4(String udf4) ;
 
-    void setaIQuotNumber(Double aIQuotNumber);
+    String getUdf5() ;
 
-    Double getaIPaPoNum();
-
-    void setaIPaPoNum(Double aIPaPoNum);
-
-    Double getaOCaNum();
-
-    void setaOCaNum(Double aOCaNum);
-
-    Double getaOCabReNum();
-
-    void setaOCabReNum(Double aOCabReNum);
-
-    Double getaOQuotNumber();
-
-    void setaOQuotNumber(Double aOQuotNumber);
-
-    Double getaOPaPoNum();
-
-    void setaOPaPoNum(Double aOPaPoNum);
-
-    Double getpICaNum();
-
-    void setpICaNum(Double pICaNum);
-
-    Double getpICabReNum();
-
-    void setpICabReNum(Double pICabReNum);
-
-    Double getpIQuotNumber();
-
-    void setpIQuotNumber(Double pIQuotNumber);
-
-    Double getpIPaPoNum();
-
-    void setpIPaPoNum(Double pIPaPoNum);
-
-    Double getExtenRefQty();
-
-    void setExtenRefQty(Double extenRefQty);
-
-    Double getRemoRaNumRefQty();
-
-    void setRemoRaNumRefQty(Double remoRaNumRefQty);
+    void setUdf5(String udf5);
 }
