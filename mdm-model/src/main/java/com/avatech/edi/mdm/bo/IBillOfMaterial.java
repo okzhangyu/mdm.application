@@ -90,6 +90,10 @@ public interface IBillOfMaterial {
 
      void setRemarks(String remarks);
 
+     String getCreator();
+
+     void setCreator(String creator);
+
     List<CompontOfMaterialListItem> getCompontOfMaterialListItems();
 
     void setCompontOfMaterialListItems( List<CompontOfMaterialListItem> compontOfMaterialListItems);

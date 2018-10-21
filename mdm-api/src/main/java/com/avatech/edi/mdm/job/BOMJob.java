@@ -47,7 +47,7 @@ public class BOMJob {
                         taskRecord.setSyncDate(formatter.format(new Date()));
                         taskRecordService.updateTask(taskRecord);
                     } catch (Exception e) {
-                        taskRecord.setIsSync("N");
+                        taskRecord.setIsSync("E");
                         taskRecord.setSyncMessage(e.getMessage());
                         taskRecord.setSyncDate(formatter.format(new Date()));
                         taskRecordService.updateTask(taskRecord);

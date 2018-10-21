@@ -16,6 +16,10 @@ public interface IProjectBudget {
 
     void setPrjCode(String prjCode);
 
+    String getCreator();
+
+    void setCreator(String creator);
+
     String getPrjName();
 
     void setPrjName(String prjName);

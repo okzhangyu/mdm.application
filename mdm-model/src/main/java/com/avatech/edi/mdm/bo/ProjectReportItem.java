@@ -5,9 +5,7 @@ import java.util.Date;
 public class ProjectReportItem implements IProjectReportItem{
 
     private Integer docEntry;
-
     private Integer lineNum;
-
     private String ref1;
     private String ref2;
     private String prjCode;
@@ -24,9 +22,7 @@ public class ProjectReportItem implements IProjectReportItem{
     private Integer atlFnt;
     private Double atlDur;
     private String atlDurUn;
-
     private String actType;
-
     private String udf1;
     private String udf2;
     private String udf3;
@@ -223,5 +219,35 @@ public class ProjectReportItem implements IProjectReportItem{
 
     public void setUdf5(String udf5) {
         this.udf5 = udf5;
+    }
+
+    @Override
+    public String toString() {
+        return "ProjectReportItem{" +
+                "\"docEntry\":\"" + docEntry +
+                "\",\" lineNum\":\"" + lineNum +
+                "\",\" ref1\":\"" + ref1 + '\'' +
+                "\",\" ref2\":\"" + ref2 + '\'' +
+                "\",\" prjCode\":\"" + prjCode + '\'' +
+                "\",\" prjName\":\"" + prjName + '\'' +
+                "\",\" stageCode\":\"" + stageCode + '\'' +
+                "\",\" stageName\":\"" + stageName + '\'' +
+                "\",\" cardCode\":\"" + cardCode + '\'' +
+                "\",\" cardName\":\"" + cardName + '\'' +
+                "\",\" srvcSbjct\":\"" + srvcSbjct + '\'' +
+                "\",\" srvcCntnt\":\"" + srvcCntnt + '\'' +
+                "\",\" atlStd\":\"" + atlStd + '\'' +
+                "\",\" atlStt\":\"" + atlStt +
+                "\",\" atlFnd\":\"" + atlFnd + '\'' +
+                "\",\" atlFnt\":\"" + atlFnt +
+                "\",\" atlDur\":\"" + atlDur +
+                "\",\" atlDurUn\":\"" + atlDurUn + '\'' +
+                "\",\" actType\":\"" + actType + '\'' +
+                "\",\" udf1\":\"" + udf1 + '\'' +
+                "\",\" udf2\":\"" + udf2 + '\'' +
+                "\",\" udf3\":\"" + udf3 + '\'' +
+                "\",\" udf4\":\"" + udf4 + '\'' +
+                "\",\" udf5\":\"" + udf5 + '\'' +
+                '}';
     }
 }

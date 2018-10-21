@@ -3,70 +3,30 @@ package com.avatech.edi.mdm.bo;
 public class ProjectBudgetItem implements IProjectBudgetItem{
 
     private Integer docEntry;
-
     private Integer lineNum;
-
     private String ref1;
-
     private String ref2;
+    private String prjCode;
+    private String prjName;
+    private String stageCode;
+    private String stageName;
+    private String cardCode;
+    private String cardName;
+    private String srvcSbjct;
+    private String srvcCntnt;
+    private String atlStd;
+    private Integer atlStt;
+    private String atlFnd;
+    private Integer atlFnt;
+    private Double atlDur;
+    private String atlDurUn;
+    private String actType;
+    private String udf1;
+    private String udf2;
+    private String udf3;
+    private String udf4;
+    private String udf5;
 
-    private Double cabQty;
-
-    private Double cabRefQty;
-
-    private Double extenRaNum;
-
-    private Double remoRaNum;
-
-    private Double auxPlatNum;
-
-    private String ovSpMachine;
-
-    private String ovSpMaType;
-
-    private Double dICaNum;
-
-    private Double dICabReNum;
-
-    private Double dIQuotNumber;
-
-    private Double dIPaPoNum;
-
-    private Double dOCaNum;
-
-    private Double dOCabReNum;
-
-    private Double dOQuotNumber;
-
-    private Double dOPaPoNum;
-
-    private Double aIDCaNum;
-
-    private Double aICabReNum;
-
-    private Double aIQuotNumber;
-
-    private Double aIPaPoNum;
-
-    private Double aOCaNum;
-
-   private Double aOCabReNum;
-
-   private Double aOQuotNumber;
-
-   private Double aOPaPoNum;
-
-   private Double pICaNum;
-
-   private Double pICabReNum;
-
-   private Double pIQuotNumber;
-
-   private Double pIPaPoNum;
-
-   private Double extenRefQty;
-
-   private Double remoRaNumRefQty;
 
     public Integer getDocEntry() {
         return docEntry;
@@ -100,235 +60,193 @@ public class ProjectBudgetItem implements IProjectBudgetItem{
         this.ref2 = ref2;
     }
 
-    public Double getCabQty() {
-        return cabQty;
+    public String getPrjCode() {
+        return prjCode;
     }
 
-    public void setCabQty(Double cabQty) {
-        this.cabQty = cabQty;
+    public void setPrjCode(String prjCode) {
+        this.prjCode = prjCode;
     }
 
-    public Double getCabRefQty() {
-        return cabRefQty;
+    public String getPrjName() {
+        return prjName;
     }
 
-    public void setCabRefQty(Double cabRefQty) {
-        this.cabRefQty = cabRefQty;
+    public void setPrjName(String prjName) {
+        this.prjName = prjName;
     }
 
-    public Double getExtenRaNum() {
-        return extenRaNum;
+    public String getStageCode() {
+        return stageCode;
     }
 
-    public void setExtenRaNum(Double extenRaNum) {
-        this.extenRaNum = extenRaNum;
+    public void setStageCode(String stageCode) {
+        this.stageCode = stageCode;
     }
 
-    public Double getRemoRaNum() {
-        return remoRaNum;
+    public String getStageName() {
+        return stageName;
     }
 
-    public void setRemoRaNum(Double remoRaNum) {
-        this.remoRaNum = remoRaNum;
+    public void setStageName(String stageName) {
+        this.stageName = stageName;
     }
 
-    public Double getAuxPlatNum() {
-        return auxPlatNum;
+    public String getCardCode() {
+        return cardCode;
     }
 
-    public void setAuxPlatNum(Double auxPlatNum) {
-        this.auxPlatNum = auxPlatNum;
+    public void setCardCode(String cardCode) {
+        this.cardCode = cardCode;
     }
 
-    public String getOvSpMachine() {
-        return ovSpMachine;
+    public String getCardName() {
+        return cardName;
     }
 
-    public void setOvSpMachine(String ovSpMachine) {
-        this.ovSpMachine = ovSpMachine;
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
     }
 
-    public String getOvSpMaType() {
-        return ovSpMaType;
+    public String getSrvcSbjct() {
+        return srvcSbjct;
     }
 
-    public void setOvSpMaType(String ovSpMaType) {
-        this.ovSpMaType = ovSpMaType;
+    public void setSrvcSbjct(String srvcSbjct) {
+        this.srvcSbjct = srvcSbjct;
     }
 
-    public Double getdICaNum() {
-        return dICaNum;
+    public String getSrvcCntnt() {
+        return srvcCntnt;
     }
 
-    public void setdICaNum(Double dICaNum) {
-        this.dICaNum = dICaNum;
+    public void setSrvcCntnt(String srvcCntnt) {
+        this.srvcCntnt = srvcCntnt;
     }
 
-    public Double getdICabReNum() {
-        return dICabReNum;
+    public String getAtlStd() {
+        return atlStd;
     }
 
-    public void setdICabReNum(Double dICabReNum) {
-        this.dICabReNum = dICabReNum;
+    public void setAtlStd(String atlStd) {
+        this.atlStd = atlStd;
     }
 
-    public Double getdIQuotNumber() {
-        return dIQuotNumber;
+    public Integer getAtlStt() {
+        return atlStt;
     }
 
-    public void setdIQuotNumber(Double dIQuotNumber) {
-        this.dIQuotNumber = dIQuotNumber;
+    public void setAtlStt(Integer atlStt) {
+        this.atlStt = atlStt;
     }
 
-    public Double getdIPaPoNum() {
-        return dIPaPoNum;
+    public String getAtlFnd() {
+        return atlFnd;
     }
 
-    public void setdIPaPoNum(Double dIPaPoNum) {
-        this.dIPaPoNum = dIPaPoNum;
+    public void setAtlFnd(String atlFnd) {
+        this.atlFnd = atlFnd;
     }
 
-    public Double getdOCaNum() {
-        return dOCaNum;
+    public Integer getAtlFnt() {
+        return atlFnt;
     }
 
-    public void setdOCaNum(Double dOCaNum) {
-        this.dOCaNum = dOCaNum;
+    public void setAtlFnt(Integer atlFnt) {
+        this.atlFnt = atlFnt;
     }
 
-    public Double getdOCabReNum() {
-        return dOCabReNum;
+    public Double getAtlDur() {
+        return atlDur;
     }
 
-    public void setdOCabReNum(Double dOCabReNum) {
-        this.dOCabReNum = dOCabReNum;
+    public void setAtlDur(Double atlDur) {
+        this.atlDur = atlDur;
     }
 
-    public Double getdOQuotNumber() {
-        return dOQuotNumber;
+    public String getAtlDurUn() {
+        return atlDurUn;
     }
 
-    public void setdOQuotNumber(Double dOQuotNumber) {
-        this.dOQuotNumber = dOQuotNumber;
+    public void setAtlDurUn(String atlDurUn) {
+        this.atlDurUn = atlDurUn;
     }
 
-    public Double getdOPaPoNum() {
-        return dOPaPoNum;
+    public String getActType() {
+        return actType;
     }
 
-    public void setdOPaPoNum(Double dOPaPoNum) {
-        this.dOPaPoNum = dOPaPoNum;
+    public void setActType(String actType) {
+        this.actType = actType;
     }
 
-    public Double getaIDCaNum() {
-        return aIDCaNum;
+    public String getUdf1() {
+        return udf1;
     }
 
-    public void setaIDCaNum(Double aIDCaNum) {
-        this.aIDCaNum = aIDCaNum;
+    public void setUdf1(String udf1) {
+        this.udf1 = udf1;
     }
 
-    public Double getaICabReNum() {
-        return aICabReNum;
+    public String getUdf2() {
+        return udf2;
     }
 
-    public void setaICabReNum(Double aICabReNum) {
-        this.aICabReNum = aICabReNum;
+    public void setUdf2(String udf2) {
+        this.udf2 = udf2;
     }
 
-    public Double getaIQuotNumber() {
-        return aIQuotNumber;
+    public String getUdf3() {
+        return udf3;
     }
 
-    public void setaIQuotNumber(Double aIQuotNumber) {
-        this.aIQuotNumber = aIQuotNumber;
+    public void setUdf3(String udf3) {
+        this.udf3 = udf3;
     }
 
-    public Double getaIPaPoNum() {
-        return aIPaPoNum;
+    public String getUdf4() {
+        return udf4;
     }
 
-    public void setaIPaPoNum(Double aIPaPoNum) {
-        this.aIPaPoNum = aIPaPoNum;
+    public void setUdf4(String udf4) {
+        this.udf4 = udf4;
     }
 
-    public Double getaOCaNum() {
-        return aOCaNum;
+    public String getUdf5() {
+        return udf5;
     }
 
-    public void setaOCaNum(Double aOCaNum) {
-        this.aOCaNum = aOCaNum;
+    public void setUdf5(String udf5) {
+        this.udf5 = udf5;
     }
 
-    public Double getaOCabReNum() {
-        return aOCabReNum;
-    }
-
-    public void setaOCabReNum(Double aOCabReNum) {
-        this.aOCabReNum = aOCabReNum;
-    }
-
-    public Double getaOQuotNumber() {
-        return aOQuotNumber;
-    }
-
-    public void setaOQuotNumber(Double aOQuotNumber) {
-        this.aOQuotNumber = aOQuotNumber;
-    }
-
-    public Double getaOPaPoNum() {
-        return aOPaPoNum;
-    }
-
-    public void setaOPaPoNum(Double aOPaPoNum) {
-        this.aOPaPoNum = aOPaPoNum;
-    }
-
-    public Double getpICaNum() {
-        return pICaNum;
-    }
-
-    public void setpICaNum(Double pICaNum) {
-        this.pICaNum = pICaNum;
-    }
-
-    public Double getpICabReNum() {
-        return pICabReNum;
-    }
-
-    public void setpICabReNum(Double pICabReNum) {
-        this.pICabReNum = pICabReNum;
-    }
-
-    public Double getpIQuotNumber() {
-        return pIQuotNumber;
-    }
-
-    public void setpIQuotNumber(Double pIQuotNumber) {
-        this.pIQuotNumber = pIQuotNumber;
-    }
-
-    public Double getpIPaPoNum() {
-        return pIPaPoNum;
-    }
-
-    public void setpIPaPoNum(Double pIPaPoNum) {
-        this.pIPaPoNum = pIPaPoNum;
-    }
-
-    public Double getExtenRefQty() {
-        return extenRefQty;
-    }
-
-    public void setExtenRefQty(Double extenRefQty) {
-        this.extenRefQty = extenRefQty;
-    }
-
-    public Double getRemoRaNumRefQty() {
-        return remoRaNumRefQty;
-    }
-
-    public void setRemoRaNumRefQty(Double remoRaNumRefQty) {
-        this.remoRaNumRefQty = remoRaNumRefQty;
+    @Override
+    public String toString() {
+        return "ProjectBudgetItem{" +
+                "docEntry\":" + docEntry +
+                ",\" lineNum\":" + lineNum +
+                ",\" ref1\":" + ref1 + '\'' +
+                ",\" ref2\":" + ref2 + '\'' +
+                ",\" prjCode\":" + prjCode + '\'' +
+                ",\" prjName\":" + prjName + '\'' +
+                ",\" stageCode\":" + stageCode + '\'' +
+                ",\" stageName\":" + stageName + '\'' +
+                ",\" cardCode\":" + cardCode + '\'' +
+                ",\" cardName\":" + cardName + '\'' +
+                ",\" srvcSbjct\":" + srvcSbjct + '\'' +
+                ",\" srvcCntnt\":" + srvcCntnt + '\'' +
+                ",\" atlStd\":" + atlStd + '\'' +
+                ",\" atlStt\":" + atlStt +
+                ",\" atlFnd\":" + atlFnd + '\'' +
+                ",\" atlFnt\":" + atlFnt +
+                ",\" atlDur\":" + atlDur +
+                ",\" atlDurUn\":" + atlDurUn + '\'' +
+                ",\" actType\":" + actType + '\'' +
+                ",\" udf1\":" + udf1 + '\'' +
+                ",\" udf2\":" + udf2 + '\'' +
+                ",\" udf3\":" + udf3 + '\'' +
+                ",\" udf4\":" + udf4 + '\'' +
+                ",\" udf5\":" + udf5 + '\'' +
+                '}';
     }
 }

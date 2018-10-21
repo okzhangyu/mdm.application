@@ -76,6 +76,9 @@ public class BillOfMaterial implements IBillOfMaterial {
     @Column(name = "Optype")
     private String opType;
 
+    @Column(name = "Creator")
+    private String creator;
+
     public String getOpType(){
         return opType;
     }
@@ -301,6 +304,16 @@ public class BillOfMaterial implements IBillOfMaterial {
     }
 
     @Override
+    public String getCreator() {
+        return creator;
+    }
+
+    @Override
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    @Override
     public List<CompontOfMaterialListItem> getCompontOfMaterialListItems() {
         return compontOfMaterialListItems;
     }
@@ -308,5 +321,35 @@ public class BillOfMaterial implements IBillOfMaterial {
     @Override
     public void setCompontOfMaterialListItems(List<CompontOfMaterialListItem> compontOfMaterialListItems) {
         this.compontOfMaterialListItems = compontOfMaterialListItems;
+    }
+
+    @Override
+    public String toString() {
+        return "BillOfMaterial{" +
+                "\"uniqueKey\":\"" + uniqueKey + '\'' +
+                "\",\" companyDB\":\"" + companyDB + '\'' +
+                "\",\" docEntry=" + docEntry +
+                "\",\" bpCode\":\"" + bpCode + '\'' +
+                "\",\" itemCode\":\"" + itemCode + '\'' +
+                "\",\" itemName\":\"" + itemName + '\'' +
+                "\",\" version\":\"" + version + '\'' +
+                "\",\" versionDesc\":\"" + versionDesc + '\'' +
+                "\",\" actived\":\"" + actived + '\'' +
+                "\",\" treeType\":\"" + treeType + '\'' +
+                "\",\" unitQty=" + unitQty +
+                "\",\" uom\":\"" + uom + '\'' +
+                "\",\" toWH\":\"" + toWH + '\'' +
+                "\",\" project\":\"" + project + '\'' +
+                "\",\" workOrderNo\":\"" + workOrderNo + '\'' +
+                "\",\" routCode\":\"" + routCode + '\'' +
+                "\",\" outPutWkc\":\"" + outPutWkc + '\'' +
+                "\",\" validDateF\":\"" + validDateF + '\'' +
+                "\",\" validDateT\":\"" + validDateT + '\'' +
+                "\",\" bPLId=" + bPLId +
+                "\",\" remarks\":\"" + remarks + '\'' +
+                "\",\" opType\":\"" + opType + '\'' +
+                "\",\" creator\":\"" + creator + '\'' +
+                "\",\" compontOfMaterialListItems\":" + compontOfMaterialListItems +
+                '}';
     }
 }

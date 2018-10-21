@@ -20,6 +20,10 @@ public interface IProjectReport {
 
     void setRef1(String ref1);
 
+    String getCreator();
+
+    void setCreator(String creator);
+
     String getRef2();
 
     void setRef2(String ref2);

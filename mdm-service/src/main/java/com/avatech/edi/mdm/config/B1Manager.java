@@ -52,7 +52,7 @@ public class B1Manager {
                 b1Connections = getB1Connections();
             }
             for (B1Connection conn:b1Connections) {
-                if(companDB.equals(conn.getCompanyDB())){
+                if(companDB.equals(conn.getCompanyDB()) || companDB.equals(conn.getCompanyName())){
                     connection = conn;
                 }
             }
