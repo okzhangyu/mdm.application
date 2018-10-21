@@ -36,6 +36,10 @@ public interface IProjectReport {
 
     void setDeptId(String deptId);
 
+    String getDeptName();
+
+    void setDeptName(String deptName);
+
     Integer getbPLId();
 
     void setbPLId(Integer bPLId);

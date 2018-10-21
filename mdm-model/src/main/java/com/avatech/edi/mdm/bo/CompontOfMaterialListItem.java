@@ -12,7 +12,10 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
 
     @Id
     @Column(name = "Uniquekey")
-    private String  uniqueKey;
+    private String uniqueKey;
+
+    @Column(name = "Bomdocentry")
+    private String bomDocEntry;
 
     @Column(name = "Companydb")
     private String companyDB;
@@ -47,6 +50,9 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
     @Column(name = "Price")
     private Double price;
 
+    @Column(name = "Islocked")
+    private String isLocked;
+
     @Column(name = "Uom")
     private String uom;
 
@@ -79,6 +85,16 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
 
     public void setCompanyDB(String companyDB) {
         this.companyDB = companyDB;
+    }
+
+    @Override
+    public String getBOMDocEntry() {
+        return bomDocEntry;
+    }
+
+    @Override
+    public void setBOMDocEntry(String bomDocEntry) {
+        this.bomDocEntry = bomDocEntry;
     }
 
     @Override
@@ -141,10 +157,23 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
         this.itemName = itemName;
     }
 
+
+    @Override
+    public String getIsLocked() {
+        return isLocked;
+    }
+
+    @Override
+    public void setIsLocked(String isLocked) {
+        this.isLocked = isLocked;
+    }
+
+    @Override
     public String getBOMVer() {
         return bomVer;
     }
 
+    @Override
     public void setBOMVer(String bomVer) {
         this.bomVer = bomVer;
     }
@@ -179,50 +208,62 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
         this.price = price;
     }
 
+    @Override
     public String getUOM() {
         return uom;
     }
 
+    @Override
     public void setUOM(String uom) {
         this.uom = uom;
     }
 
+    @Override
     public String getUDF1() {
         return udf1;
     }
 
+    @Override
     public void setUDF1(String udf1) {
         this.udf1 = udf1;
     }
 
+    @Override
     public String getUDF2() {
         return udf2;
     }
 
+    @Override
     public void setUDF2(String udf2) {
         this.udf2 = udf2;
     }
 
+    @Override
     public String getUDF3() {
         return udf3;
     }
 
+    @Override
     public void setUDF3(String udf3) {
         this.udf3 = udf3;
     }
 
+    @Override
     public String getUDF4() {
         return udf4;
     }
 
+    @Override
     public void setUDF4(String udf4) {
         this.udf4 = udf4;
     }
 
+    @Override
     public String getUDF5() {
         return udf5;
     }
 
+    @Override
     public void setUDF5(String udf5) {
         this.udf5 = udf5;
     }

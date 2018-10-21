@@ -18,11 +18,11 @@ public class ProjectReportItem implements IProjectReportItem{
     private String cardName;
     private String srvcSbjct;
     private String srvcCntnt;
-    private Date atlStd;
-    private Date atlStt;
-    private Date atlFnd;
-    private Date atlFnt;
-    private Date atlDur;
+    private String atlStd;
+    private Integer atlStt;
+    private String atlFnd;
+    private Integer atlFnt;
+    private Double atlDur;
     private String atlDurUn;
 
     private String actType;
@@ -129,43 +129,43 @@ public class ProjectReportItem implements IProjectReportItem{
         this.srvcCntnt = srvcCntnt;
     }
 
-    public Date getAtlStd() {
+    public String getAtlStd() {
         return atlStd;
     }
 
-    public void setAtlStd(Date atlStd) {
+    public void setAtlStd(String atlStd) {
         this.atlStd = atlStd;
     }
 
-    public Date getAtlStt() {
+    public Integer getAtlStt() {
         return atlStt;
     }
 
-    public void setAtlStt(Date atlStt) {
+    public void setAtlStt(Integer atlStt) {
         this.atlStt = atlStt;
     }
 
-    public Date getAtlFnd() {
+    public String getAtlFnd() {
         return atlFnd;
     }
 
-    public void setAtlFnd(Date atlFnd) {
+    public void setAtlFnd(String atlFnd) {
         this.atlFnd = atlFnd;
     }
 
-    public Date getAtlFnt() {
+    public Integer getAtlFnt() {
         return atlFnt;
     }
 
-    public void setAtlFnt(Date atlFnt) {
+    public void setAtlFnt(Integer atlFnt) {
         this.atlFnt = atlFnt;
     }
 
-    public Date getAtlDur() {
+    public Double getAtlDur() {
         return atlDur;
     }
 
-    public void setAtlDur(Date atlDur) {
+    public void setAtlDur(Double atlDur) {
         this.atlDur = atlDur;
     }
 

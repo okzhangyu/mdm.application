@@ -2,8 +2,8 @@
 <configuration  scan="true" scanPeriod="60 seconds" debug="false">
     <contextName>logback</contextName>
 
-    <property name="logback.logdir" value="/Users/fanxing/dev/log/tomcat"/>
-    <!--<property name="logback.logdir" value="/servicelog/mdm"/>-->
+    <!--<property name="logback.logdir" value="/Users/fanxing/dev/log/tomcat"/>-->
+    <property name="logback.logdir" value="/servicelog/mdm"/>
     <property name="logback.appname" value="app"/>
 
     <!--输出到控制台-->

@@ -27,6 +27,8 @@ public class ProjectReport implements IProjectReport{
 
     private String deptId;
 
+    private String deptName;
+
     private Integer bPLId;
 
 
@@ -94,6 +96,16 @@ public class ProjectReport implements IProjectReport{
 
     public void setDeptId(String deptId) {
         this.deptId = deptId;
+    }
+
+    @Override
+    public String getDeptName() {
+        return deptName;
+    }
+
+    @Override
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 
     public Integer getbPLId() {

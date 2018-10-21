@@ -20,7 +20,7 @@ public class B1ProjectBudgetServiceImp implements B1ProjectBudgetService {
 
 
     private final String BASE_TYPE = "U_BaseType";
-    private final String BASE_DOCENTRY = "U_BaseDocEntry";
+    private final String BASE_DOCENTRY = "U_BaseEntry";
     private final String BASE_LINENUM = "U_BaseLineNum";
 
     private final String OBJECT_CODE = "AVA_PM_TIMEBUDGET";
@@ -33,7 +33,7 @@ public class B1ProjectBudgetServiceImp implements B1ProjectBudgetService {
             company = boRepositoryBusinessOne.getCompany();
 
             IStockTransfer document = SBOCOMUtil.newStockTransfer(company,SBOCOMConstants.BoObjectTypes_StockTransfer_oInventoryTransferRequest);
-            document.setCardCode(B1Data.VISUAL_CARDCODE);
+            document.setCardCode(B1Data.VISUAL_SUPPLIER);
             document.setDocDate(new Date());
             document.setTaxDate(new Date());
             if(projectBudget.getRemarks() != null)

@@ -22,6 +22,10 @@ public interface IBillOfMaterial {
 
      void setBPCode(String bpCode);
 
+     String getVersionDesc();
+
+     void setVersionDesc(String versionDesc);
+
      String getItemCode();
 
      void setItemCode(String itemCode);
@@ -58,6 +62,10 @@ public interface IBillOfMaterial {
 
      void setProject(String project);
 
+     String getWorkOrderNo();
+
+     void setWorkOrderNo(String workOrderNo);
+
      String getRoutCode();
 
      void setRoutCode(String routCode);
@@ -66,13 +74,13 @@ public interface IBillOfMaterial {
 
      void setOutPutWkc(String outPutWkc);
 
-     Date getValidDateF();
+     String getValidDateF();
 
-     void setValidDateF(Date validDateF);
+     void setValidDateF(String validDateF);
 
-     Date getValidDateT();
+     String getValidDateT();
 
-     void setValidDateT(Date validDateT);
+     void setValidDateT(String validDateT);
 
      Integer getBPLId();
 

@@ -48,6 +48,10 @@ public interface IProjectBudget {
 
     void setDeptId(String deptId);
 
+    String getDeptName();
+
+    void setDeptName(String deptName);
+
     Integer getBplId();
 
     void setBplId(Integer bplId);

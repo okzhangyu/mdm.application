@@ -8,6 +8,10 @@ public interface ICompontOfMaterialListItem {
 
     void setDocEntry(Integer docEntry);
 
+    String getBOMDocEntry();
+
+    void setBOMDocEntry(String bomDocEntry);
+
    Integer getLineId();
 
    void setLineId(Integer lineId);
@@ -41,6 +45,10 @@ public interface ICompontOfMaterialListItem {
    void setWhsCode(String whsCode);
 
    Double getPrice();
+
+   String getIsLocked();
+
+   void setIsLocked(String isLocked);
 
    void setPrice(Double price);
 
