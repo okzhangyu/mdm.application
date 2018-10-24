@@ -82,13 +82,13 @@ public interface IBillOfMaterial {
 
      void setValidDateT(String validDateT);
 
-     Integer getBPLId();
-
-     void setBPLId(Integer bplId);
-
      String getRemarks();
 
      void setRemarks(String remarks);
+
+     String getItemType();
+
+     void setItemType(String itemType);
 
      String getCreator();
 

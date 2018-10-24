@@ -48,7 +48,10 @@ public class BOMJob {
                         taskRecordService.updateTask(taskRecord);
                     } catch (Exception e) {
                         taskRecord.setIsSync("E");
-                        taskRecord.setSyncMessage(e.getMessage());
+                        if(e.getMessage()!= null && e.getMessage().length() > 99)
+                            taskRecord.setSyncMessage(e.getMessage().substring(0,99));
+                        else
+                            taskRecord.setSyncMessage(e.getMessage());
                         taskRecord.setSyncDate(formatter.format(new Date()));
                         taskRecordService.updateTask(taskRecord);
                         logger.error("[" + taskRecord.getCompanyName() + "_" + taskRecord.getDocEntry() + taskRecord.getDocEntry() + "]BOM处理发生异常", e);

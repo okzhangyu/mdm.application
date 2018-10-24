@@ -54,20 +54,20 @@ public class B1ProjectBudgetServiceImp implements B1ProjectBudgetService {
             if(projectBudget.getRemarks() != null)
                 document.setComments(projectBudget.getRemarks());
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
-            document.getUserFields().getFields().item(PROJECT_ID).setValue(projectBudget.getPrjCode());
-            document.getUserFields().getFields().item(PROJECT_NAME).setValue(projectBudget.getPrjName());
-            document.getUserFields().getFields().item(CREATOR).setValue(projectBudget.getCreator());
-            document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(projectBudget.getDocEntry());
-
+            if(projectBudget.getPrjCode() != null)
+                document.getUserFields().getFields().item(PROJECT_ID).setValue(projectBudget.getPrjCode().toString());
+            if(projectBudget.getPrjName() != null)
+                document.getUserFields().getFields().item(PROJECT_NAME).setValue(projectBudget.getPrjName());
+            document.getUserFields().getFields().item(CREATOR).setValue(projectBudget.getCreator().toString());
+            document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(projectBudget.getDocEntry().toString());
             for (IProjectBudgetItem item:projectBudget.getProjectBudgetItemList()) {
                 document.getLines().setItemCode(B1Data.VISUAL_ITEMCODE);
                 document.getLines().setWarehouseCode(B1Data.VISUAL_WHSCODE1);
                 document.getLines().setFromWarehouseCode(B1Data.VISUAL_WHSCODE2);
                 document.getLines().setQuantity(0.01);
-
                 document.getLines().getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
-                document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry());
-                document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineNum());
+                document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry().toString());
+                document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineNum().toString());
                 if(item.getPrjCode() != null)
                     document.getLines().getUserFields().getFields().item(PROJECT_ID).setValue(item.getPrjCode());
                 if(item.getPrjName() != null)
@@ -82,8 +82,8 @@ public class B1ProjectBudgetServiceImp implements B1ProjectBudgetService {
                     document.getLines().getUserFields().getFields().item(SUBJECT).setValue(item.getSrvcSbjct());
                 if(item.getSrvcCntnt() != null)
                     document.getLines().getUserFields().getFields().item(CONTENT).setValue(item.getSrvcCntnt());
-                if(item.getActType() != null)
-                    document.getLines().getUserFields().getFields().item(ACTIVITY_TYPE).setValue(item.getActType());
+//               // if(item.getActType() != null)
+//                  //  document.getLines().getUserFields().getFields().item(ACTIVITY_TYPE).setValue(item.getActType());
                 if(item.getAtlStd() != null)
                     document.getLines().getUserFields().getFields().item(ATLSTD).setValue(item.getAtlStd());
                 if(item.getAtlStt() != null)
