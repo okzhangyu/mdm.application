@@ -62,6 +62,10 @@ public interface IBillOfMaterial {
 
      void setProject(String project);
 
+     String getProjectName();
+
+     void setProjectName(String projectName);
+
      String getWorkOrderNo();
 
      void setWorkOrderNo(String workOrderNo);

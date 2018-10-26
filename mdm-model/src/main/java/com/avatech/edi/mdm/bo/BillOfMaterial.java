@@ -79,6 +79,19 @@ public class BillOfMaterial implements IBillOfMaterial {
     @Column(name = "Itemtype")
     private String itemType;
 
+    @Column(name = "Projectname")
+    private String projectName;
+
+    @Override
+    public String getProjectName() {
+        return projectName;
+    }
+
+    @Override
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
     public String getOpType(){
         return opType;
     }

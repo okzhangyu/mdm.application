@@ -29,7 +29,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
     private final String BOM_QUANTITY = "U_Quantity";
     private final String BOM_WORKORDERNUM = "U_WorkOrderNo";
     private final String BOM_UOM = "U_Uom";
-    private final String BOM_VERSION = "BOMVer";
+    private final String BOM_VERSION = "U_BOMVer";
     private final String BOM_UNITQTY = "U_UnitQty";
     private final String BOM_PROJECT = "U_PrjCode";
     private final String BOM_PROJECT_NAME = "U_PrjName";
@@ -58,26 +58,27 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             document.setRequriedDate(new Date());
             document.setComments(billOfMaterial.getRemarks());
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
-            document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(billOfMaterial.getDocEntry());
+            document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(billOfMaterial.getDocEntry().toString());
             document.getUserFields().getFields().item(BOM_ITEMCODE).setValue(billOfMaterial.getItemCode());
             document.getUserFields().getFields().item(BOM_ITEMNAME).setValue(billOfMaterial.getItemName());
             document.getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getProject());
             document.getUserFields().getFields().item(BOM_PROJECT).setValue(billOfMaterial.getProject());
-            if(billOfMaterial.getCreator() != null)
+            if(billOfMaterial.getCreator() != null && !billOfMaterial.getCreator().isEmpty())
                 document.getUserFields().getFields().item(BOM_CREATOR).setValue(billOfMaterial.getCreator());
-            if(billOfMaterial.getTreeType() != null)
+            if(billOfMaterial.getTreeType() != null && ! billOfMaterial.getTreeType().isEmpty())
                 document.getUserFields().getFields().item(BOM_TREETYPE).setValue(billOfMaterial.getTreeType());
-            if(billOfMaterial.getUom() != null)
+            if(billOfMaterial.getUom() != null && !billOfMaterial.getUom().isEmpty())
                 document.getUserFields().getFields().item(BOM_UOM).setValue(billOfMaterial.getUom());
-            if(billOfMaterial.getVersion() != null)
+            if(billOfMaterial.getVersion() != null && !billOfMaterial.getVersion().isEmpty())
                 document.getUserFields().getFields().item(BOM_VERSION).setValue(billOfMaterial.getVersion());
             for (ICompontOfMaterialListItem item:billOfMaterial.getCompontOfMaterialListItems()) {
                 document.getLines().setItemCode(item.getItemCode());
-                document.getLines().setQuantity(item.getQuantity());
+                document.getLines().setQuantity(1.0);
                 document.getLines().setPrice(item.getPrice());
                 document.getLines().getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
                 document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry().toString());
                 document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId().toString());
+                document.getLines().getUserFields().getFields().item(BOM_QUANTITY).setValue(item.getQuantity().toString());
                 document.getLines().add();
             }
             int rt = document.add();
