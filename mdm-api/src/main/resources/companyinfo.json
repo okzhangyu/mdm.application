@@ -110,5 +110,33 @@
     "dbPassword":"Consen2018",
     "laguage":15,
     "useTrusted":"false"
+  },
+  {
+    "companyName":"自动化开发测试账套",
+    "server":"10.10.8.41:30015",
+    "companyDB":"SBO_KJS_ZDHKFCS",
+    "userName":"manager",
+    "password":"123456",
+    "licenseServer":"10.10.8.41:40000",
+    "sldServer":"10.10.8.41:40000",
+    "dbServiceType":9,
+    "dbUsername":"SYSTEM",
+    "dbPassword":"Consen2018",
+    "laguage":15,
+    "useTrusted":"false"
+  },
+  {
+    "companyName":"自动化测试账套_1029",
+    "server":"10.10.8.41:30015",
+    "companyDB":"SBO_KJS_ZDHSAPCS01",
+    "userName":"manager",
+    "password":"123456",
+    "licenseServer":"10.10.8.41:40000",
+    "sldServer":"10.10.8.41:40000",
+    "dbServiceType":9,
+    "dbUsername":"SYSTEM",
+    "dbPassword":"Consen2018",
+    "laguage":15,
+    "useTrusted":"false"
   }
 ]

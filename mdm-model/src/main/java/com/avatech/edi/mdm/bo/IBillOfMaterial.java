@@ -62,6 +62,10 @@ public interface IBillOfMaterial {
 
      void setProject(String project);
 
+     String getProjectName();
+
+     void setProjectName(String projectName);
+
      String getWorkOrderNo();
 
      void setWorkOrderNo(String workOrderNo);
@@ -82,13 +86,13 @@ public interface IBillOfMaterial {
 
      void setValidDateT(String validDateT);
 
-     Integer getBPLId();
-
-     void setBPLId(Integer bplId);
-
      String getRemarks();
 
      void setRemarks(String remarks);
+
+     String getItemType();
+
+     void setItemType(String itemType);
 
      String getCreator();
 

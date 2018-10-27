@@ -67,9 +67,6 @@ public class BillOfMaterial implements IBillOfMaterial {
     @Column(name = "Validdatet")
     private String validDateT;
 
-    @Column(name = "Bplid")
-    private Integer bPLId;
-
     @Column(name = "Remarks")
     private String remarks;
 
@@ -78,6 +75,22 @@ public class BillOfMaterial implements IBillOfMaterial {
 
     @Column(name = "Creator")
     private String creator;
+
+    @Column(name = "Itemtype")
+    private String itemType;
+
+    @Column(name = "Projectname")
+    private String projectName;
+
+    @Override
+    public String getProjectName() {
+        return projectName;
+    }
+
+    @Override
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
 
     public String getOpType(){
         return opType;
@@ -283,15 +296,6 @@ public class BillOfMaterial implements IBillOfMaterial {
         this.validDateT = validDateT;
     }
 
-    @Override
-    public Integer getBPLId() {
-        return bPLId;
-    }
-
-    @Override
-    public void setBPLId(Integer bPLId) {
-        this.bPLId = bPLId;
-    }
 
     @Override
     public String getRemarks() {
@@ -324,6 +328,16 @@ public class BillOfMaterial implements IBillOfMaterial {
     }
 
     @Override
+    public String getItemType() {
+        return itemType;
+    }
+
+    @Override
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
+    @Override
     public String toString() {
         return "BillOfMaterial{" +
                 "\"uniqueKey\":\"" + uniqueKey + '\'' +
@@ -345,7 +359,6 @@ public class BillOfMaterial implements IBillOfMaterial {
                 "\",\" outPutWkc\":\"" + outPutWkc + '\'' +
                 "\",\" validDateF\":\"" + validDateF + '\'' +
                 "\",\" validDateT\":\"" + validDateT + '\'' +
-                "\",\" bPLId=" + bPLId +
                 "\",\" remarks\":\"" + remarks + '\'' +
                 "\",\" opType\":\"" + opType + '\'' +
                 "\",\" creator\":\"" + creator + '\'' +

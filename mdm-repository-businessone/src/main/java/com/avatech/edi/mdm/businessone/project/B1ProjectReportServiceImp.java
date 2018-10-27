@@ -54,8 +54,9 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
             if(projectReport.getRemarks() != null)
                 document.setComments(projectReport.getRemarks());
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
-            document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(projectReport.getDocEntry());
-            document.getUserFields().getFields().item(CREATOR).setValue(projectReport.getCreator());
+            document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(projectReport.getDocEntry().toString());
+            if(projectReport.getCreator() != null)
+                document.getUserFields().getFields().item(CREATOR).setValue(projectReport.getCreator().toString());
             if(projectReport.getEmpName() != null)
                 document.getUserFields().getFields().item(EMPLOYEE_NAME).setValue(projectReport.getEmpName());
             if(projectReport.getDeptName() != null)
@@ -65,10 +66,10 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
                 document.getLines().setItemCode(B1Data.VISUAL_ITEMCODE);
                 document.getLines().setWarehouseCode(B1Data.VISUAL_WHSCODE1);
                 document.getLines().setFromWarehouseCode(B1Data.VISUAL_WHSCODE2);
-                document.getLines().setQuantity(0.01);
+                document.getLines().setQuantity(1.0);
                 document.getLines().getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
-                document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry());
-                document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineNum());
+                document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry().toString());
+                document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineNum().toString());
                 if(item.getPrjCode() != null)
                     document.getLines().getUserFields().getFields().item(PROJECT_ID).setValue(item.getPrjCode());
                 if(item.getPrjName() != null)
@@ -83,8 +84,8 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
                     document.getLines().getUserFields().getFields().item(SUBJECT).setValue(item.getSrvcSbjct());
                 if(item.getSrvcCntnt() != null)
                     document.getLines().getUserFields().getFields().item(CONTENT).setValue(item.getSrvcCntnt());
-                if(item.getActType() != null)
-                    document.getLines().getUserFields().getFields().item(ACTIVITY_TYPE).setValue(item.getActType());
+//                if(item.getActType() != null)
+//                    document.getLines().getUserFields().getFields().item(ACTIVITY_TYPE).setValue(item.getActType());
                 if(item.getAtlStd() != null)
                     document.getLines().getUserFields().getFields().item(ATLSTD).setValue(item.getAtlStd());
                 if(item.getAtlStt() != null)
