@@ -35,7 +35,6 @@ public class B1AccountServiceImp implements B1AccountService {
             company = boRepositoryBusinessOne.getCompany();
 
             IChartOfAccounts chartOfAccounts = SBOCOMUtil.newChartOfAccounts(company);
-
             Boolean isExist;
             if(chartOfAccounts.getByKey(account.getAcctCode())){
                 isExist = true;
