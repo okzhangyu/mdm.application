@@ -202,7 +202,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             document.setRequriedDate(new Date());
             document.setComments(billOfMaterial.getRemarks());
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
-            document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(billOfMaterial.getDocEntry());
+            document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(billOfMaterial.getDocEntry().toString());
             document.getUserFields().getFields().item(BOM_ITEMCODE).setValue(billOfMaterial.getItemCode());
             document.getUserFields().getFields().item(BOM_ITEMNAME).setValue(billOfMaterial.getItemName());
             document.getUserFields().getFields().item(BOM_TREETYPE).setValue(billOfMaterial.getTreeType());
