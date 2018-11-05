@@ -105,6 +105,10 @@ public class B1ProjectBudgetServiceImp implements B1ProjectBudgetService {
         }catch (SBOCOMException e){
             logger.error("同步项目预算发生异常",e);
             throw new B1Exception(e);
+        }finally {
+            if(company != null){
+                company.disconnect();
+            }
         }
     }
 }

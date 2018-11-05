@@ -64,7 +64,6 @@ public class B1AccountServiceImp implements B1AccountService {
                     chartOfAccounts.setAccountType(getActType(account.getActType()));
                 }
             }
-
             int rstCode;
             if(isExist){
                 rstCode = chartOfAccounts.update();

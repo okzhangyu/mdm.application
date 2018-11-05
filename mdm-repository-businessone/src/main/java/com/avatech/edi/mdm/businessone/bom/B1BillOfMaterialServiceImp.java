@@ -90,6 +90,10 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
         }catch (SBOCOMException e){
             logger.error("同步BOM发生异常",e);
             throw new B1Exception(e);
+        }finally {
+            if(company!=null){
+                company.disconnect();
+            }
         }
     }
 
@@ -122,6 +126,9 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
         }catch (Exception e){
             if(company.isInTransaction()){
                 company.endTransaction(SBOCOMConstants.BoWfTransOpt_wf_RollBack);
+            }
+            if(company != null){
+                company.disconnect();
             }
             logger.error("BOM处理生产订单/采购申请单异常"+e);
             throw e;
