@@ -1,0 +1,12 @@
+Create Procedure "AVA_SP_ADDON_UPDATE_TIME_BUDGET"(
+in  docEntry  int
+)
+as
+begin
+
+    Update "@AVA_PM_WTB1" t0 Set t0."U_AtlDur" =(IFNull(t0."U_AtlDur",0)+IFNull(t1."U_AtlDur",0)) from "@AVA_PM_ACT1" t1  where t0."DocEntry" =t1."U_BaseEntry"
+    and t0."LineId" =t1."U_BaseLine" and t1."U_BaseType"='S' and t1."DocEntry"= :docEntry   ;
+
+    Update "@AVA_PM_PRJ2" t0 Set t0."U_AtlDur" =(IFNull(t0."U_AtlDur",0)+IFNull(t1."U_AtlDur",0)) from "@AVA_PM_ACT1" t1  where t0."DocEntry" =t1."U_BaseEntry"
+    and t0."LineId" =t1."U_BaseLine" and t1."U_BaseType"='C' and t1."DocEntry"= :docEntry   ;
+end
