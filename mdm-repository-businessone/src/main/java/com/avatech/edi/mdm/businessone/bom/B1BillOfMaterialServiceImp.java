@@ -30,6 +30,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
     private final String BOM_WORKORDERNUM = "U_WorkOrderNo";
     private final String BOM_UOM = "U_Uom";
     private final String BOM_VERSION = "U_BOMVer";
+    private final String BOM_IS_LOCK = "U_IsLocked";
     private final String BOM_UNITQTY = "U_UnitQty";
     private final String BOM_PROJECT = "U_PrjCode";
     private final String BOM_PROJECT_NAME = "U_PrjName";
@@ -79,6 +80,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                 document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry().toString());
                 document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId().toString());
                 document.getLines().getUserFields().getFields().item(BOM_QUANTITY).setValue(item.getQuantity().toString());
+                document.getLines().getUserFields().getFields().item(BOM_IS_LOCK).setValue(item.getIsLocked());
                 document.getLines().add();
             }
             int rt = document.add();
@@ -187,8 +189,9 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                 return company.getNewObjectKey();
             }
             else throw new B1Exception(company.getLastErrorCode() + ":" + company.getLastErrorDescription());
-        }catch (Exception e){
-            logger.error("生产订单创建或更新发生异常",e);
+        }catch (B1Exception e){
+            throw  e;
+        }catch (SBOCOMException e){
             throw new B1Exception(e);
         }
     }
