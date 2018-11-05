@@ -91,4 +91,90 @@ public class BusinessPartner extends MDMMasterData implements IBusinessPartner,S
     public void setCurrency(String currency) {
         this.currency = currency;
     }
+
+    @Override
+    public String getLicTradNum() {
+        return null;
+    }
+
+    @Override
+    public void setLicTradNum(String licTradNum) {
+
+    }
+
+    @Column(name = "Federaltaxid")
+    private String federalTaxID;
+
+    @Override
+    public String getFederalTaxID() {
+        return federalTaxID;
+    }
+
+    @Override
+    public void setFederalTaxID(String federalTaxID) {
+        this.federalTaxID = federalTaxID;
+    }
+
+    @Column(name="Gsbh")
+    private String gsbh;
+
+    @Column(name="Gnw")
+    private String gnw;
+
+    @Column(name = "Xtnw")
+    private String xtnw;
+
+    @Column(name = "Jspbm")
+    private String jspbm;
+
+    @Column(name = "Cj")
+    private String cj;
+
+    @Override
+    public String getGsbh() {
+        return gsbh;
+    }
+
+    @Override
+    public void setGsbh(String gsbh) {
+        this.gsbh = gsbh;
+    }
+
+    @Override
+    public String getGnw() {
+        return gnw;
+    }
+
+    @Override
+    public void setGnw(String gnw) {
+        this.gnw = gnw;
+    }
+
+    @Override
+    public String getXtnw() {
+        return xtnw;
+    }
+
+    @Override
+    public void setXtnw(String xtnw) {
+        this.xtnw = xtnw;
+    }
+
+    public String getJSPBM() {
+        return jspbm;
+    }
+
+    public void setJSPBM(String jsbpm) {
+        this.jspbm = jsbpm;
+    }
+
+    @Override
+    public String getCj() {
+        return cj;
+    }
+
+    @Override
+    public void setCj(String cj) {
+        this.cj = cj;
+    }
 }
