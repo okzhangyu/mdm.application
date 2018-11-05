@@ -25,4 +25,26 @@ public interface  IBusinessPartner extends IMDMMasterData {
     String getCurrency();
 
     void setCurrency(String currency);
+
+    String getLicTradNum();
+    void setLicTradNum(String licTradNum);
+
+    String getFederalTaxID();
+
+    void setFederalTaxID(String federalTaxID);
+
+    String getGsbh();
+    void setGsbh(String gsbh);
+
+    String getGnw();
+    void setGnw(String gnw);
+
+    String getXtnw();
+    void setXtnw(String xtnw);
+
+    String getCj();
+    void setCj(String cj);
+
+    String getJSPBM();
+    void setJSPBM(String jspbm);
 }

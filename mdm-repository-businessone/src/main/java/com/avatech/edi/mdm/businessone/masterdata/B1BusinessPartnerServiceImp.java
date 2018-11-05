@@ -6,6 +6,7 @@ import com.avatech.edi.mdm.bo.IBusinessPartner;
 import com.avatech.edi.mdm.businessone.config.B1Data;
 import com.avatech.edi.mdm.config.B1Connection;
 import com.avatech.edi.mdm.config.DataTemple;
+import com.sap.db.util.StringUtils;
 import com.sap.smb.sbo.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,13 @@ import java.util.List;
 public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
 
     private final Logger logger = LoggerFactory.getLogger(B1BusinessPartnerServiceImp.class);
-    private static final String CURRENCY = "CURRENCY";
+    private static final String CURRENCY = "Currency";
+    private static final String CJ="U_Cj";
+    private static final String GSBH="U_Gsbh";
+    private static final String GNW="U_Gnw";
+    private static final String XTNW="U_Xtnw";
+    private static final String JSPBM="U_JSPBM";
+
     @Override
     public String syncBusinessPartner(IBusinessPartner businessPartner, B1Connection b1Connection,List<DataTemple> dataTempleList){
         BORepositoryBusinessOne boRepositoryBusinessOne = null;
@@ -38,15 +45,48 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
             businessPartners.setCardType(getTypeValue(businessPartner.getCardType()));
             businessPartners.setGroupCode(businessPartner.getGroupCode());
 
+            if( businessPartners.getFederalTaxID() != null && !businessPartners.getFederalTaxID().isEmpty()){
+                businessPartners.setFederalTaxID(businessPartners.getFederalTaxID());
+            }
             // TODO temple filed
             for (DataTemple temple:dataTempleList) {
                 if(temple.getFieldName().isEmpty() || !B1Data.YES.equals(temple.getIsSync()))
                     continue;
                 if(temple.getFieldName().toUpperCase().equals(CURRENCY)){
                     businessPartners.setCurrency(businessPartner.getCurrency());
+                    continue;
+                }
+                if(temple.getFieldName().toUpperCase().equals(CJ.toUpperCase())){
+                    if(businessPartner.getCj() != null&& !businessPartner.getCj().isEmpty() ){
+                        businessPartners.getUserFields().getFields().item(CJ).setValue(businessPartner.getCj());
+                    }
+                    continue;
+                }
+                if(temple.getFieldName().toUpperCase().equals(JSPBM.toUpperCase())){
+                    if (businessPartner.getJSPBM() !=null && !businessPartner.getJSPBM().isEmpty()){
+                        businessPartners.getUserFields().getFields().item(JSPBM).setValue(businessPartner.getJSPBM());
+                    }
+                    continue;
+                }
+                if(temple.getFieldName().toUpperCase().equals(XTNW.toUpperCase())){
+                    if (businessPartner.getXtnw()!=null && !businessPartner.getXtnw().isEmpty()){
+                        businessPartners.getUserFields().getFields().item(XTNW).setValue(businessPartner.getGnw());
+                    }
+                    continue;
+                }
+                if(temple.getFieldName().toUpperCase().equals(GNW.toUpperCase())){
+                    if(businessPartner.getGnw()!=null&& !businessPartner.getGnw().isEmpty()){
+                        businessPartners.getUserFields().getFields().item(GNW).setValue(businessPartner.getGnw());
+                    }
+                    continue;
+                }
+                if(temple.getFieldName().toUpperCase().equals(GSBH.toUpperCase())){
+                    if(businessPartner.getGsbh()!=null && !businessPartner.getGsbh().isEmpty()){
+                        businessPartners.getUserFields().getFields().item(GSBH).setValue(businessPartner.getGsbh());
+                    }
+                    continue;
                 }
             }
-            // TODO userfileds
             int rstCode;
             if(isExist){
                 rstCode = businessPartners.update();
@@ -58,7 +98,6 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
             }else {
                 throw new B1Exception(company.getLastErrorCode() + ":" + company.getLastErrorDescription());
             }
-
         }catch (SBOCOMException e){
             logger.info("",e.getMessage());
             throw new B1Exception(e);
