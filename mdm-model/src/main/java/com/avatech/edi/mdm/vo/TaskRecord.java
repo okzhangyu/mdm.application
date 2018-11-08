@@ -143,4 +143,22 @@ public class TaskRecord {
 
     public TaskRecord() {
     }
+
+    @Override
+    public String toString() {
+        return "TaskRecord{" +
+                "docEntry=" + docEntry +
+                ", objectCode='" + objectCode + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", uniqueKey='" + uniqueKey + '\'' +
+                ", isSync='" + isSync + '\'' +
+                ", errorTime=" + errorTime +
+                ", syncMessage='" + syncMessage + '\'' +
+                ", opType='" + opType + '\'' +
+                ", createDate='" + createDate + '\'' +
+                ", createTime=" + createTime +
+                ", syncDate='" + syncDate + '\'' +
+                ", syncTime=" + syncTime +
+                '}';
+    }
 }

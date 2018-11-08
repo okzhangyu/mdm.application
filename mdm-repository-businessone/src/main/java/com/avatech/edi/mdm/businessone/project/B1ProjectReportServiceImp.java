@@ -61,7 +61,6 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
                 document.getUserFields().getFields().item(EMPLOYEE_NAME).setValue(projectReport.getEmpName());
             if(projectReport.getDeptName() != null)
                 document.getUserFields().getFields().item(DEPATEMENT_NAME).setValue(projectReport.getDeptName());
-
             for (IProjectReportItem item:projectReport.getProjectReportItems()) {
                 document.getLines().setItemCode(B1Data.VISUAL_ITEMCODE);
                 document.getLines().setWarehouseCode(B1Data.VISUAL_WHSCODE1);
