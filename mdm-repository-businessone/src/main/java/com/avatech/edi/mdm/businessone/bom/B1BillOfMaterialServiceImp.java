@@ -161,10 +161,13 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
             document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(billOfMaterial.getDocEntry().toString());
             document.getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getWorkOrderNo());
+
             if(isExists){
-                for (int i = 0;i<=document.getLines().getCount();i++){
+                document.setProductionOrderStatus(SBOCOMConstants.BoProductionOrderStatusEnum_boposReleased);
+                while (document.getLines().getCount() > 1){
                     document.getLines().delete();
                 }
+                document.getLines().delete();
             }
             for (ICompontOfMaterialListItem item:billOfMaterial.getCompontOfMaterialListItems()) {
                 if(item.getIsLocked().equals("Y") && item.getQuantity() > 0){
@@ -182,12 +185,15 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                 rt = document.update();
             }else {
                 rt = document.add();
+                if(document.getByKey(Integer.valueOf(company.getNewObjectKey()))){
+                    document.setProductionOrderStatus(SBOCOMConstants.BoProductionOrderStatusEnum_boposReleased);
+                    document.update();
+                }
             }
             if(rt == 0){
-                document.setProductionOrderStatus(SBOCOMConstants.BoProductionOrderStatusEnum_boposReleased);
-                document.update();
                 return company.getNewObjectKey();
             }
+
             else throw new B1Exception(company.getLastErrorCode() + ":" + company.getLastErrorDescription());
         }catch (B1Exception e){
             throw  e;
