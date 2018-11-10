@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "AVA_PM_VIEW_BOM1")
@@ -71,6 +72,8 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
     @Column(name = "Udf5")
     private String udf5;
 
+    @Column(name = "DocDate")
+    private Date docDate;
     public String getUniqueKey() {
         return uniqueKey;
     }
@@ -266,6 +269,17 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
     @Override
     public void setUDF5(String udf5) {
         this.udf5 = udf5;
+    }
+
+    @Override
+    public void setDocDate(Date docDate) {
+        this.docDate=docDate;
+
+    }
+
+    @Override
+    public Date getDocDate() {
+        return docDate;
     }
 
     @Override

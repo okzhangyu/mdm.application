@@ -101,4 +101,16 @@ public interface IBillOfMaterial {
     List<CompontOfMaterialListItem> getCompontOfMaterialListItems();
 
     void setCompontOfMaterialListItems( List<CompontOfMaterialListItem> compontOfMaterialListItems);
+
+    void setDocDate(String docDate);
+
+    String getDocDate();
+
+    void setHTH(String hth);
+    String getHTH();
+
+    void setHTMC(String HTMC);
+    String getHTMC();
+
+
 }
