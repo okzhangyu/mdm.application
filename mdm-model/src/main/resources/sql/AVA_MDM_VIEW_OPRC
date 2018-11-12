@@ -1,0 +1,21 @@
+CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_MDM_VIEW_OPRC" ( "UNIQUEKEY",
+	 "PRCCODE",
+	 "PRCNAME",
+	 "DIMCODE",
+	 "GRPCODE",
+	 "LOCKED",
+	 "VALIDFROM",
+	 "VALIDTO",
+	 "ACTIVE",
+	 "CCTYPECODE" ) AS select
+	 "PrcCode",
+	 "PrcCode",
+	 "PrcName",
+	 "DimCode",
+	 "GrpCode",
+	 "Locked",
+	 "ValidFrom",
+	 "ValidTo",
+	 "Active" ,
+	 "CCTypeCode"
+from "SBO_KJSJT-ADDON".OPRC
