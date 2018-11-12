@@ -35,11 +35,11 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
     private final String BOM_UNITQTY = "U_UnitQty";
     private final String BOM_PROJECT = "U_PrjCode";
     private final String BOM_PROJECT_NAME = "U_PrjName";
-    private final String DOCDATE="U_DocDate";
+    private final String DOCDATE="U_DOCDATE";
     private final String OBJECT_CODE = "AVA_PM_BOMVERSION";
     private final String HTH="U_HTH";
     private final String HTMC="U_HTMC";
-    private final String ITEMTYPE="ItemType";
+    private final String ITEMTYPE="U_ItemType";
 
 
     /**
@@ -113,7 +113,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
         try{
             boRepositoryBusinessOne = BORepositoryBusinessOne.getInstance(b1Connection);
             company = boRepositoryBusinessOne.getCompany();
-            Integer docEntry = getProduceOrderNo(billOfMaterial.getProject(),billOfMaterial.getWorkOrderNo(),company);
+            Integer docEntry = getProduceOrderNo(billOfMaterial.getProject(),billOfMaterial.getWorkOrderNo(),billOfMaterial.getHTH(),billOfMaterial.getItemType(),company);
             if(!company.isInTransaction()){
                 company.startTransaction();
             }
@@ -133,14 +133,14 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
         }
     }
 
-    private Integer getProduceOrderNo(String projectNo,String workOrderNo,ICompany company){
+    private Integer getProduceOrderNo(String projectNo,String workOrderNo,String hth,String itemType,ICompany company){
         try{
-            String sql = "select \"DocEntry\" from OWOR where  \"Project\" = '%s' and \"U_WorkOrderNo\" = '%s' and \"U_HTH\"='%s'and \"U_WorkOrderNo\" = '%s'" ;
+            String sql = "select \"DocEntry\" from OWOR where  \"Project\" = '%s' and \"U_WorkOrderNo\" = '%s' and \"U_HTH\"='%s'and \"U_ItemType\"='%s'" ;
             IRecordset res = SBOCOMUtil.newRecordset(company);
-            res.doQuery(String.format(sql,projectNo,workOrderNo));
+                res.doQuery(String.format(sql,projectNo,workOrderNo,hth,itemType));
             if(res.getRecordCount() > 0)
                 return Integer.parseInt(res.getFields().item(DOCENTRY).getValue().toString()) ;
-               else throw new B1Exception("根据合同号和工单号未找到生产订单");
+             else  return  null;
         }catch (SBOCOMException e){
             logger.error("查询生产订单异常"+e);
            throw new  B1Exception(e);
@@ -189,8 +189,8 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                     document.getLines().getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
                     document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry().toString());
                     document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId().toString());
-                    billOfMaterial.setDocDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-                    document.getLines().getUserFields().getFields().item(DOCDATE).setValue(item.getDocDate());
+//                    SimpleDateFormat sdf =   new SimpleDateFormat( " yyyy-MM-dd " );
+//                    document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
 
                     document.getLines().add();
                 }

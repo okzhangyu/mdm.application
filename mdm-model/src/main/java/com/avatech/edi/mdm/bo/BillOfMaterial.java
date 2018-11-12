@@ -402,6 +402,9 @@ public class BillOfMaterial implements IBillOfMaterial {
                 "\",\" opType\":\"" + opType + '\'' +
                 "\",\" creator\":\"" + creator + '\'' +
                 "\",\" compontOfMaterialListItems\":" + compontOfMaterialListItems +
+                "\",\" docDate\":" + docDtae +
+                "\",\" hth\":" + hth +
+                "\",\" htmc\":" + htmc +
                 '}';
     }
 }
