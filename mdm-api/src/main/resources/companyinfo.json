@@ -168,6 +168,20 @@
     "useTrusted":"false"
   },
   {
+    "companyName":"自动化集成测试账套_1112",
+    "server":"10.10.8.41:30015",
+    "companyDB":"SBO_KJS_ZDH_20181109",
+    "userName":"manager",
+    "password":"123456",
+    "licenseServer":"10.10.8.41:40000",
+    "sldServer":"10.10.8.41:40000",
+    "dbServiceType":9,
+    "dbUsername":"SYSTEM",
+    "dbPassword":"Consen2018",
+    "laguage":15,
+    "useTrusted":"false"
+  },
+  {
     "companyName":"北京康吉森自动化设备有限公司",
     "server":"10.10.8.41:30015",
     "companyDB":"SBO_KJS_ZDH",
