@@ -133,18 +133,17 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
         }
     }
 
-    private Integer getProduceOrderNo(String projectNo,String workOrderNo,String hth,String itemType,ICompany company){
-        try{
-            String sql = "select \"DocEntry\" from OWOR where  \"Project\" = '%s' and \"U_WorkOrderNo\" = '%s' and \"U_HTH\"='%s'and \"U_ItemType\"='%s'" ;
+    private Integer getProduceOrderNo(String projectNo,String workOrderNo,String hth,String itemType,ICompany company) {
+        try {
+            String sql = "select \"DocEntry\" from OWOR where  \"Project\" = '%s' and \"U_WorkOrderNo\" = '%s' and \"U_HTH\"='%s'and \"U_ItemType\"='%s'";
             IRecordset res = SBOCOMUtil.newRecordset(company);
-                res.doQuery(String.format(sql,projectNo,workOrderNo,hth,itemType));
-            if(res.getRecordCount() > 0)
-                return Integer.parseInt(res.getFields().item(DOCENTRY).getValue().toString()) ;
-             else  return  null;
-        }catch (SBOCOMException e){
-            logger.error("查询生产订单异常"+e);
-           throw new  B1Exception(e);
-
+            res.doQuery(String.format(sql, projectNo, workOrderNo, hth, itemType));
+            if (res.getRecordCount() > 0)
+                return Integer.parseInt(res.getFields().item(DOCENTRY).getValue().toString());
+            else return null;
+        } catch (SBOCOMException e) {
+            logger.error("查询生产订单异常" + e);
+            throw new B1Exception(e);
         }
 
     }
