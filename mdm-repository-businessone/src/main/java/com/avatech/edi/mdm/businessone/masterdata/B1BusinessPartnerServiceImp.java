@@ -25,6 +25,7 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
     private static final String XTNW="U_Xtnw";
     private static final String JSPBM="U_JSPBM";
 
+
     @Override
     public String syncBusinessPartner(IBusinessPartner businessPartner, B1Connection b1Connection,List<DataTemple> dataTempleList){
         BORepositoryBusinessOne boRepositoryBusinessOne = null;
