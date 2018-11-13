@@ -8,8 +8,8 @@ spring:
     driver-class-name: com.sap.db.jdbc.Driver
   jpa:
     hibernate:
-              ddl-auto: none
-              show-sql: true
+      ddl-auto: none
+      show-sql: true
 logging:
   pattern:
     console: "%d - %msg%n"

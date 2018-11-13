@@ -102,7 +102,7 @@ public class BusinessPartner extends MDMMasterData implements IBusinessPartner,S
 
     }
 
-    @Column(name = "Federaltaxid")
+    @Column(name = "LicTradNum")
     private String federalTaxID;
 
     @Override

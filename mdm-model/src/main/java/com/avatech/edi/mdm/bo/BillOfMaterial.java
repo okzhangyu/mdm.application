@@ -82,6 +82,14 @@ public class BillOfMaterial implements IBillOfMaterial {
     @Column(name = "Projectname")
     private String projectName;
 
+    @Column(name = "Docdate")
+    private String docDtae;
+    @Column(name="HTH")
+    private String hth;
+
+    @Column(name = "HTMC")
+    private String htmc;
+
     @Override
     public String getProjectName() {
         return projectName;
@@ -328,6 +336,37 @@ public class BillOfMaterial implements IBillOfMaterial {
     }
 
     @Override
+    public void setDocDate(String docDate) {
+        this.docDtae=docDate;
+
+    }
+
+    @Override
+    public String getDocDate() {
+        return docDtae;
+    }
+
+    @Override
+    public void setHTH(String hth) {
+
+    }
+
+    @Override
+    public String getHTH() {
+        return hth;
+    }
+
+    @Override
+    public void setHTMC(String HTMC) {
+
+    }
+
+    @Override
+    public String getHTMC() {
+        return htmc;
+    }
+
+    @Override
     public String getItemType() {
         return itemType;
     }
@@ -363,6 +402,9 @@ public class BillOfMaterial implements IBillOfMaterial {
                 "\",\" opType\":\"" + opType + '\'' +
                 "\",\" creator\":\"" + creator + '\'' +
                 "\",\" compontOfMaterialListItems\":" + compontOfMaterialListItems +
+                "\",\" docDate\":" + docDtae +
+                "\",\" hth\":" + hth +
+                "\",\" htmc\":" + htmc +
                 '}';
     }
 }

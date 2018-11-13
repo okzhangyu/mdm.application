@@ -17,7 +17,7 @@ public class MasterData {
 
     private String templeCode;
 
-    private String sourceServer;
+        private String sourceServer;
 
     private String targetServer;
 
