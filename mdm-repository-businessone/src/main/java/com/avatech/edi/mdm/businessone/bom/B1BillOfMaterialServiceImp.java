@@ -4,14 +4,15 @@ import com.avatech.edi.mdm.bo.IBillOfMaterial;
 import com.avatech.edi.mdm.bo.ICompontOfMaterialListItem;
 import com.avatech.edi.mdm.businessone.B1Exception;
 import com.avatech.edi.mdm.businessone.BORepositoryBusinessOne;
+import com.avatech.edi.mdm.businessone.approval.B1ApprovalTempleService;
 import com.avatech.edi.mdm.businessone.config.B1Data;
 import com.avatech.edi.mdm.config.B1Connection;
 import com.sap.smb.sbo.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
@@ -42,6 +43,9 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
     private final String ITEMTYPE="U_ItemType";
 
 
+    @Autowired
+    private B1ApprovalTempleService b1ApprovalTempleService;
+
     /**
      * BOM新增或变更后进入审批
      * @param billOfMaterial
@@ -52,10 +56,16 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
     public String syncBillOfMaterial(IBillOfMaterial billOfMaterial, B1Connection b1Connection) {
         BORepositoryBusinessOne boRepositoryBusinessOne = null;
         ICompany company = null;
+        int tempCode = -1;
         try {
             boRepositoryBusinessOne = BORepositoryBusinessOne.getInstance(b1Connection);
             company = boRepositoryBusinessOne.getCompany();
 
+            tempCode = b1ApprovalTempleService.getApproveTemple(B1Data.PURCHASEQUOTE,company,billOfMaterial);
+            if(tempCode > 0){
+                b1ApprovalTempleService.inActiveApproveTemple(company);
+                b1ApprovalTempleService.activeApproveTemple(true,tempCode,company);
+            }
             IDocuments document = SBOCOMUtil.newDocuments(company, B1Data.PURCHASEQUOTE);
             document.setCardCode(B1Data.VISUAL_SUPPLIER);
             document.setDocDate(new Date());
@@ -69,6 +79,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             document.getUserFields().getFields().item(BOM_ITEMNAME).setValue(billOfMaterial.getItemName());
             document.getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getProject());
             document.getUserFields().getFields().item(BOM_PROJECT).setValue(billOfMaterial.getProject());
+
             if(billOfMaterial.getCreator() != null && !billOfMaterial.getCreator().isEmpty())
                 document.getUserFields().getFields().item(BOM_CREATOR).setValue(billOfMaterial.getCreator());
             if(billOfMaterial.getTreeType() != null && ! billOfMaterial.getTreeType().isEmpty())
@@ -95,8 +106,16 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
         }catch (SBOCOMException e){
             logger.error("同步BOM发生异常",e);
             throw new B1Exception(e);
+        }finally {
+            if(company!=null){
+                if(tempCode > 0){
+                    b1ApprovalTempleService.inActiveApproveTemple(company);
+                }
+                company.disconnect();
+            }
         }
     }
+
 
     /**
      * BOM审批完成后，生成（更新）生产订单和采购申请
@@ -127,6 +146,9 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
         }catch (Exception e){
             if(company.isInTransaction()){
                 company.endTransaction(SBOCOMConstants.BoWfTransOpt_wf_RollBack);
+            }
+            if(company != null){
+                company.disconnect();
             }
             logger.error("BOM处理生产订单/采购申请单异常"+e);
             throw e;
@@ -167,12 +189,9 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
             document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(billOfMaterial.getDocEntry().toString());
             document.getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getWorkOrderNo());
-
             document.getUserFields().getFields().item(HTH).setValue(billOfMaterial.getHTH());
             document.getUserFields().getFields().item(HTMC).setValue(billOfMaterial.getHTMC());
             document.getUserFields().getFields().item(ITEMTYPE).setValue(billOfMaterial.getItemType());
-
-
 
             if(isExists){
                 document.setProductionOrderStatus(SBOCOMConstants.BoProductionOrderStatusEnum_boposReleased);
@@ -190,6 +209,8 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                     document.getLines().getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
                     document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry().toString());
                     document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId().toString());
+                    document.getLines().getUserFields().getFields().item(BOM_PROJECT).setValue(billOfMaterial.getProject());
+
 //                    SimpleDateFormat sdf =   new SimpleDateFormat( " yyyy-MM-dd " );
 //                    document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
 
