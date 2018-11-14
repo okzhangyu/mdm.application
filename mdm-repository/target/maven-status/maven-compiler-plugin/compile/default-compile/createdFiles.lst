@@ -1,8 +1,0 @@
-com\avatech\edi\mdm\repository\IBORepositoryBillOfMaterial.class
-com\avatech\edi\mdm\repository\IBORepositoryBusinessPartner.class
-com\avatech\edi\mdm\repository\IBORepositoryProfitCenter.class
-com\avatech\edi\mdm\repository\IBORepositoryTaskRecord.class
-com\avatech\edi\mdm\repository\config\IRepositoryDataTemple.class
-com\avatech\edi\mdm\repository\IBORepositoryBusinessPartnerGroup.class
-com\avatech\edi\mdm\repository\IBORepositoryProfitCenterType.class
-com\avatech\edi\mdm\repository\IBORepositoryAccount.class

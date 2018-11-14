@@ -1,8 +1,0 @@
-com\avatech\edi\mdm\config\ServiceParam.class
-com\avatech\edi\mdm\contorller\ProjectController.class
-com\avatech\edi\mdm\MDMApplication.class
-com\avatech\edi\mdm\job\BOMJob.class
-com\avatech\edi\mdm\config\BusinessObjectType.class
-com\avatech\edi\mdm\contorller\BusinessPartnerController.class
-com\avatech\edi\mdm\contorller\BOMController.class
-com\avatech\edi\mdm\contorller\MDMController.class
