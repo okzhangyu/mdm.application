@@ -4,11 +4,13 @@ import com.avatech.edi.mdm.bo.IProjectReport;
 import com.avatech.edi.mdm.bo.IProjectReportItem;
 import com.avatech.edi.mdm.businessone.B1Exception;
 import com.avatech.edi.mdm.businessone.BORepositoryBusinessOne;
+import com.avatech.edi.mdm.businessone.approval.B1ApprovalTempleService;
 import com.avatech.edi.mdm.businessone.config.B1Data;
 import com.avatech.edi.mdm.config.B1Connection;
 import com.sap.smb.sbo.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -40,13 +42,22 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
     private final String ATLDURUN = "U_AtlDurUn";
     private final String OBJECT_CODE = "AVA_PM_ACTIVITY";
 
+    @Autowired
+    private B1ApprovalTempleService b1ApprovalTempleService;
+
     @Override
     public String syncProjectReport(IProjectReport projectReport, B1Connection b1Connection) {
         BORepositoryBusinessOne boRepositoryBusinessOne = null;
         ICompany company = null;
+        int tempCode = -1;
         try {
             boRepositoryBusinessOne = BORepositoryBusinessOne.getInstance(b1Connection);
             company = boRepositoryBusinessOne.getCompany();
+            tempCode = b1ApprovalTempleService.getApproveTemple(B1Data.TRANSFER,company,projectReport);
+            if(tempCode > 0){
+                b1ApprovalTempleService.inActiveApproveTemple(company);
+                b1ApprovalTempleService.activeApproveTemple(true,tempCode,company);
+            }
             IStockTransfer document = SBOCOMUtil.newStockTransfer(company, SBOCOMConstants.BoObjectTypes_oStockTransfer);
             document.setCardCode(B1Data.VISUAL_SUPPLIER);
             document.setDocDate(new Date());
@@ -108,6 +119,9 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
             throw new B1Exception(e);
         }finally {
             if(company != null){
+                if(tempCode > 0){
+                    b1ApprovalTempleService.inActiveApproveTemple(company);
+                }
                 company.disconnect();
             }
         }
