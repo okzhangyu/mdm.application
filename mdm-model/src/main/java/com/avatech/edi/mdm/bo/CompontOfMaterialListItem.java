@@ -75,6 +75,16 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
 
     @Column(name = "Docdate")
     private Date docDate;
+
+    @Column(name = "Modelname")
+    private String modelName;
+
+//    @Column(name = "Prjcode")
+//    private String prjCode;
+//
+//    @Column(name = "Workorderno")
+//    private String workOrderNo;
+
     public String getUniqueKey() {
         return uniqueKey;
     }
@@ -276,6 +286,17 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
     public void setDocDate(Date docDate) {
         this.docDate=docDate;
 
+    }
+
+
+    @Override
+    public String getModelName() {
+        return modelName;
+    }
+
+    @Override
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 
     @Override

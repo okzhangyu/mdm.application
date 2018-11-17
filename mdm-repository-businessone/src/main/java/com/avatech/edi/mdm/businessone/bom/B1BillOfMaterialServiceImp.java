@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
@@ -36,11 +37,12 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
     private final String BOM_UNITQTY = "U_UnitQty";
     private final String BOM_PROJECT = "U_PrjCode";
     private final String BOM_PROJECT_NAME = "U_PrjName";
-    private final String DOCDATE="U_DOCDATE";
+    private final String DOCDATE="U_DocDate";
     private final String OBJECT_CODE = "AVA_PM_BOMVERSION";
     private final String HTH="U_HTH";
     private final String HTMC="U_HTMC";
     private final String ITEMTYPE="U_ItemType";
+    private final String MODEL_NAME = "U_XH";
 
 
     @Autowired
@@ -67,12 +69,24 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                 b1ApprovalTempleService.activeApproveTemple(true,tempCode,company);
             }
             IDocuments document = SBOCOMUtil.newDocuments(company, B1Data.PURCHASEQUOTE);
+            IRecordset res = SBOCOMUtil.newRecordset(company);
+
             document.setCardCode(B1Data.VISUAL_SUPPLIER);
             document.setDocDate(new Date());
             document.setTaxDate(new Date());
             document.setVatDate(new Date());
             document.setRequriedDate(new Date());
             document.setComments(billOfMaterial.getRemarks());
+
+            document.getApprovalTemplates();
+            if(document.getDocument_ApprovalRequests().getCount() > 0 && document.getDocument_ApprovalRequests().getApprovalTemplatesID() > 0){
+                String sqlUser = "select \"U_NAME\" from OUSR where \"USERID\" = %s";
+                res.doQuery(String.format(sqlUser,billOfMaterial.getCreator()));
+                String remarks = "创建人：" + res.getFields().item("U_NAME").getValue()+";工单号："+billOfMaterial.getWorkOrderNo()+";项目:"+billOfMaterial.getProject();
+                document.getDocument_ApprovalRequests().setCurrentLine(0);
+                document.getDocument_ApprovalRequests().setRemarks(remarks);
+            }
+
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
             document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(billOfMaterial.getDocEntry().toString());
             document.getUserFields().getFields().item(BOM_ITEMCODE).setValue(billOfMaterial.getItemCode());
@@ -97,6 +111,14 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                 document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId().toString());
                 document.getLines().getUserFields().getFields().item(BOM_QUANTITY).setValue(item.getQuantity().toString());
                 document.getLines().getUserFields().getFields().item(BOM_IS_LOCK).setValue(item.getIsLocked());
+                document.getLines().setProjectCode(billOfMaterial.getProject());
+                SimpleDateFormat sdf = new SimpleDateFormat( " yyyy-MM-dd " );
+                document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
+                document.getLines().getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getWorkOrderNo());
+                if(item.getModelName() != null && !item.getModelName().isEmpty()){
+                    document.getLines().getUserFields().getFields().item(MODEL_NAME).setValue(item.getModelName());
+                }
+
                 document.getLines().add();
             }
             int rt = document.add();
@@ -111,7 +133,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                 if(tempCode > 0){
                     b1ApprovalTempleService.inActiveApproveTemple(company);
                 }
-                company.disconnect();
+                //company.disconnect();
             }
         }
     }
@@ -148,7 +170,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                 company.endTransaction(SBOCOMConstants.BoWfTransOpt_wf_RollBack);
             }
             if(company != null){
-                company.disconnect();
+                //company.disconnect();
             }
             logger.error("BOM处理生产订单/采购申请单异常"+e);
             throw e;
@@ -209,11 +231,11 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                     document.getLines().getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
                     document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry().toString());
                     document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId().toString());
-                    document.getLines().getUserFields().getFields().item(BOM_PROJECT).setValue(billOfMaterial.getProject());
-
-//                    SimpleDateFormat sdf =   new SimpleDateFormat( " yyyy-MM-dd " );
-//                    document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
-
+                    document.getLines().setProject(billOfMaterial.getProject());
+                    document.getLines().getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getWorkOrderNo());
+                    SimpleDateFormat sdf = new SimpleDateFormat( " yyyy-MM-dd " );
+                    document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
+                    document.getLines().getUserFields().getFields().item(MODEL_NAME).setValue(item.getModelName());
                     document.getLines().add();
                 }
             }
@@ -221,7 +243,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                 rt = document.update();
             }else {
                 rt = document.add();
-                if(document.getByKey(Integer.valueOf(company.getNewObjectKey()))){
+                if(rt == 0 && document.getByKey(Integer.valueOf(company.getNewObjectKey()))){
                     document.setProductionOrderStatus(SBOCOMConstants.BoProductionOrderStatusEnum_boposReleased);
                     document.update();
                 }
@@ -265,7 +287,12 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                     document.getLines().getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
                     document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry().toString());
                     document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId().toString());
-
+                    document.getLines().setProjectCode(billOfMaterial.getProject());
+                    document.getLines().getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getWorkOrderNo());
+                    SimpleDateFormat sdf = new SimpleDateFormat( " yyyy-MM-dd " );
+                    document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
+                    if(item.getModelName() != null && !item.getModelName().isEmpty())
+                    document.getLines().getUserFields().getFields().item(MODEL_NAME).setValue(item.getModelName());
                     document.getLines().add();
                 }
             }
