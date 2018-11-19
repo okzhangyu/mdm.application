@@ -122,7 +122,7 @@ public class B1ProjectBudgetServiceImp implements B1ProjectBudgetService {
                 if(tempCode > 0){
                     b1ApprovalTempleService.inActiveApproveTemple(company);
                 }
-                company.disconnect();
+               // company.disconnect();
             }
         }
     }

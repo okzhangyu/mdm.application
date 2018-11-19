@@ -69,8 +69,8 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_OBOM" ( "UNIQUEKEY",
 	 '',
 	 "Creator",
 	 '',
-	 '' 
-		from "SBO_KJS_ZDH_20181109"."@AVA_PM_OVCO") 
+	 ''
+		from "SBO_KJS_ZDH_20181109"."@AVA_PM_OVCO")
 	UNION ALL (select
 	 concat('SBO_KJS_ZDHSAPCS_',
 	 "DocEntry"),
@@ -110,6 +110,5 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_OBOM" ( "UNIQUEKEY",
 	 '',
 	 "Creator",
 	 "U_HTH",
-	 "U_HTMC" 
+	 "U_HTMC"
 		from "SBO_KJS_ZDHSAPCS"."@AVA_PM_OVCO")) WITH READ ONLY
-		

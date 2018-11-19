@@ -122,7 +122,7 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
                 if(tempCode > 0){
                     b1ApprovalTempleService.inActiveApproveTemple(company);
                 }
-                company.disconnect();
+               // company.disconnect();
             }
         }
     }

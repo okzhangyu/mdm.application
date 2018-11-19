@@ -81,5 +81,16 @@ public interface ICompontOfMaterialListItem {
 
     Date getDocDate();
 
+    String getModelName();
+
+    void setModelName(String modelName);
+
+//    String getPrjCode();
+//
+//    void setPrjCode(String prjCode);
+//
+//    String getWorkOrderNo();
+//
+//    void setWorkOrderNo(String workOrderNo);
 
 }
