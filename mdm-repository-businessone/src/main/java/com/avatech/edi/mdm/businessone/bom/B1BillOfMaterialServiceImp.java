@@ -4,11 +4,13 @@ import com.avatech.edi.mdm.bo.IBillOfMaterial;
 import com.avatech.edi.mdm.bo.ICompontOfMaterialListItem;
 import com.avatech.edi.mdm.businessone.B1Exception;
 import com.avatech.edi.mdm.businessone.BORepositoryBusinessOne;
+import com.avatech.edi.mdm.businessone.approval.B1ApprovalTempleService;
 import com.avatech.edi.mdm.businessone.config.B1Data;
 import com.avatech.edi.mdm.config.B1Connection;
 import com.sap.smb.sbo.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
@@ -35,12 +37,16 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
     private final String BOM_UNITQTY = "U_UnitQty";
     private final String BOM_PROJECT = "U_PrjCode";
     private final String BOM_PROJECT_NAME = "U_PrjName";
-    private final String DOCDATE="U_DOCDATE";
+    private final String DOCDATE="U_DocDate";
     private final String OBJECT_CODE = "AVA_PM_BOMVERSION";
     private final String HTH="U_HTH";
     private final String HTMC="U_HTMC";
     private final String ITEMTYPE="U_ItemType";
+    private final String MODEL_NAME = "U_XH";
 
+
+    @Autowired
+    private B1ApprovalTempleService b1ApprovalTempleService;
 
     /**
      * BOM新增或变更后进入审批
@@ -52,23 +58,42 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
     public String syncBillOfMaterial(IBillOfMaterial billOfMaterial, B1Connection b1Connection) {
         BORepositoryBusinessOne boRepositoryBusinessOne = null;
         ICompany company = null;
+        int tempCode = -1;
         try {
             boRepositoryBusinessOne = BORepositoryBusinessOne.getInstance(b1Connection);
             company = boRepositoryBusinessOne.getCompany();
 
+            tempCode = b1ApprovalTempleService.getApproveTemple(B1Data.PURCHASEQUOTE,company,billOfMaterial);
+            if(tempCode > 0){
+                b1ApprovalTempleService.inActiveApproveTemple(company);
+                b1ApprovalTempleService.activeApproveTemple(true,tempCode,company);
+            }
             IDocuments document = SBOCOMUtil.newDocuments(company, B1Data.PURCHASEQUOTE);
+            IRecordset res = SBOCOMUtil.newRecordset(company);
+
             document.setCardCode(B1Data.VISUAL_SUPPLIER);
             document.setDocDate(new Date());
             document.setTaxDate(new Date());
             document.setVatDate(new Date());
             document.setRequriedDate(new Date());
             document.setComments(billOfMaterial.getRemarks());
+
+            document.getApprovalTemplates();
+            if(document.getDocument_ApprovalRequests().getCount() > 0 && document.getDocument_ApprovalRequests().getApprovalTemplatesID() > 0){
+                String sqlUser = "select \"U_NAME\" from OUSR where \"USERID\" = %s";
+                res.doQuery(String.format(sqlUser,billOfMaterial.getCreator()));
+                String remarks = "创建人：" + res.getFields().item("U_NAME").getValue()+";工单号："+billOfMaterial.getWorkOrderNo()+";项目:"+billOfMaterial.getProject();
+                document.getDocument_ApprovalRequests().setCurrentLine(0);
+                document.getDocument_ApprovalRequests().setRemarks(remarks);
+            }
+
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
             document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(billOfMaterial.getDocEntry().toString());
             document.getUserFields().getFields().item(BOM_ITEMCODE).setValue(billOfMaterial.getItemCode());
             document.getUserFields().getFields().item(BOM_ITEMNAME).setValue(billOfMaterial.getItemName());
             document.getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getProject());
             document.getUserFields().getFields().item(BOM_PROJECT).setValue(billOfMaterial.getProject());
+
             if(billOfMaterial.getCreator() != null && !billOfMaterial.getCreator().isEmpty())
                 document.getUserFields().getFields().item(BOM_CREATOR).setValue(billOfMaterial.getCreator());
             if(billOfMaterial.getTreeType() != null && ! billOfMaterial.getTreeType().isEmpty())
@@ -86,6 +111,14 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                 document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId().toString());
                 document.getLines().getUserFields().getFields().item(BOM_QUANTITY).setValue(item.getQuantity().toString());
                 document.getLines().getUserFields().getFields().item(BOM_IS_LOCK).setValue(item.getIsLocked());
+                document.getLines().setProjectCode(billOfMaterial.getProject());
+                SimpleDateFormat sdf = new SimpleDateFormat( " yyyy-MM-dd " );
+                document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
+                document.getLines().getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getWorkOrderNo());
+                if(item.getModelName() != null && !item.getModelName().isEmpty()){
+                    document.getLines().getUserFields().getFields().item(MODEL_NAME).setValue(item.getModelName());
+                }
+
                 document.getLines().add();
             }
             int rt = document.add();
@@ -95,8 +128,16 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
         }catch (SBOCOMException e){
             logger.error("同步BOM发生异常",e);
             throw new B1Exception(e);
+        }finally {
+            if(company!=null){
+                if(tempCode > 0){
+                    b1ApprovalTempleService.inActiveApproveTemple(company);
+                }
+                //company.disconnect();
+            }
         }
     }
+
 
     /**
      * BOM审批完成后，生成（更新）生产订单和采购申请
@@ -127,6 +168,9 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
         }catch (Exception e){
             if(company.isInTransaction()){
                 company.endTransaction(SBOCOMConstants.BoWfTransOpt_wf_RollBack);
+            }
+            if(company != null){
+                //company.disconnect();
             }
             logger.error("BOM处理生产订单/采购申请单异常"+e);
             throw e;
@@ -167,12 +211,9 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
             document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(billOfMaterial.getDocEntry().toString());
             document.getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getWorkOrderNo());
-
             document.getUserFields().getFields().item(HTH).setValue(billOfMaterial.getHTH());
             document.getUserFields().getFields().item(HTMC).setValue(billOfMaterial.getHTMC());
             document.getUserFields().getFields().item(ITEMTYPE).setValue(billOfMaterial.getItemType());
-
-
 
             if(isExists){
                 document.setProductionOrderStatus(SBOCOMConstants.BoProductionOrderStatusEnum_boposReleased);
@@ -190,9 +231,11 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                     document.getLines().getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
                     document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry().toString());
                     document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId().toString());
-//                    SimpleDateFormat sdf =   new SimpleDateFormat( " yyyy-MM-dd " );
-//                    document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
-
+                    document.getLines().setProject(billOfMaterial.getProject());
+                    document.getLines().getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getWorkOrderNo());
+                    SimpleDateFormat sdf = new SimpleDateFormat( " yyyy-MM-dd " );
+                    document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
+                    document.getLines().getUserFields().getFields().item(MODEL_NAME).setValue(item.getModelName());
                     document.getLines().add();
                 }
             }
@@ -200,7 +243,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                 rt = document.update();
             }else {
                 rt = document.add();
-                if(document.getByKey(Integer.valueOf(company.getNewObjectKey()))){
+                if(rt == 0 && document.getByKey(Integer.valueOf(company.getNewObjectKey()))){
                     document.setProductionOrderStatus(SBOCOMConstants.BoProductionOrderStatusEnum_boposReleased);
                     document.update();
                 }
@@ -244,7 +287,12 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                     document.getLines().getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
                     document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry().toString());
                     document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId().toString());
-
+                    document.getLines().setProjectCode(billOfMaterial.getProject());
+                    document.getLines().getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getWorkOrderNo());
+                    SimpleDateFormat sdf = new SimpleDateFormat( " yyyy-MM-dd " );
+                    document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
+                    if(item.getModelName() != null && !item.getModelName().isEmpty())
+                    document.getLines().getUserFields().getFields().item(MODEL_NAME).setValue(item.getModelName());
                     document.getLines().add();
                 }
             }

@@ -22,6 +22,10 @@ public class B1Data {
      */
     public static final Integer PURCHASEQUOTE = 540000006;
 
+    public static final Integer TRANSFER_REQUEST = 1250000001;
+
+    public static final Integer TRANSFER = 67;
+
     /**
      * 虚拟客户
      */
