@@ -47,7 +47,7 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
             businessPartners.setGroupCode(businessPartner.getGroupCode());
 
             if( businessPartners.getFederalTaxID() != null && !businessPartners.getFederalTaxID().isEmpty()){
-                businessPartners.setFederalTaxID(businessPartners.getFederalTaxID());
+                businessPartners.setFederalTaxID(businessPartner.getFederalTaxID());
             }
             // TODO temple filed
             for (DataTemple temple:dataTempleList) {

@@ -87,18 +87,23 @@ public class BusinessPartner extends MDMMasterData implements IBusinessPartner,S
         return currency;
     }
 
+
+
     @Override
     public void setCurrency(String currency) {
         this.currency = currency;
     }
 
+    @Column(name = "LicTradNum")
+    private String licTradNum;
     @Override
     public String getLicTradNum() {
-        return null;
+        return licTradNum;
     }
 
     @Override
     public void setLicTradNum(String licTradNum) {
+        this.licTradNum=licTradNum;
 
     }
 
