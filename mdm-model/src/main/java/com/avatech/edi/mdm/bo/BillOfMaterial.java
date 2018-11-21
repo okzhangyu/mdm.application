@@ -90,6 +90,19 @@ public class BillOfMaterial implements IBillOfMaterial {
     @Column(name = "HTMC")
     private String htmc;
 
+    @Column(name = "Manager")
+    private String manager;
+
+    @Override
+    public String getManager() {
+        return manager;
+    }
+
+    @Override
+    public void setManager(String manager) {
+        this.manager = manager;
+    }
+
     @Override
     public String getProjectName() {
         return projectName;

@@ -30,6 +30,29 @@ public class ProjectReport implements IProjectReport{
 
     private Integer bPLId;
 
+    private String workOrderNo;
+
+    private String project;
+
+    @Override
+    public String getWorkOrderNo() {
+        return workOrderNo;
+    }
+
+    @Override
+    public void setWorkOrderNo(String workOrderNo) {
+        this.workOrderNo = workOrderNo;
+    }
+
+    @Override
+    public String getProject() {
+        return project;
+    }
+
+    @Override
+    public void setProject(String project) {
+        this.project = project;
+    }
 
     private List<ProjectReportItem> projectReportItems;
 

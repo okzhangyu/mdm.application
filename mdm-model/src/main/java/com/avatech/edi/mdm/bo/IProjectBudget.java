@@ -12,6 +12,10 @@ public interface IProjectBudget {
 
     void setDocEntry(Integer docEntry);
 
+    String getWorkOrderNo();
+
+    void setWorkOrderNo(String workOrderNo);
+
     String getPrjCode();
 
     void setPrjCode(String prjCode);

@@ -43,6 +43,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
     private final String HTMC="U_HTMC";
     private final String ITEMTYPE="U_ItemType";
     private final String MODEL_NAME = "U_XH";
+    private final String PROJECAT_MANAGER = "U_PrjManager";
 
 
     @Autowired
@@ -82,7 +83,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             if(document.getDocument_ApprovalRequests().getCount() > 0 && document.getDocument_ApprovalRequests().getApprovalTemplatesID() > 0){
                 String sqlUser = "select \"U_NAME\" from OUSR where \"USERID\" = %s";
                 res.doQuery(String.format(sqlUser,billOfMaterial.getCreator()));
-                String remarks = "创建人：" + res.getFields().item("U_NAME").getValue()+";工单号："+billOfMaterial.getWorkOrderNo()+";项目:"+billOfMaterial.getProject();
+                String remarks = "创建人：" + res.getFields().item("U_NAME").getValue()+";工单号：" + billOfMaterial.getWorkOrderNo() +";项目:"+ billOfMaterial.getProject();
                 document.getDocument_ApprovalRequests().setCurrentLine(0);
                 document.getDocument_ApprovalRequests().setRemarks(remarks);
             }
@@ -118,7 +119,6 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                 if(item.getModelName() != null && !item.getModelName().isEmpty()){
                     document.getLines().getUserFields().getFields().item(MODEL_NAME).setValue(item.getModelName());
                 }
-
                 document.getLines().add();
             }
             int rt = document.add();
@@ -214,7 +214,9 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             document.getUserFields().getFields().item(HTH).setValue(billOfMaterial.getHTH());
             document.getUserFields().getFields().item(HTMC).setValue(billOfMaterial.getHTMC());
             document.getUserFields().getFields().item(ITEMTYPE).setValue(billOfMaterial.getItemType());
-
+            if(billOfMaterial.getManager()!= null && !billOfMaterial.getManager().isEmpty()){
+                document.getUserFields().getFields().item(PROJECAT_MANAGER).setValue(billOfMaterial.getManager());
+            }
             if(isExists){
                 document.setProductionOrderStatus(SBOCOMConstants.BoProductionOrderStatusEnum_boposReleased);
                 while (document.getLines().getCount() > 1){
@@ -235,8 +237,9 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                     document.getLines().getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getWorkOrderNo());
                     SimpleDateFormat sdf = new SimpleDateFormat( " yyyy-MM-dd " );
                     document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
-                    document.getLines().getUserFields().getFields().item(MODEL_NAME).setValue(item.getModelName());
-                    document.getLines().add();
+                    if(item.getModelName() != null && !item.getModelName().isEmpty()){
+                        document.getLines().getUserFields().getFields().item(MODEL_NAME).setValue(item.getModelName());
+                    }document.getLines().add();
                 }
             }
             if(isExists){
@@ -276,9 +279,12 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             document.getUserFields().getFields().item(BOM_TREETYPE).setValue(billOfMaterial.getTreeType());
             if(billOfMaterial.getUom() != null && !billOfMaterial.getUom().isEmpty())
             document.getUserFields().getFields().item(BOM_UOM).setValue(billOfMaterial.getUom());
-            if(billOfMaterial.getProject() != null && !billOfMaterial.getProject().isEmpty())
+            if(billOfMaterial.getProject() != null && !billOfMaterial.getProject().isEmpty()) {
                 document.getUserFields().getFields().item(BOM_PROJECT).setValue(billOfMaterial.getProject());
-
+            }
+            if(billOfMaterial.getManager()!= null && !billOfMaterial.getManager().isEmpty()){
+                document.getUserFields().getFields().item(PROJECAT_MANAGER).setValue(billOfMaterial.getManager());
+            }
             for (ICompontOfMaterialListItem item:billOfMaterial.getCompontOfMaterialListItems()) {
                 if(item.getIsLocked().equals("Y") && item.getQuantity() > 0){
                     document.getLines().setItemCode(item.getItemCode());
