@@ -49,6 +49,18 @@ public class ProjectBudget implements IProjectBudget{
 
     private String udf5;
 
+    private String workOrderNo;
+
+    @Override
+    public String getWorkOrderNo() {
+        return workOrderNo;
+    }
+
+    @Override
+    public void setWorkOrderNo(String workOrderNo) {
+        this.workOrderNo = workOrderNo;
+    }
+
     private List<ProjectBudgetItem> projectBudgetItemList;
 
     public String getCompanyDB() {

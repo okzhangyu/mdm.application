@@ -46,8 +46,8 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
             businessPartners.setCardType(getTypeValue(businessPartner.getCardType()));
             businessPartners.setGroupCode(businessPartner.getGroupCode());
 
-            if( businessPartners.getFederalTaxID() != null && !businessPartners.getFederalTaxID().isEmpty()){
-                businessPartners.setFederalTaxID(businessPartners.getFederalTaxID());
+            if( businessPartner.getFederalTaxID() != null && !businessPartner.getFederalTaxID().isEmpty()){
+                businessPartners.setFederalTaxID(businessPartner.getFederalTaxID());
             }
             // TODO temple filed
             for (DataTemple temple:dataTempleList) {

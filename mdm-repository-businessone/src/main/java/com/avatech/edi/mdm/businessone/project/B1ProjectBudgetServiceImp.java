@@ -60,9 +60,18 @@ public class B1ProjectBudgetServiceImp implements B1ProjectBudgetService {
                 b1ApprovalTempleService.activeApproveTemple(true,tempCode,company);
             }
             IStockTransfer document = SBOCOMUtil.newStockTransfer(company,SBOCOMConstants.BoObjectTypes_StockTransfer_oInventoryTransferRequest);
+            IRecordset res = SBOCOMUtil.newRecordset(company);
             document.setCardCode(B1Data.VISUAL_SUPPLIER);
             document.setDocDate(new Date());
             document.setTaxDate(new Date());
+            document.getApprovalTemplates();
+            if(document.getStockTransfer_ApprovalRequests().getCount() > 0 && document.getStockTransfer_ApprovalRequests().getApprovalTemplatesID() > 0){
+                String sqlUser = "select \"U_NAME\" from OUSR where \"USERID\" = %s";
+                res.doQuery(String.format(sqlUser,projectBudget.getCreator()));
+                String remarks = "创建人：" + res.getFields().item("U_NAME").getValue()+";工单号："+projectBudget.getWorkOrderNo()+";项目:"+projectBudget.getPrjCode();
+                document.getStockTransfer_ApprovalRequests().setCurrentLine(0);
+                document.getStockTransfer_ApprovalRequests().setRemarks(remarks);
+            }
             if(projectBudget.getRemarks() != null)
                 document.setComments(projectBudget.getRemarks());
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
@@ -94,8 +103,6 @@ public class B1ProjectBudgetServiceImp implements B1ProjectBudgetService {
                     document.getLines().getUserFields().getFields().item(SUBJECT).setValue(item.getSrvcSbjct());
                 if(item.getSrvcCntnt() != null)
                     document.getLines().getUserFields().getFields().item(CONTENT).setValue(item.getSrvcCntnt());
-//               // if(item.getActType() != null)
-//                  //  document.getLines().getUserFields().getFields().item(ACTIVITY_TYPE).setValue(item.getActType());
                 if(item.getAtlStd() != null)
                     document.getLines().getUserFields().getFields().item(ATLSTD).setValue(item.getAtlStd());
                 if(item.getAtlStt() != null)

@@ -59,9 +59,20 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
                 b1ApprovalTempleService.activeApproveTemple(true,tempCode,company);
             }
             IStockTransfer document = SBOCOMUtil.newStockTransfer(company, SBOCOMConstants.BoObjectTypes_oStockTransfer);
+            IRecordset res = SBOCOMUtil.newRecordset(company);
             document.setCardCode(B1Data.VISUAL_SUPPLIER);
             document.setDocDate(new Date());
             document.setTaxDate(new Date());
+            document.getApprovalTemplates();
+
+            document.getApprovalTemplates();
+            if(document.getStockTransfer_ApprovalRequests().getCount() > 0 && document.getStockTransfer_ApprovalRequests().getApprovalTemplatesID() > 0){
+                String sqlUser = "select \"U_NAME\" from OUSR where \"USERID\" = %s";
+                res.doQuery(String.format(sqlUser,projectReport.getCreator()));
+                String remarks = "创建人：" + res.getFields().item("U_NAME").getValue()+";工单号："+projectReport.getWorkOrderNo()+";项目:"+projectReport.getProject();
+                document.getStockTransfer_ApprovalRequests().setCurrentLine(0);
+                document.getStockTransfer_ApprovalRequests().setRemarks(remarks);
+            }
             if(projectReport.getRemarks() != null)
                 document.setComments(projectReport.getRemarks());
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);

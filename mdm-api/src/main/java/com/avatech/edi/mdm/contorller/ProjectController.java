@@ -61,7 +61,7 @@ public class ProjectController {
         try
         {
             logger.info("接收项目预算信息》》》》》"+ budget.toString());
-            if(budget.getPrjCode() == null || budget.getPrjName() == null || budget.getPrjCode().isEmpty() || budget.getPrjName().isEmpty())
+            if(budget.getPrjCode() == null || budget.getPrjCode().isEmpty())
                 rt = Result.error("1001","项目信息为空");
             else {
                 SyncResult results = projectBudgetService.syncProjectBudget(budget);
@@ -77,7 +77,6 @@ public class ProjectController {
         }
         logger.info("项目预算推送返回信息》》》》》"+ rt.toString());
         return rt;
-
     }
 
     @RequestMapping(value = "report",method ={RequestMethod.POST})
@@ -87,9 +86,12 @@ public class ProjectController {
         try
         {
             logger.info("接收项目工时汇报信息》》》》》"+ report.toString());
-            SyncResult results = projectReportService.syncProjectReport(report);
-            rt = Result.ok(results);
-
+            if(report.getProject() == null || report.getProject().isEmpty()){
+                rt = Result.error("1001","项目信息为空");
+            }else {
+                SyncResult results = projectReportService.syncProjectReport(report);
+                rt = Result.ok(results);
+            }
         }catch (ServiceException e){
             logger.error(report.toString(),e);
             rt = Result.error("-1",e);
@@ -100,6 +102,5 @@ public class ProjectController {
         }
         logger.info("项目工时汇报推送返回信息》》》》》"+ rt.toString());
         return rt;
-
     }
 }
