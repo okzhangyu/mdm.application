@@ -277,6 +277,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             document.getUserFields().getFields().item(BOM_ITEMCODE).setValue(billOfMaterial.getItemCode());
             document.getUserFields().getFields().item(BOM_ITEMNAME).setValue(billOfMaterial.getItemName());
             document.getUserFields().getFields().item(BOM_TREETYPE).setValue(billOfMaterial.getTreeType());
+            document.getUserFields().getFields().item(BOM_VERSION).setValue(billOfMaterial.getVersion());
             document.getUserFields().getFields().item(HTH).setValue(billOfMaterial.getContractNo());
             document.getUserFields().getFields().item(HTMC).setValue(billOfMaterial.getContractName());
 
