@@ -79,12 +79,6 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
     @Column(name = "Modelname")
     private String modelName;
 
-//    @Column(name = "Prjcode")
-//    private String prjCode;
-//
-//    @Column(name = "Workorderno")
-//    private String workOrderNo;
-
     public String getUniqueKey() {
         return uniqueKey;
     }

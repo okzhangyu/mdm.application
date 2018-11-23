@@ -85,10 +85,10 @@ public class BillOfMaterial implements IBillOfMaterial {
     @Column(name = "Docdate")
     private String docDtae;
     @Column(name="HTH")
-    private String hth;
+    private String contractNo;
 
     @Column(name = "HTMC")
-    private String htmc;
+    private String contractName;
 
     @Column(name = "Manager")
     private String manager;
@@ -360,23 +360,21 @@ public class BillOfMaterial implements IBillOfMaterial {
     }
 
     @Override
-    public void setHTH(String hth) {
-
+    public void setContractNo(String contractNo) {
     }
 
     @Override
-    public String getHTH() {
-        return hth;
+    public String getContractNo() {
+        return contractNo;
     }
 
     @Override
-    public void setHTMC(String HTMC) {
-
+    public void setContractName(String contractName) {
     }
 
     @Override
-    public String getHTMC() {
-        return htmc;
+    public String getContractName() {
+        return contractName;
     }
 
     @Override
@@ -416,8 +414,8 @@ public class BillOfMaterial implements IBillOfMaterial {
                 "\",\" creator\":\"" + creator + '\'' +
                 "\",\" compontOfMaterialListItems\":" + compontOfMaterialListItems +
                 "\",\" docDate\":" + docDtae +
-                "\",\" hth\":" + hth +
-                "\",\" htmc\":" + htmc +
+                "\",\" contractNo\":" + contractNo +
+                "\",\" contractName\":" + contractName +
                 '}';
     }
 }

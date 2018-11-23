@@ -69,7 +69,8 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
             if(document.getStockTransfer_ApprovalRequests().getCount() > 0 && document.getStockTransfer_ApprovalRequests().getApprovalTemplatesID() > 0){
                 String sqlUser = "select \"U_NAME\" from OUSR where \"USERID\" = %s";
                 res.doQuery(String.format(sqlUser,projectReport.getCreator()));
-                String remarks = "创建人：" + res.getFields().item("U_NAME").getValue()+";工单号："+projectReport.getWorkOrderNo()+";项目:"+projectReport.getProject();
+                String remarks = "创建人：" + res.getFields().item("U_NAME").getValue()+";["+projectReport.getDocEntry()+"]工时汇报单;工单号："+projectReport.getWorkOrderNo()+";项目:"+projectReport.getProject()
+                        + ";合同号："+projectReport.getContractNo()+";合同名称："+projectReport.getContractName();
                 document.getStockTransfer_ApprovalRequests().setCurrentLine(0);
                 document.getStockTransfer_ApprovalRequests().setRemarks(remarks);
             }

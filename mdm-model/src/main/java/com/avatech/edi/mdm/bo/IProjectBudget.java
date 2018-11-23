@@ -88,6 +88,14 @@ public interface IProjectBudget {
 
     void setUdf5(String udf5);
 
+    String getContractNo();
+
+    void setContractNo(String contractNo);
+
+    String getContractName();
+
+    void setContractName(String contractName);
+
     List<ProjectBudgetItem> getProjectBudgetItemList();
 
     void setProjectBudgetItemList(List<ProjectBudgetItem> projectBudgetItemList);

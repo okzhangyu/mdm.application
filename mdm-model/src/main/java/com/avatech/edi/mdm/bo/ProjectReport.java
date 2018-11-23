@@ -34,6 +34,10 @@ public class ProjectReport implements IProjectReport{
 
     private String project;
 
+    private String contractNo;
+
+    private String contractName;
+
     @Override
     public String getWorkOrderNo() {
         return workOrderNo;
@@ -154,6 +158,26 @@ public class ProjectReport implements IProjectReport{
 
     public void setProjectReportItems(List<ProjectReportItem> projectReportItems) {
         this.projectReportItems = projectReportItems;
+    }
+
+    @Override
+    public String getContractNo() {
+        return contractNo;
+    }
+
+    @Override
+    public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
+    }
+
+    @Override
+    public String getContractName() {
+        return contractName;
+    }
+
+    @Override
+    public void setContractName(String contractName) {
+        this.contractName = contractName;
     }
 
     @Override

@@ -68,7 +68,8 @@ public class B1ProjectBudgetServiceImp implements B1ProjectBudgetService {
             if(document.getStockTransfer_ApprovalRequests().getCount() > 0 && document.getStockTransfer_ApprovalRequests().getApprovalTemplatesID() > 0){
                 String sqlUser = "select \"U_NAME\" from OUSR where \"USERID\" = %s";
                 res.doQuery(String.format(sqlUser,projectBudget.getCreator()));
-                String remarks = "创建人：" + res.getFields().item("U_NAME").getValue()+";工单号："+projectBudget.getWorkOrderNo()+";项目:"+projectBudget.getPrjCode();
+                String remarks = "创建人：" + res.getFields().item("U_NAME").getValue()+";["+ projectBudget.getDocEntry()+"]工时预算单;工单号："+projectBudget.getWorkOrderNo()+";项目:"+projectBudget.getPrjCode()
+                        +";合同号："+projectBudget.getContractNo()+";合同名称："+projectBudget.getContractName();
                 document.getStockTransfer_ApprovalRequests().setCurrentLine(0);
                 document.getStockTransfer_ApprovalRequests().setRemarks(remarks);
             }

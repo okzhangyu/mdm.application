@@ -1,5 +1,6 @@
 package com.avatech.edi.mdm.businessone.bom;
 
+import com.avatech.edi.mdm.bo.CompontOfMaterialListItem;
 import com.avatech.edi.mdm.bo.IBillOfMaterial;
 import com.avatech.edi.mdm.bo.ICompontOfMaterialListItem;
 import com.avatech.edi.mdm.businessone.B1Exception;
@@ -7,6 +8,7 @@ import com.avatech.edi.mdm.businessone.BORepositoryBusinessOne;
 import com.avatech.edi.mdm.businessone.approval.B1ApprovalTempleService;
 import com.avatech.edi.mdm.businessone.config.B1Data;
 import com.avatech.edi.mdm.config.B1Connection;
+import com.avatech.edi.mdm.vo.RequestOrder;
 import com.sap.smb.sbo.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
@@ -81,11 +85,8 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
 
             document.getApprovalTemplates();
             if(document.getDocument_ApprovalRequests().getCount() > 0 && document.getDocument_ApprovalRequests().getApprovalTemplatesID() > 0){
-                String sqlUser = "select \"U_NAME\" from OUSR where \"USERID\" = %s";
-                res.doQuery(String.format(sqlUser,billOfMaterial.getCreator()));
-                String remarks = "创建人：" + res.getFields().item("U_NAME").getValue()+";工单号：" + billOfMaterial.getWorkOrderNo() +";项目:"+ billOfMaterial.getProject();
                 document.getDocument_ApprovalRequests().setCurrentLine(0);
-                document.getDocument_ApprovalRequests().setRemarks(remarks);
+                document.getDocument_ApprovalRequests().setRemarks(getBOMRemarks(billOfMaterial,company));
             }
 
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
@@ -154,7 +155,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
         try{
             boRepositoryBusinessOne = BORepositoryBusinessOne.getInstance(b1Connection);
             company = boRepositoryBusinessOne.getCompany();
-            Integer docEntry = getProduceOrderNo(billOfMaterial.getProject(),billOfMaterial.getWorkOrderNo(),billOfMaterial.getHTH(),billOfMaterial.getItemType(),company);
+            Integer docEntry = getProduceOrderNo(billOfMaterial.getProject(),billOfMaterial.getWorkOrderNo(),billOfMaterial.getContractNo(),billOfMaterial.getItemType(),company);
             if(!company.isInTransaction()){
                 company.startTransaction();
             }
@@ -189,7 +190,6 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             logger.error("查询生产订单异常" + e);
             throw new B1Exception(e);
         }
-
     }
 
     private String createOrUpdateProduceOrder(IBillOfMaterial billOfMaterial,ICompany company,Integer docEntry){
@@ -207,13 +207,14 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             document.setWarehouse(billOfMaterial.getToWH());
             document.setPlannedQuantity(billOfMaterial.getUnitQty());
             document.setProject(billOfMaterial.getProject());
-            document.setRemarks(billOfMaterial.getRemarks());
+            document.setRemarks(this.getBOMRemarks(billOfMaterial,company));
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
             document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(billOfMaterial.getDocEntry().toString());
             document.getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getWorkOrderNo());
-            document.getUserFields().getFields().item(HTH).setValue(billOfMaterial.getHTH());
-            document.getUserFields().getFields().item(HTMC).setValue(billOfMaterial.getHTMC());
+            document.getUserFields().getFields().item(HTH).setValue(billOfMaterial.getContractNo());
+            document.getUserFields().getFields().item(HTMC).setValue(billOfMaterial.getContractName());
             document.getUserFields().getFields().item(ITEMTYPE).setValue(billOfMaterial.getItemType());
+
             if(billOfMaterial.getManager()!= null && !billOfMaterial.getManager().isEmpty()){
                 document.getUserFields().getFields().item(PROJECAT_MANAGER).setValue(billOfMaterial.getManager());
             }
@@ -230,10 +231,10 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                     document.getLines().setBaseQuantity(item.getQuantity());
                     document.getLines().setPlannedQuantity(item.getQuantity());
                     document.getLines().setWarehouse(item.getWhsCode());
+                    document.getLines().setProject(billOfMaterial.getProject());
                     document.getLines().getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
                     document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry().toString());
                     document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId().toString());
-                    document.getLines().setProject(billOfMaterial.getProject());
                     document.getLines().getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getWorkOrderNo());
                     SimpleDateFormat sdf = new SimpleDateFormat( " yyyy-MM-dd " );
                     document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
@@ -254,7 +255,6 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             if(rt == 0){
                 return company.getNewObjectKey();
             }
-
             else throw new B1Exception(company.getLastErrorCode() + ":" + company.getLastErrorDescription());
         }catch (B1Exception e){
             throw  e;
@@ -263,33 +263,42 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
         }
     }
 
-    private String
-    createPurchaseOrder(IBillOfMaterial billOfMaterial, ICompany company){
+    private String createPurchaseOrder(IBillOfMaterial billOfMaterial, ICompany company){
         try {
             IDocuments document = SBOCOMUtil.newDocuments(company, SBOCOMConstants.BoObjectTypes_Document_oPurchaseRequest);
+            List<RequestOrder> requestOrders = this.getRequestOrder(billOfMaterial,company);
             document.setDocDate(new Date());
             document.setTaxDate(new Date());
             document.setVatDate(new Date());
             document.setRequriedDate(new Date());
-            document.setComments(billOfMaterial.getRemarks());
+            document.setComments(getBOMRemarks(billOfMaterial,company));
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
             document.getUserFields().getFields().item(BASE_DOCENTRY).setValue(billOfMaterial.getDocEntry().toString());
             document.getUserFields().getFields().item(BOM_ITEMCODE).setValue(billOfMaterial.getItemCode());
             document.getUserFields().getFields().item(BOM_ITEMNAME).setValue(billOfMaterial.getItemName());
             document.getUserFields().getFields().item(BOM_TREETYPE).setValue(billOfMaterial.getTreeType());
+            document.getUserFields().getFields().item(HTH).setValue(billOfMaterial.getContractNo());
+            document.getUserFields().getFields().item(HTMC).setValue(billOfMaterial.getContractName());
+
             if(billOfMaterial.getUom() != null && !billOfMaterial.getUom().isEmpty())
             document.getUserFields().getFields().item(BOM_UOM).setValue(billOfMaterial.getUom());
+            document.setProject(billOfMaterial.getProject());
             if(billOfMaterial.getProject() != null && !billOfMaterial.getProject().isEmpty()) {
                 document.getUserFields().getFields().item(BOM_PROJECT).setValue(billOfMaterial.getProject());
             }
             if(billOfMaterial.getManager()!= null && !billOfMaterial.getManager().isEmpty()){
                 document.getUserFields().getFields().item(PROJECAT_MANAGER).setValue(billOfMaterial.getManager());
             }
-            for (ICompontOfMaterialListItem item:billOfMaterial.getCompontOfMaterialListItems()) {
+            List<CompontOfMaterialListItem> compontOfMaterialListItems = this.getRequestQuantityNextTime(requestOrders,billOfMaterial.getCompontOfMaterialListItems());
+            if(compontOfMaterialListItems == null)
+                throw new B1Exception("无效的bom明细") ;
+            for (ICompontOfMaterialListItem item:compontOfMaterialListItems) {
                 if(item.getIsLocked().equals("Y") && item.getQuantity() > 0){
                     document.getLines().setItemCode(item.getItemCode());
                     document.getLines().setQuantity(item.getQuantity());
                     document.getLines().setPrice(item.getPrice());
+                    document.getLines().setWarehouseCode(item.getWhsCode());
+                    document.getLines().setProjectCode(billOfMaterial.getProject());
                     document.getLines().getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
                     document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry().toString());
                     document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId().toString());
@@ -298,7 +307,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                     SimpleDateFormat sdf = new SimpleDateFormat( " yyyy-MM-dd " );
                     document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
                     if(item.getModelName() != null && !item.getModelName().isEmpty())
-                    document.getLines().getUserFields().getFields().item(MODEL_NAME).setValue(item.getModelName());
+                        document.getLines().getUserFields().getFields().item(MODEL_NAME).setValue(item.getModelName());
                     document.getLines().add();
                 }
             }
@@ -308,6 +317,77 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             else throw new B1Exception(company.getLastErrorCode() + ":" + company.getLastErrorDescription());
         }catch (SBOCOMException e){
             logger.error("BOM生成采购申请发生异常",e);
+            throw new B1Exception(e);
+        }
+    }
+
+    /**
+     * 获取已经申请的BOM数量
+     * @param
+     * @return
+     */
+    private List<RequestOrder> getRequestOrder(IBillOfMaterial billOfMaterial, ICompany company){
+        try{
+            String sql = "select t1.\"U_BaseLineNum\",\"ItemCode\",sum(\"Quantity\") as \"Quantity\" from OPRQ t0 inner join PRQ1 t1 on t0.\"DocEntry\" = t1.\"DocEntry\"\n" +
+                    "\t\t\t\t\t where t0.\"U_ItemCode\" = '%s'\n" +
+                    "\t\t\t\t\t \tand t0.\"U_PrjCode\" = '%s'\n" +
+                    "\t\t\t\t\t \tand ifnull(t1.\"U_WorkOrderNo\",'') = '%s'\n" +
+                    "                   \t\tand ifnull(t0.\"U_HTH\",'') = '%s'\n" +
+                    "                    \tgroup by t1.\"U_BaseLineNum\",\"ItemCode\"";
+            IRecordset res = SBOCOMUtil.newRecordset(company);
+            res.doQuery(String.format(sql,billOfMaterial.getItemCode(),billOfMaterial.getProject(),billOfMaterial.getWorkOrderNo(),billOfMaterial.getContractNo()));
+            List<RequestOrder> requestOrders = new ArrayList<>();
+            RequestOrder order;
+            while (!res.isEoF()){
+                order = new RequestOrder();
+                order.setBaseLineNUum(Integer.valueOf(res.getFields().item("U_BaseLineNum").getValue().toString()) );
+                order.setItemCode(res.getFields().item("ItemCode").getValue().toString());
+                order.setQuantity(Double.valueOf(res.getFields().item("Quantity").getValue().toString()));
+                requestOrders.add(order);
+                res.moveNext();
+            }
+            return requestOrders;
+        }catch (Exception e){
+            logger.error("获取已申请BOM异常：",e);
+            throw new B1Exception(e);
+        }
+    }
+
+    /**
+     * 获取需申请的数量
+     * @param orders
+     * @return
+     */
+    private List<CompontOfMaterialListItem> getRequestQuantityNextTime(List<RequestOrder> orders,List<CompontOfMaterialListItem> billOfMaterialItems){
+        if(billOfMaterialItems ==null || billOfMaterialItems.size()<= 0)
+            return null;
+        if(orders == null || orders.size() <= 0)
+            return billOfMaterialItems;
+        for (int i =0;i<billOfMaterialItems.size();i++){
+            if(!billOfMaterialItems.get(i).getIsLocked().equals("Y"))
+                continue;
+            for (int j=0;j<orders.size();j++){
+                if(orders.get(j).getBaseLineNum().equals(billOfMaterialItems.get(i).getLineId())
+                    && orders.get(j).getItemCode().equals(billOfMaterialItems.get(i).getItemCode())) {
+                    billOfMaterialItems.get(i).setQuantity(billOfMaterialItems.get(i).getQuantity() - orders.get(j).getQuantity() <= 0 ? 0 :
+                            billOfMaterialItems.get(i).getQuantity() - orders.get(j).getQuantity());
+                    break;
+                }
+            }
+        }
+        return billOfMaterialItems;
+    }
+
+    private String getBOMRemarks(IBillOfMaterial billOfMaterial,ICompany company){
+        try{
+            IRecordset res = SBOCOMUtil.newRecordset(company);
+            String sqlUser = "select \"U_NAME\" from OUSR where \"USERID\" = %s";
+            res.doQuery(String.format(sqlUser,billOfMaterial.getCreator()));
+            return  "创建人：" + res.getFields().item("U_NAME").getValue()+";[" + billOfMaterial.getDocEntry() +"]BOM;工单号：" + billOfMaterial.getWorkOrderNo() +";项目:"
+                    + billOfMaterial.getProject()+";合同号："+billOfMaterial.getContractNo()+";合同名称："+billOfMaterial.getContractName();
+
+        }catch (Exception e){
+            logger.error("查询用户信息异常",e);
             throw new B1Exception(e);
         }
     }

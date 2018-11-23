@@ -78,6 +78,8 @@ public class B1AccountServiceImp implements B1AccountService {
         }catch (SBOCOMException e){
             logger.error("同步科目发生异常",e);
             throw new B1Exception(e);
+        }finally {
+            //company.disconnect();
         }
     }
 
