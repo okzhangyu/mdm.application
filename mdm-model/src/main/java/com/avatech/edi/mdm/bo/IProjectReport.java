@@ -56,6 +56,14 @@ public interface IProjectReport {
 
     void setProject(String project);
 
+    String getContractNo();
+
+    void setContractNo(String contractNo);
+
+    String getContractName();
+
+    void setContractName(String contractName);
+
     List<ProjectReportItem> getProjectReportItems();
 
     void setProjectReportItems(List<ProjectReportItem> projectReportItems);

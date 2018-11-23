@@ -114,6 +114,7 @@ public class B1ApprovalTempleServiceImp implements B1ApprovalTempleService {
         }
     }
 
+
     /**
      * 激活审批模板
      * @param isActive 是否激活

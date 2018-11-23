@@ -102,13 +102,13 @@ public interface IBillOfMaterial {
 
      String getDocDate();
 
-     void setHTH(String hth);
+     String getContractNo();
 
-     String getHTH();
+     void setContractNo(String contractNo);
 
-     void setHTMC(String HTMC);
+     String getContractName();
 
-     String getHTMC();
+     void setContractName(String contractName);
 
      String getManager();
 
