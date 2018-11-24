@@ -31,7 +31,7 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_OBOM" ( "UNIQUEKEY",
 	 "CREATOR",
 	 "HTH",
 	 "HTMC",
-	 "MANAGER" ) AS select
+	 "MANAGER" ) AS (((((select
 	 concat('SBO_KJS_ZDH_20181109_',
 	 "DocEntry"),
 	 'SBO_KJS_ZDH_20181109',
@@ -41,17 +41,17 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_OBOM" ( "UNIQUEKEY",
 	 "U_ItemName",
 	 "U_Version",
 	 "U_VerDescrp",
- 	 'Y',
+	 'Y',
 	 "U_TreeType",
 	 "U_UnitQty",
 	 "U_Uom",
 	 "U_ToWH",
 	 "U_Project",
 	 "U_WorkId",
- 	 '',
- 	 '',
- 	 '',
- 	 '',
+	 '',
+	 '',
+	 '',
+	 '',
 	 '',
 	 "U_Remarks",
 	 "U_DocStatus",
@@ -66,8 +66,9 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_OBOM" ( "UNIQUEKEY",
 	 "Creator",
 	 '',
 	 '' ,
-	 "U_PrjManager" from "SBO_KJS_ZDH_20181109"."@AVA_PM_OVCO"
-				UNION ALL select
+	 "U_PrjManager"
+					from "SBO_KJS_ZDH_20181109"."@AVA_PM_OVCO")
+				UNION ALL (select
 	 concat('SBO_KJS_ZDHSAPCS_',
 	 "DocEntry"),
 	 'SBO_KJS_ZDHSAPCS',
@@ -77,7 +78,7 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_OBOM" ( "UNIQUEKEY",
 	 "U_ItemName",
 	 "U_Version",
 	 "U_VerDescrp",
- 	 'Y',
+	 'Y',
 	 "U_TreeType",
 	 "U_UnitQty",
 	 "U_Uom",
@@ -102,8 +103,9 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_OBOM" ( "UNIQUEKEY",
 	 "Creator",
 	 "U_HTH",
 	 "U_HTMC",
-	  "U_PrjManager" from "SBO_KJS_ZDHSAPCS"."@AVA_PM_OVCO"
-			UNION ALL select
+	 "U_PrjManager"
+					from "SBO_KJS_ZDHSAPCS"."@AVA_PM_OVCO"))
+			UNION ALL (select
 	 concat('SBO_KJS_ZDHKFCS_',
 	 "DocEntry"),
 	 'SBO_KJS_ZDHKFCS',
@@ -113,7 +115,7 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_OBOM" ( "UNIQUEKEY",
 	 "U_ItemName",
 	 "U_Version",
 	 "U_VerDescrp",
- 	 'Y',
+	 'Y',
 	 "U_TreeType",
 	 "U_UnitQty",
 	 "U_Uom",
@@ -138,8 +140,9 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_OBOM" ( "UNIQUEKEY",
 	 "Creator",
 	 "U_HTH",
 	 "U_HTMC",
-	 "U_PrjManager" from "SBO_KJS_ZDHKFCS"."@AVA_PM_OVCO"
-		UNION ALL select
+	 "U_PrjManager"
+				from "SBO_KJS_ZDHKFCS"."@AVA_PM_OVCO"))
+		UNION ALL (select
 	 concat('SBO_KJS_TRI_',
 	 "DocEntry"),
 	 'SBO_KJS_TRI',
@@ -175,8 +178,8 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_OBOM" ( "UNIQUEKEY",
 	 "U_HTH",
 	 "U_HTMC",
 	 "U_PrjManager"
-			from "SBO_KJS_TRI"."@AVA_PM_OVCO"
-	UNION ALL select
+			from "SBO_KJS_TRI"."@AVA_PM_OVCO"))
+	UNION ALL (select
 	 concat('SBO_KJS_CK_',
 	 "DocEntry"),
 	 'SBO_KJS_CK',
@@ -210,11 +213,6 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_OBOM" ( "UNIQUEKEY",
 	 '',
 	 "Creator",
 	 "U_HTH",
-<<<<<<< HEAD
-	 "U_HTMC"
-		from "SBO_KJS_ZDHSAPCS"."@AVA_PM_OVCO")) WITH READ ONLY
-=======
 	 "U_HTMC",
-	  "U_PrjManager"
-		from "SBO_KJS_CK"."@AVA_PM_OVCO"
->>>>>>> edi/master
+	 "U_PrjManager"
+		from "SBO_KJS_CK"."@AVA_PM_OVCO")) WITH READ ONLY

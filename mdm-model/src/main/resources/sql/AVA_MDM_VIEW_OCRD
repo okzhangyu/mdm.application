@@ -4,12 +4,13 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_MDM_VIEW_OCRD" ( "UNIQUEKEY",
 	 "CURRENCY",
 	 "CARDTYPE",
 	 "GROUPCODE",
-	 "FEDERALTAXID",
+	 "LIC_TRAD_NUM",
 	 "CJ",
 	 "GSBH",
 	 "GNW",
 	 "XTNW",
-	 "JSPBM" ) AS select
+	 "JSPBM",
+	 "Gsbh" ) AS select
 	 "CardCode",
 	 "CardCode",
 	 "CardName",
@@ -21,5 +22,6 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_MDM_VIEW_OCRD" ( "UNIQUEKEY",
 	 "U_Gsbh",
 	 "U_Gnw",
 	 "U_Xtnw",
-	 "U_JSPBM"
+	 "U_JSPBM",
+	 "U_Gsbh"
 from "SBO_KJS_JT".OCRD

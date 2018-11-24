@@ -21,7 +21,8 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_BOM1" ( "UNIQUEKEY",
 	 "UDF3",
 	 "UDF4",
 	 "UDF5",
-	 "DOCDATE" ) AS ((((select
+	 "DOCDATE",
+	 "MODELNAME" ) AS ((((select
 	 concat(concat(concat('SBO_KJS_ZDHSAPCS_',
 	 "DocEntry"),
 	 '_'),
@@ -42,8 +43,7 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_BOM1" ( "UNIQUEKEY",
 	 "U_Warehouse",
 	 "U_IssueMthd",
 	 "U_IsLock",
-	 --ifnull("U_Price", 0.0),
- 0.0,
+	 0.0,
 	 "U_Uom",
 	 "U_Ref1",
 	 "U_Ref2",
@@ -52,7 +52,8 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_BOM1" ( "UNIQUEKEY",
 	 "U_UDF003",
 	 "U_UDF004",
 	 "U_UDF005" ,
-	 "U_DocDate"
+	 "U_DocDate",
+	 "U_XH"
 				from "SBO_KJS_ZDHSAPCS"."@AVA_PM_VCO1")
 			UNION ALL (select
 	 concat(concat(concat('SBO_KJS_ZDH_20181109_',
@@ -75,8 +76,7 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_BOM1" ( "UNIQUEKEY",
 	 "U_Warehouse",
 	 "U_IssueMthd",
 	 "U_IsLock",
-	 --ifnull("U_Price", 0.0),
- 0.0,
+	 0.0,
 	 "U_Uom",
 	 "U_Ref1",
 	 "U_Ref2",
@@ -85,7 +85,8 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_BOM1" ( "UNIQUEKEY",
 	 "U_UDF003",
 	 "U_UDF004",
 	 "U_UDF005" ,
-	 "U_DocDate"
+	 "U_DocDate",
+	 "U_XH"
 				from "SBO_KJS_ZDH_20181109"."@AVA_PM_VCO1"))
 		UNION ALL (select
 	 concat(concat(concat('SBO_KJS_ZDHCS01_',
@@ -108,8 +109,7 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_BOM1" ( "UNIQUEKEY",
 	 "U_Warehouse",
 	 "U_IssueMthd",
 	 "U_IsLock",
-	 --ifnull("U_Price", 0.0),
- 0.0,
+	 0.0,
 	 "U_Uom",
 	 "U_Ref1",
 	 "U_Ref2",
@@ -118,7 +118,8 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_BOM1" ( "UNIQUEKEY",
 	 "U_UDF003",
 	 "U_UDF004",
 	 "U_UDF005" ,
-	 "U_DocDate"
+	 "U_DocDate",
+	 "U_XH"
 			from "SBO_KJS_ZDHCS01"."@AVA_PM_VCO1"))
 	UNION ALL (select
 	 concat(concat(concat('SBO_KJS_ZDHKFCS_',
@@ -141,8 +142,7 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_BOM1" ( "UNIQUEKEY",
 	 "U_Warehouse",
 	 "U_IssueMthd",
 	 "U_IsLock",
-	 --ifnull("U_Price", 0.0),
- 0.0,
+	 0.0,
 	 "U_Uom",
 	 "U_Ref1",
 	 "U_Ref2",
@@ -151,5 +151,6 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_BOM1" ( "UNIQUEKEY",
 	 "U_UDF003",
 	 "U_UDF004",
 	 "U_UDF005" ,
-	 "U_DocDate"
+	 "U_DocDate",
+	 "U_XH"
 		from "SBO_KJS_ZDHKFCS"."@AVA_PM_VCO1")) WITH READ ONLY

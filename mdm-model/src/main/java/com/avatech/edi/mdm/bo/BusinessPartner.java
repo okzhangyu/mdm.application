@@ -82,6 +82,8 @@ public class BusinessPartner extends MDMMasterData implements IBusinessPartner,S
     @Column(name = "Currency")
     private String currency;
 
+
+
     @Override
     public String getCurrency() {
         return currency;
@@ -159,6 +161,7 @@ public class BusinessPartner extends MDMMasterData implements IBusinessPartner,S
     public void setJSPBM(String jsbpm) {
         this.jspbm = jsbpm;
     }
+
 
     @Override
     public String getCj() {

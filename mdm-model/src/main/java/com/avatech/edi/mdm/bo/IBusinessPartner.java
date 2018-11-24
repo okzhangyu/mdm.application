@@ -45,4 +45,8 @@ public interface  IBusinessPartner extends IMDMMasterData {
 
     String getJSPBM();
     void setJSPBM(String jspbm);
+
+
+
+
 }
