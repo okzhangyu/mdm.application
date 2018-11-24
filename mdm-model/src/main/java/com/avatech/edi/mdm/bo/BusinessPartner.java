@@ -95,19 +95,6 @@ public class BusinessPartner extends MDMMasterData implements IBusinessPartner,S
     }
 
     @Column(name = "LicTradNum")
-    private String licTradNum;
-    @Override
-    public String getLicTradNum() {
-        return licTradNum;
-    }
-
-    @Override
-    public void setLicTradNum(String licTradNum) {
-        this.licTradNum=licTradNum;
-
-    }
-
-    @Column(name = "LicTradNum")
     private String federalTaxID;
 
     @Override

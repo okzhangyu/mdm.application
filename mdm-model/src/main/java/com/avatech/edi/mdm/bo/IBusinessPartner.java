@@ -26,8 +26,6 @@ public interface  IBusinessPartner extends IMDMMasterData {
 
     void setCurrency(String currency);
 
-    String getLicTradNum();
-    void setLicTradNum(String licTradNum);
 
     String getFederalTaxID();
 
