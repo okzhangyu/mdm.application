@@ -48,6 +48,22 @@ public interface IProjectReport {
 
     void setbPLId(Integer bPLId);
 
+    String getWorkOrderNo();
+
+    void setWorkOrderNo(String workOrderNo);
+
+    String getProject();
+
+    void setProject(String project);
+
+    String getContractNo();
+
+    void setContractNo(String contractNo);
+
+    String getContractName();
+
+    void setContractName(String contractName);
+
     List<ProjectReportItem> getProjectReportItems();
 
     void setProjectReportItems(List<ProjectReportItem> projectReportItems);

@@ -98,19 +98,24 @@ public interface IBillOfMaterial {
 
      void setCreator(String creator);
 
-    List<CompontOfMaterialListItem> getCompontOfMaterialListItems();
+     void setDocDate(String docDate);
 
-    void setCompontOfMaterialListItems( List<CompontOfMaterialListItem> compontOfMaterialListItems);
+     String getDocDate();
 
-    void setDocDate(String docDate);
+     String getContractNo();
 
-    String getDocDate();
+     void setContractNo(String contractNo);
 
-    void setHTH(String hth);
-    String getHTH();
+     String getContractName();
 
-    void setHTMC(String HTMC);
-    String getHTMC();
+     void setContractName(String contractName);
 
+     String getManager();
+
+     void setManager(String manager);
+
+     List<CompontOfMaterialListItem> getCompontOfMaterialListItems();
+
+     void setCompontOfMaterialListItems(List<CompontOfMaterialListItem> compontOfMaterialListItems);
 
 }

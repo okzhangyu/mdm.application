@@ -24,28 +24,23 @@ public class B1BusinessPartnerGroupServiceImp implements B1BusinessPartnerGroupS
             company = boRepositoryBusinessOne.getCompany();
 
             IBusinessPartnerGroups bpGroup = SBOCOMUtil.newBusinessPartnerGroups(company);
-
             Boolean isExist = bpGroup.getByKey(businessPartnerGroup.getGrpCode());
             bpGroup.setName(businessPartnerGroup.getGrpName());
             bpGroup.setType(getTypeValue(businessPartnerGroup.getType()));
             //bpGroup.s
             //bpGroup.setType(businessPartnerGroup.getType());
-
             // TODO add userfileds
-
             int rstCode;
             if(isExist){
                 rstCode = bpGroup.update();
             }else {
                 rstCode = bpGroup.add();
             }
-
             if(rstCode == 0){
                 return company.getNewObjectKey();
             }else {
                 throw new B1Exception(company.getLastErrorCode() + ":"+company.getLastErrorDescription());
             }
-
         }catch (SBOCOMException e){
             throw new B1Exception(e);
         }

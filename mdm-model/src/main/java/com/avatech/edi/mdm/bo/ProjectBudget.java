@@ -49,6 +49,22 @@ public class ProjectBudget implements IProjectBudget{
 
     private String udf5;
 
+    private String workOrderNo;
+
+    private String contractNo;
+
+    private String contractName;
+
+    @Override
+    public String getWorkOrderNo() {
+        return workOrderNo;
+    }
+
+    @Override
+    public void setWorkOrderNo(String workOrderNo) {
+        this.workOrderNo = workOrderNo;
+    }
+
     private List<ProjectBudgetItem> projectBudgetItemList;
 
     public String getCompanyDB() {
@@ -219,6 +235,26 @@ public class ProjectBudget implements IProjectBudget{
 
     public void setProjectBudgetItemList(List<ProjectBudgetItem> projectBudgetItemList) {
         this.projectBudgetItemList = projectBudgetItemList;
+    }
+
+    @Override
+    public String getContractNo() {
+        return contractNo;
+    }
+
+    @Override
+    public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
+    }
+
+    @Override
+    public String getContractName() {
+        return contractName;
+    }
+
+    @Override
+    public void setContractName(String contractName) {
+        this.contractName = contractName;
     }
 
     @Override
