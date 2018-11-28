@@ -73,7 +73,7 @@
     "companyName":"自动化开发测试账套",
     "server":"10.10.8.41:30015",
     "companyDB":"SBO_KJS_ZDHKFCS",
-    "userName":"manager",
+    "userName":"SDI",
     "password":"123456",
     "licenseServer":"10.10.8.41:40000",
     "sldServer":"10.10.8.41:40000",
@@ -168,7 +168,7 @@
     "useTrusted":"false"
   },
   {
-    "companyName":"Tri-control测试账套_1110",
+    "companyName":"Tri-control测试账套_1127",
     "server":"10.10.8.41:30015",
     "companyDB":"SBO_KJS_TRI",
     "userName":"SDI",

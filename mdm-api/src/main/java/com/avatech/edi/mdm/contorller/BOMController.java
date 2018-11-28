@@ -80,7 +80,10 @@ public class BOMController {
                 rt =  Result.error("1001","项目信息为空");
             else if(bom.getWorkOrderNo() == null || bom.getWorkOrderNo().isEmpty())
                 rt = Result.error("1002","工单号信息为空");
-            else {
+            else if(bom.getCompontOfMaterialListItems().stream().filter(c->c.getIsLocked().equals("Y")).count() <= 0){
+                rt = Result.error("1003","冻结明细未空");
+            }
+            else{
                 SyncResult results = billOfMaterialService.syncBOM(bom);
                 rt = Result.ok(results);
             }

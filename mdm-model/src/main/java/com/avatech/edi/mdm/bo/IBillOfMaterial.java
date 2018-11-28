@@ -114,6 +114,10 @@ public interface IBillOfMaterial {
 
      void setManager(String manager);
 
+     String getDeptType();
+
+     void setDeptType(String deptType);
+
      List<CompontOfMaterialListItem> getCompontOfMaterialListItems();
 
      void setCompontOfMaterialListItems(List<CompontOfMaterialListItem> compontOfMaterialListItems);

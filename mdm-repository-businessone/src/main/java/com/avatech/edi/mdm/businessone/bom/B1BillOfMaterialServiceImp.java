@@ -48,6 +48,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
     private final String ITEMTYPE="U_ItemType";
     private final String MODEL_NAME = "U_XH";
     private final String PROJECAT_MANAGER = "U_PrjManager";
+    private final String DEPT_TYPE = "U_DeptType";
 
 
     @Autowired
@@ -104,6 +105,8 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                 document.getUserFields().getFields().item(BOM_UOM).setValue(billOfMaterial.getUom());
             if(billOfMaterial.getVersion() != null && !billOfMaterial.getVersion().isEmpty())
                 document.getUserFields().getFields().item(BOM_VERSION).setValue(billOfMaterial.getVersion());
+            if(billOfMaterial.getDeptType() != null && !billOfMaterial.getDeptType().isEmpty())
+                document.getUserFields().getFields().item(DEPT_TYPE).setValue(billOfMaterial.getDeptType());
             for (ICompontOfMaterialListItem item:billOfMaterial.getCompontOfMaterialListItems()) {
                 document.getLines().setItemCode(item.getItemCode());
                 document.getLines().setQuantity(1.0);
@@ -218,15 +221,14 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             if(billOfMaterial.getManager()!= null && !billOfMaterial.getManager().isEmpty()){
                 document.getUserFields().getFields().item(PROJECAT_MANAGER).setValue(billOfMaterial.getManager());
             }
-            if(isExists){
-                document.setProductionOrderStatus(SBOCOMConstants.BoProductionOrderStatusEnum_boposReleased);
-                while (document.getLines().getCount() > 1){
-                    document.getLines().delete();
-                }
-                document.getLines().delete();
-            }
+            if(billOfMaterial.getDeptType() != null && !billOfMaterial.getDeptType().isEmpty())
+                document.getUserFields().getFields().item(DEPT_TYPE).setValue(billOfMaterial.getDeptType());
             for (ICompontOfMaterialListItem item:billOfMaterial.getCompontOfMaterialListItems()) {
-                if(item.getIsLocked().equals("Y") && item.getQuantity() > 0){
+                if(item.getIsLocked().equals("Y") && item.getQuantity() > 0) {
+                    if (item.getDesLineNum() >= 0) {
+                        document.getLines().setCurrentLine(item.getDesLineNum());
+                    }
+                    document.getLines().getIssuedQuantity();
                     document.getLines().setItemNo(item.getItemCode());
                     document.getLines().setBaseQuantity(item.getQuantity());
                     document.getLines().setPlannedQuantity(item.getQuantity());
@@ -236,11 +238,12 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                     document.getLines().getUserFields().getFields().item(BASE_DOCENTRY).setValue(item.getDocEntry().toString());
                     document.getLines().getUserFields().getFields().item(BASE_LINENUM).setValue(item.getLineId().toString());
                     document.getLines().getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getWorkOrderNo());
-                    SimpleDateFormat sdf = new SimpleDateFormat( " yyyy-MM-dd " );
+                    SimpleDateFormat sdf = new SimpleDateFormat(" yyyy-MM-dd ");
                     document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
-                    if(item.getModelName() != null && !item.getModelName().isEmpty()){
+                    if (item.getModelName() != null && !item.getModelName().isEmpty()) {
                         document.getLines().getUserFields().getFields().item(MODEL_NAME).setValue(item.getModelName());
-                    }document.getLines().add();
+                    }
+                    document.getLines().add();
                 }
             }
             if(isExists){
@@ -290,9 +293,11 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             if(billOfMaterial.getManager()!= null && !billOfMaterial.getManager().isEmpty()){
                 document.getUserFields().getFields().item(PROJECAT_MANAGER).setValue(billOfMaterial.getManager());
             }
+            if(billOfMaterial.getDeptType() != null && !billOfMaterial.getDeptType().isEmpty())
+                document.getUserFields().getFields().item(DEPT_TYPE).setValue(billOfMaterial.getDeptType());
             List<CompontOfMaterialListItem> compontOfMaterialListItems = this.getRequestQuantityNextTime(requestOrders,billOfMaterial.getCompontOfMaterialListItems());
             if(compontOfMaterialListItems == null)
-                throw new B1Exception("无效的bom明细") ;
+                return "" ;
             for (ICompontOfMaterialListItem item:compontOfMaterialListItems) {
                 if(item.getIsLocked().equals("Y") && item.getQuantity() > 0){
                     document.getLines().setItemCode(item.getItemCode());
@@ -370,8 +375,9 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             for (int j=0;j<orders.size();j++){
                 if(orders.get(j).getBaseLineNum().equals(billOfMaterialItems.get(i).getLineId())
                     && orders.get(j).getItemCode().equals(billOfMaterialItems.get(i).getItemCode())) {
-                    billOfMaterialItems.get(i).setQuantity(billOfMaterialItems.get(i).getQuantity() - orders.get(j).getQuantity() <= 0 ? 0 :
-                            billOfMaterialItems.get(i).getQuantity() - orders.get(j).getQuantity());
+                    if(billOfMaterialItems.get(i).getQuantity() > orders.get(j).getQuantity()){
+                        billOfMaterialItems.get(i).setQuantity(billOfMaterialItems.get(i).getQuantity() - orders.get(j).getQuantity());
+                    }
                     break;
                 }
             }
@@ -385,7 +391,7 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             String sqlUser = "select \"U_NAME\" from OUSR where \"USERID\" = %s";
             res.doQuery(String.format(sqlUser,billOfMaterial.getCreator()));
             return  "创建人：" + res.getFields().item("U_NAME").getValue()+";[" + billOfMaterial.getDocEntry() +"]BOM;工单号：" + billOfMaterial.getWorkOrderNo() +";项目:"
-                    + billOfMaterial.getProject()+";合同号："+billOfMaterial.getContractNo()+";合同名称："+billOfMaterial.getContractName();
+                    + billOfMaterial.getProject()+";合同号："+billOfMaterial.getContractNo()+";合同名称："+billOfMaterial.getContractName() + ";物料类型：" + billOfMaterial.getItemType();
 
         }catch (Exception e){
             logger.error("查询用户信息异常",e);

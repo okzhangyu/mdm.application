@@ -79,6 +79,12 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
     @Column(name = "Modelname")
     private String modelName;
 
+    @Column(name = "Desdocentry")
+    private Integer desDocEntry;
+
+    @Column(name = "Deslinenum")
+    private Integer desLineNum;
+
     public String getUniqueKey() {
         return uniqueKey;
     }
@@ -282,6 +288,25 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
 
     }
 
+    @Override
+    public Integer getDesDocEntry() {
+        return desDocEntry;
+    }
+
+    @Override
+    public void setDesDocEntry(Integer desDocEntry) {
+        this.desDocEntry = desDocEntry;
+    }
+
+    @Override
+    public Integer getDesLineNum() {
+        return desLineNum;
+    }
+
+    @Override
+    public void setDesLineNum(Integer desLineNum) {
+        this.desLineNum = desLineNum;
+    }
 
     @Override
     public String getModelName() {
