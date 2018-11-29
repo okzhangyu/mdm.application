@@ -26,20 +26,6 @@ public class ProjectController {
     @Autowired
     private ProjectReportService projectReportService;
 
-    @GetMapping("budgets")
-    public ProjectBudget getProjectBudget(){
-        ProjectBudget projectBudget = new ProjectBudget();
-        ProjectBudgetItem projectBudgetItem;
-        projectBudget.setCardCode("C1001");
-        projectBudget.setDeptId("D11");
-        projectBudget.setPrjCode("自动化");
-        projectBudgetItem = new ProjectBudgetItem();
-        projectBudgetItem.setDocEntry(1);
-        projectBudgetItem.setLineNum(1);
-        projectBudget.getProjectBudgetItemList().add(projectBudgetItem);
-        return projectBudget;
-    }
-
     @GetMapping("reports")
     public ProjectReport getProjectReport(){
         ProjectReport projectReport = new ProjectReport();

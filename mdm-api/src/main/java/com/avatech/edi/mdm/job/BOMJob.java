@@ -30,8 +30,7 @@ public class BOMJob {
 
     @Scheduled(cron = "0 0/1 * * * ?")
     private void processData() {
-        try {
-            List<TaskRecord> taskRecordList = taskRecordService.fetchTaskRecord(BusinessObjectType.BILL_OF_MATERIAL);
+        try { List<TaskRecord> taskRecordList = taskRecordService.fetchTaskRecord(BusinessObjectType.BILL_OF_MATERIAL);
             if (taskRecordList.size() > 0) {
                 logger.info("获取任务清单信息：" + taskRecordList.toString());
                 BillOfMaterial billOfMaterial;
