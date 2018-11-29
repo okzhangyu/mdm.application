@@ -84,6 +84,7 @@ public class BillOfMaterial implements IBillOfMaterial {
 
     @Column(name = "Docdate")
     private String docDtae;
+
     @Column(name="HTH")
     private String contractNo;
 
@@ -372,6 +373,7 @@ public class BillOfMaterial implements IBillOfMaterial {
 
     @Override
     public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
     }
 
     @Override
@@ -381,6 +383,7 @@ public class BillOfMaterial implements IBillOfMaterial {
 
     @Override
     public void setContractName(String contractName) {
+        this.contractName = contractName;
     }
 
     @Override
