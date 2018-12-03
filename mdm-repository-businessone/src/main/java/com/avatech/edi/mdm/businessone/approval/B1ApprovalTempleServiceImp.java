@@ -59,8 +59,8 @@ public class B1ApprovalTempleServiceImp implements B1ApprovalTempleService {
             resCondition.doQuery(conditionSql);
             if(resCondition.getRecordCount() > 0){
                 String result = resCondition.getFields().item(0).getValue().toString();
-                if(result.toUpperCase().equals("TRUE")){
-                    return true;
+                    if(result.toUpperCase().equals("TRUE")){
+                        return true;
                 }
             }
             return false;
@@ -78,7 +78,7 @@ public class B1ApprovalTempleServiceImp implements B1ApprovalTempleService {
            String getter = "get" + firstLetter + fieldName.substring(1);
            Method method = object.getClass().getMethod(getter, new Class[] {});
            String value = method.invoke(object, new Object[] {}).toString();
-           return value;
+           return  "'" + value + "'";
        }catch (IllegalArgumentException e){
            throw new B1Exception(e);
        }
@@ -134,7 +134,6 @@ public class B1ApprovalTempleServiceImp implements B1ApprovalTempleService {
             approvalTemplatesParams = (ApprovalTemplatesParams) approvalTemplatesService.getApprovalTemplateList();
             approvalTemplateParams = (ApprovalTemplateParams) approvalTemplatesParams.add();
             approvalTemplateParams.setCode(tempCode);
-
             approvalTemplate = approvalTemplatesService.getApprovalTemplate(approvalTemplateParams);
             if (approvalTemplate != null) {
                 if (isActive) {

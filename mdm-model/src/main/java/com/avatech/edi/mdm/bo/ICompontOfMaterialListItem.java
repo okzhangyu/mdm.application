@@ -85,4 +85,11 @@ public interface ICompontOfMaterialListItem {
 
     void setModelName(String modelName);
 
+    Integer getDesDocEntry();
+
+    void setDesDocEntry(Integer desDocEntry);
+
+    Integer getDesLineNum();
+
+    void setDesLineNum(Integer desLineNum);
 }

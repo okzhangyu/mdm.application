@@ -84,6 +84,7 @@ public class BillOfMaterial implements IBillOfMaterial {
 
     @Column(name = "Docdate")
     private String docDtae;
+
     @Column(name="HTH")
     private String contractNo;
 
@@ -92,6 +93,9 @@ public class BillOfMaterial implements IBillOfMaterial {
 
     @Column(name = "Manager")
     private String manager;
+
+    @Column(name = "Depttype")
+    private String deptType;
 
     @Override
     public String getManager() {
@@ -354,6 +358,14 @@ public class BillOfMaterial implements IBillOfMaterial {
 
     }
 
+    public String getDeptType() {
+        return deptType;
+    }
+
+    public void setDeptType(String deptType) {
+        this.deptType = deptType;
+    }
+
     @Override
     public String getDocDate() {
         return docDtae;
@@ -361,6 +373,7 @@ public class BillOfMaterial implements IBillOfMaterial {
 
     @Override
     public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
     }
 
     @Override
@@ -370,6 +383,7 @@ public class BillOfMaterial implements IBillOfMaterial {
 
     @Override
     public void setContractName(String contractName) {
+        this.contractName = contractName;
     }
 
     @Override

@@ -1,0 +1,29 @@
+[
+  {
+    "companyName":"技术公司-开发测试02",
+    "server":"10.10.8.41:30015",
+    "companyDB":"SBO_JS_KFCS02",
+    "userName":"A100",
+    "password":"123456",
+    "licenseServer":"10.10.8.41:40000",
+    "sldServer":"10.10.8.41:40000",
+    "dbServiceType":9,
+    "dbUsername":"SYSTEM",
+    "dbPassword":"Consen2018",
+    "laguage":15,
+    "useTrusted":"false"
+  }, {
+  "companyName":"技术公司-开发测试03",
+  "server":"10.10.8.41:30015",
+  "companyDB":"SBO_JS_KFCS03",
+  "userName":"A100",
+  "password":"123456",
+  "licenseServer":"10.10.8.41:40000",
+  "sldServer":"10.10.8.41:40000",
+  "dbServiceType":9,
+  "dbUsername":"SYSTEM",
+  "dbPassword":"Consen2018",
+  "laguage":15,
+  "useTrusted":"false"
+}
+]

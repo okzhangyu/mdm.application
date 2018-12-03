@@ -2,6 +2,7 @@ package com.avatech.edi.mdm.businessone;
 
 import com.avatech.edi.mdm.config.B1Connection;
 import com.sap.smb.sbo.api.ICompany;
+import com.sap.smb.sbo.api.SBOCOMConstants;
 import com.sap.smb.sbo.api.SBOCOMUtil;
 import com.sap.smb.sbo.api.SBOErrorMessage;
 import org.slf4j.Logger;
@@ -102,7 +103,6 @@ public class BORepositoryBusinessOne {
             company.setDbPassword(this.dbPassword);
             company.setSLDServer(this.sldServer);
             company.setLicenseServer(this.licenseServer);
-
             int connectionResult = company.connect();
             if (connectionResult == 0) {
                 logger.info("Successfully connected to " + company.getCompanyName());
