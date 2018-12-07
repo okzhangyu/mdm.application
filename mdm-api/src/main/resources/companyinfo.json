@@ -194,5 +194,19 @@
     "dbPassword":"Consen2018",
     "laguage":15,
     "useTrusted":"false"
+  },
+  {
+    "companyName":"自动化测试_1204",
+    "server":"10.10.8.41:30015",
+    "companyDB":"SBO_KJS_ZDH1204",
+    "userName":"SDI",
+    "password":"123456",
+    "licenseServer":"10.10.8.41:40000",
+    "sldServer":"10.10.8.41:40000",
+    "dbServiceType":9,
+    "dbUsername":"SYSTEM",
+    "dbPassword":"Consen2018",
+    "laguage":15,
+    "useTrusted":"false"
   }
 ]
