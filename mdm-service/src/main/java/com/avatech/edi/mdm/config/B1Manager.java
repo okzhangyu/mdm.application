@@ -35,9 +35,6 @@ public class B1Manager {
             List<B1Connection> companyInfos = gson.fromJson(stringBuffer.toString(), new TypeToken<List<B1Connection>>() {
             }.getType());
             return companyInfos;
-        } catch (IOException e) {
-            logger.info("读取配置文件出错", e);
-            throw new ServiceException("50002", "读取配置文件出错");
         } finally {
             if (null != bufferedReader) bufferedReader.close();
             if (null != inputStreamReader) inputStreamReader.close();
@@ -58,8 +55,9 @@ public class B1Manager {
             }
         }catch (ServiceException e){
             throw e;
-        }
-        catch (Exception e){
+        }catch (IOException e){
+            throw new ServiceException("50002", "读取配置文件出错");
+        }catch (Exception e){
             throw new ServiceException("50003","公司信息配置信息匹配异常");
         }
         if(connection == null){
