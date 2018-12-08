@@ -24,4 +24,4 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_MDM_VIEW_OACT" ( "UNIQUEKEY",
 	 "ActType",
 	 "CfwRlvnt",
 	 "AccntntCod"
-from "SBO_KJSJT-ADDON".OACT
+from "SBO_KJS_JT".OACT

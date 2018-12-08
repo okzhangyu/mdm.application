@@ -18,4 +18,4 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_MDM_VIEW_OPRC" ( "UNIQUEKEY",
 	 "ValidTo",
 	 "Active" ,
 	 "CCTypeCode"
-from "SBO_KJSJT-ADDON".OPRC
+from "SBO_KJS_JT".OPRC
