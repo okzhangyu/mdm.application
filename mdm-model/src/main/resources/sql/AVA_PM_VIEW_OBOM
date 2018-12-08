@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_PM_VIEW_OBOM" ( "UNIQUEKEY",
 	 "COMPANYDB",
 	 "DOCENTRY",
@@ -260,3 +261,73 @@ UNION ALL select
 	 "U_PrjManager" ,
 	"U_DeptType"
 from "SBO_KJS_XA"."@AVA_PM_OVCO"
+=======
+alter VIEW "ADDON_MID_BASE"."AVA_PM_VIEW_OBOM" ( "UNIQUEKEY",
+	 "COMPANYDB","DOCENTRY","BPCODE","ITEMCODE","ITEMNAME","VERSION","VERSIONDESC","ACTIVED","TREETYPE","UNITQTY",
+	 "UOM","TOWH","PROJECT","WORKORDERNO","ROUTCODE","OUTPUTWKC","VALIDDATEF","VALIDDATET","BPLID",
+	 "REMARKS","DOCSTATUS","DOCDATE","DOCDUEDATE","TAXDATE","REF1","REF2","OPTYPE","ITEMTYPE",
+	 "PROJECTNAME","CREATOR","HTH","HTMC","MANAGER","DEPTTYPE") as
+select
+	 concat(''SBO_KJS_HT_'',"DocEntry"),''SBO_KJS_HT'',
+	 "DocEntry",'''', "U_ItemCode", "U_ItemName", "U_Version",
+	 "U_VerDescrp", ''Y'', "U_TreeType", "U_UnitQty", "U_Uom", "U_ToWH", "U_Project", "U_WorkId",
+	 '''', '''', '''', '''', '''', "U_Remarks", "U_DocStatus", "U_DocDate", "U_DocDueDate",
+	 "U_TaxDate", "U_Ref1", "U_Ref2" , ''A'', "U_ItemType", '''', "UserSign",
+	 "U_HTH", "U_HTMC" , "U_PrjManager","U_DeptType"
+	 from "SBO_KJS_HT"."@AVA_PM_OVCO"
+UNION ALL
+select
+	 concat(''SBO_KJS_XAFB_'',"DocEntry"),''SBO_KJS_XAFB'',
+	 "DocEntry",'''', "U_ItemCode", "U_ItemName", "U_Version",
+	 "U_VerDescrp", ''Y'', "U_TreeType", "U_UnitQty", "U_Uom", "U_ToWH", "U_Project", "U_WorkId",
+	 '''', '''', '''', '''', '''', "U_Remarks", "U_DocStatus", "U_DocDate", "U_DocDueDate",
+	 "U_TaxDate", "U_Ref1", "U_Ref2" , ''A'', "U_ItemType", '''', "UserSign",
+	 "U_HTH", "U_HTMC" , "U_PrjManager","U_DeptType"
+	 from "SBO_KJS_XAFB"."@AVA_PM_OVCO"
+UNION ALL
+select
+	 concat(''SBO_KJS_TRICONTROL_'',"DocEntry"),''SBO_KJS_TRICONTROL'',
+	 "DocEntry",'''', "U_ItemCode", "U_ItemName", "U_Version",
+	 "U_VerDescrp", ''Y'', "U_TreeType", "U_UnitQty", "U_Uom", "U_ToWH", "U_Project", "U_WorkId",
+	 '''', '''', '''', '''', '''', "U_Remarks", "U_DocStatus", "U_DocDate", "U_DocDueDate",
+	 "U_TaxDate", "U_Ref1", "U_Ref2" , ''A'', "U_ItemType", '''', "UserSign",
+	 "U_HTH", "U_HTMC" , "U_PrjManager","U_DeptType"
+	 from "SBO_KJS_TRICONTROL"."@AVA_PM_OVCO"
+UNION ALL
+select
+	 concat(''SBO_KJS_CKHK_'',"DocEntry"),''SBO_KJS_CKHK'',
+	 "DocEntry",'''', "U_ItemCode", "U_ItemName", "U_Version",
+	 "U_VerDescrp", ''Y'', "U_TreeType", "U_UnitQty", "U_Uom", "U_ToWH", "U_Project", "U_WorkId",
+	 '''', '''', '''', '''', '''', "U_Remarks", "U_DocStatus", "U_DocDate", "U_DocDueDate",
+	 "U_TaxDate", "U_Ref1", "U_Ref2" , ''A'', "U_ItemType", '''', "UserSign",
+	 "U_HTH", "U_HTMC" , "U_PrjManager","U_DeptType"
+	 from "SBO_KJS_CKHK"."@AVA_PM_OVCO"
+UNION ALL
+select
+	 concat(''SBO_KJS_ZDH_'',"DocEntry"),''SBO_KJS_ZDH'',
+	 "DocEntry",'''', "U_ItemCode", "U_ItemName", "U_Version",
+	 "U_VerDescrp", ''Y'', "U_TreeType", "U_UnitQty", "U_Uom", "U_ToWH", "U_Project", "U_WorkId",
+	 '''', '''', '''', '''', '''', "U_Remarks", "U_DocStatus", "U_DocDate", "U_DocDueDate",
+	 "U_TaxDate", "U_Ref1", "U_Ref2" , ''A'', "U_ItemType", '''', "UserSign",
+	 "U_HTH", "U_HTMC" , "U_PrjManager","U_DeptType"
+	 from "SBO_KJS_ZDH"."@AVA_PM_OVCO"
+UNION ALL
+select
+	 concat(''SBO_KJS_ZDH_20181109_'',"DocEntry"),''SBO_KJS_ZDH_20181109'',
+	 "DocEntry",'''', "U_ItemCode", "U_ItemName", "U_Version",
+	 "U_VerDescrp", ''Y'', "U_TreeType", "U_UnitQty", "U_Uom", "U_ToWH", "U_Project", "U_WorkId",
+	 '''', '''', '''', '''', '''', "U_Remarks", "U_DocStatus", "U_DocDate", "U_DocDueDate",
+	 "U_TaxDate", "U_Ref1", "U_Ref2" , ''A'', "U_ItemType", '''', "UserSign",
+	 "U_HTH", "U_HTMC" , "U_PrjManager","U_DeptType"
+	 from "SBO_KJS_ZDH_20181109"."@AVA_PM_OVCO"
+UNION ALL
+select
+	 concat(''SBO_KJS_ZDH1204_'',"DocEntry"),''SBO_KJS_ZDH1204'',
+	 "DocEntry",'''', "U_ItemCode", "U_ItemName", "U_Version",
+	 "U_VerDescrp", ''Y'', "U_TreeType", "U_UnitQty", "U_Uom", "U_ToWH", "U_Project", "U_WorkId",
+	 '''', '''', '''', '''', '''', "U_Remarks", "U_DocStatus", "U_DocDate", "U_DocDueDate",
+	 "U_TaxDate", "U_Ref1", "U_Ref2" , ''A'', "U_ItemType", '''', "UserSign",
+	 "U_HTH", "U_HTMC" , "U_PrjManager","U_DeptType"
+	 from "SBO_KJS_ZDH1204"."@AVA_PM_OVCO"
+	 
+>>>>>>> edi/master
