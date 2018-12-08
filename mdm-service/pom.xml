@@ -33,6 +33,12 @@
             <artifactId>mdm-repository-businessone</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.7</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>
