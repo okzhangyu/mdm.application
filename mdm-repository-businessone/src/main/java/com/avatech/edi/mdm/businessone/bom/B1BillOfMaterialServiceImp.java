@@ -277,8 +277,8 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
             IDocuments document = SBOCOMUtil.newDocuments(company, SBOCOMConstants.BoObjectTypes_Document_oPurchaseRequest);
             List<RequestOrder> requestOrders = this.getRequestOrder(billOfMaterial,company);
             document.setDocDate(new Date());
+            document.setDocDueDate(new Date());
             document.setTaxDate(new Date());
-            document.setVatDate(new Date());
             document.setRequriedDate(new Date());
             document.setComments(getBOMRemarks(billOfMaterial,company));
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
