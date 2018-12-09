@@ -16,6 +16,7 @@ public class B1Manager {
 
     private final Logger logger = LoggerFactory.getLogger(B1Manager.class);
     String path ="C:\\Users\\Administrator\\Desktop\\companyconfig\\mdmcompanyino.jason";
+    public static String companyinfo = "companyinfo.json";
     File file =new File(path);
     private static List<B1Connection> b1Connections;
 
