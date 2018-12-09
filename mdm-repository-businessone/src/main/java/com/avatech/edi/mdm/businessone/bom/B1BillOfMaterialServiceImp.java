@@ -240,10 +240,16 @@ public class B1BillOfMaterialServiceImp implements B1BillOfMaterialService {
                     document.getLines().getUserFields().getFields().item(BOM_WORKORDERNUM).setValue(billOfMaterial.getWorkOrderNo());
                     SimpleDateFormat sdf = new SimpleDateFormat(" yyyy-MM-dd ");
                     document.getLines().getUserFields().getFields().item(DOCDATE).setValue(sdf.format(item.getDocDate()));
-                    if (item.getModelName() != null && !item.getModelName().isEmpty()) {
+
+                    if(item.getModelName() != null && !item.getModelName().isEmpty()) {
                         document.getLines().getUserFields().getFields().item(MODEL_NAME).setValue(item.getModelName());
                     }
                     document.getLines().add();
+
+                    if(item.getModelName() != null && !item.getModelName().isEmpty()){
+                        document.getLines().getUserFields().getFields().item(MODEL_NAME).setValue(item.getModelName());
+                    }document.getLines().add();
+
                 }
             }
             if(isExists){

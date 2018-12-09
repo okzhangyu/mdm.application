@@ -3,7 +3,7 @@ CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_MDM_VIEW_OCRG" ( "UNIQUEKEY",
 	 "GROUPNAME",
 	 "GROUPTYPE",
 	 "LOCKED" ) AS select
-	 "GroupName",
+	 "GroupCode",
 	 "GroupCode",
 	 "GroupName",
 	 "GroupType",
