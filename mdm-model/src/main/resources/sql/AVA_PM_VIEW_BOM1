@@ -77,4 +77,3 @@ select
 	 ifnull(t1."LineNum",-1) as DesLineNum
 	 from "SBO_KJS_ZDH1204"."@AVA_PM_VCO1" t0 left join "SBO_KJS_ZDH1204"."WOR1" t1
 	 		on t0."DocEntry" = t1."U_BaseEntry" and t0."LineId" = t1."U_BaseLineNum"
-

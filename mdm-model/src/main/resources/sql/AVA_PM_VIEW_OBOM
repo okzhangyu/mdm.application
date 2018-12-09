@@ -65,4 +65,4 @@ select
 	 "U_TaxDate", "U_Ref1", "U_Ref2" , ''A'', "U_ItemType", '''', "UserSign",
 	 "U_HTH", "U_HTMC" , "U_PrjManager","U_DeptType"
 	 from "SBO_KJS_ZDH1204"."@AVA_PM_OVCO"
-
+	 
