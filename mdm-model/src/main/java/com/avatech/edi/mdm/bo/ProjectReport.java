@@ -1,7 +1,5 @@
 package com.avatech.edi.mdm.bo;
 
-import org.omg.CORBA.INTERNAL;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +30,33 @@ public class ProjectReport implements IProjectReport{
 
     private Integer bPLId;
 
+    private String workOrderNo;
+
+    private String project;
+
+    private String contractNo;
+
+    private String contractName;
+
+    @Override
+    public String getWorkOrderNo() {
+        return workOrderNo;
+    }
+
+    @Override
+    public void setWorkOrderNo(String workOrderNo) {
+        this.workOrderNo = workOrderNo;
+    }
+
+    @Override
+    public String getProject() {
+        return project;
+    }
+
+    @Override
+    public void setProject(String project) {
+        this.project = project;
+    }
 
     private List<ProjectReportItem> projectReportItems;
 
@@ -133,6 +158,26 @@ public class ProjectReport implements IProjectReport{
 
     public void setProjectReportItems(List<ProjectReportItem> projectReportItems) {
         this.projectReportItems = projectReportItems;
+    }
+
+    @Override
+    public String getContractNo() {
+        return contractNo;
+    }
+
+    @Override
+    public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
+    }
+
+    @Override
+    public String getContractName() {
+        return contractName;
+    }
+
+    @Override
+    public void setContractName(String contractName) {
+        this.contractName = contractName;
     }
 
     @Override

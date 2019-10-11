@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class BusinessPartnerService extends AbsMasterDataService{
 
-
     @Autowired
     private IBORepositoryBusinessPartner boRepositoryBusinessPartner;
 

@@ -1,13 +1,96 @@
 package com.avatech.edi.mdm.bo;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "AVA_PM_VIEW_OBOM")
 public class BillOfMaterial implements IBillOfMaterial {
+
+    public static List<CompontOfMaterialListItem> createMaterialListItems(IBillOfMaterial billOfMaterial){
+        for (int i = 0;i<billOfMaterial.getCompontOfMaterialListItems().size();i++){
+            if(billOfMaterial.getCompontOfMaterialListItems().get(i).getIsLocked().equals("Y") &&
+                    billOfMaterial.getCompontOfMaterialListItems().get(i).getDesLineNum().equals(-1)){
+                billOfMaterial.getCompontOfMaterialListItems().get(i).setDesLineNum(i);
+            }
+        }
+        return billOfMaterial.getCompontOfMaterialListItems();
+    }
+
+    public static List<ICompontOfMaterialListItem> createMaterialListItem(IBillOfMaterial billOfMaterial){
+        try{
+            List<ICompontOfMaterialListItem>  materialListItems = new LinkedList<>();
+            HashMap<Integer,ICompontOfMaterialListItem> materialListItemHashMap = new HashMap<>();
+            ICompontOfMaterialListItem currentBOMLine;
+            List<ICompontOfMaterialListItem> lockedOfBOM = billOfMaterial.getCompontOfMaterialListItems().stream().filter(c->c.getIsLocked().equals("Y")).collect(Collectors.toList());
+            List<ICompontOfMaterialListItem> lastLockedOfBOM = billOfMaterial.getCompontOfMaterialListItems().stream()
+                    .filter(c->c.getDesLineNum()>=0).collect(Collectors.toList());
+            List<ICompontOfMaterialListItem> handleOfBOM = billOfMaterial.getCompontOfMaterialListItems().stream()
+                    .filter(c->c.getIsLocked().equals("Y") || c.getDesLineNum()>=0).collect(Collectors.toList());
+            HashMap newBomAndOrder;
+            int count ;
+            if(lockedOfBOM.size()>=lastLockedOfBOM.size()){
+                count = lockedOfBOM.size();
+                newBomAndOrder = createBOMAndOrder(lockedOfBOM);
+            }else {
+                count = handleOfBOM.size();
+                newBomAndOrder = createBOMAndOrder(handleOfBOM);
+            }
+            int deleteLines = getDeleteLines(lastLockedOfBOM);
+            for (int i=0;i<count;i++) {
+                Integer key = findByValue(newBomAndOrder, i + deleteLines);
+                if (key == -1) {
+                    Integer lineNum = i + deleteLines;
+                    currentBOMLine = lastLockedOfBOM.stream().filter(c -> c.getIsLocked().equals("N") && c.getDesLineNum() == lineNum).findFirst().get();
+                } else {
+                    newBomAndOrder.put(key, i);
+                    currentBOMLine = handleOfBOM.stream().filter(c -> c.getLineId().equals(key)).findFirst().get();
+                    currentBOMLine.setDesLineNum(i);
+                }
+                materialListItems.add(currentBOMLine);
+            }
+            return materialListItems;
+        }catch (Exception e){
+            throw e;
+        }
+    }
+
+    private static Integer getDeleteLines(List<ICompontOfMaterialListItem> compontOfMaterialListItems){
+        if(compontOfMaterialListItems != null && compontOfMaterialListItems.size() == 0){
+            return 0;
+        }
+        Integer deleteLines = 10000;
+        for (ICompontOfMaterialListItem item:compontOfMaterialListItems) {
+            if(deleteLines>item.getDesLineNum() && item.getDesLineNum()>= 0){
+                deleteLines = item.getDesLineNum();
+            }
+        }
+        return deleteLines;
+    }
+    private static Integer findByValue(HashMap<Integer,Integer> map,Integer value){
+        Set set = map.entrySet(); //通过entrySet()方法把map中的每个键值对变成对应成Set集合中的一个对象
+        Iterator<Map.Entry<Integer, Integer>> iterator = set.iterator();
+        if(!map.values().contains(value)){
+            value = -1;
+        }
+        while(iterator.hasNext()){
+            //Map.Entry是一种类型，指向map中的一个键值对组成的对象
+            Map.Entry<Integer, Integer> entry = iterator.next();
+            if(entry.getValue().equals(value)){
+                return entry.getKey();
+            }
+        }
+        return -1;
+    }
+
+    private static HashMap createBOMAndOrder(List<ICompontOfMaterialListItem> compontOfMaterialListItems){
+        HashMap bomAndOrder = new HashMap<Integer,Integer>();
+        for (ICompontOfMaterialListItem item: compontOfMaterialListItems) {
+            bomAndOrder.put(item.getLineId(),item.getDesLineNum());
+        }
+        return bomAndOrder;
+    }
 
     @Id
     @Column(name = "Uniquekey")
@@ -81,6 +164,31 @@ public class BillOfMaterial implements IBillOfMaterial {
 
     @Column(name = "Projectname")
     private String projectName;
+
+    @Column(name = "Docdate")
+    private String docDtae;
+
+    @Column(name="HTH")
+    private String contractNo;
+
+    @Column(name = "HTMC")
+    private String contractName;
+
+    @Column(name = "Manager")
+    private String manager;
+
+    @Column(name = "Depttype")
+    private String deptType;
+
+    @Override
+    public String getManager() {
+        return manager;
+    }
+
+    @Override
+    public void setManager(String manager) {
+        this.manager = manager;
+    }
 
     @Override
     public String getProjectName() {
@@ -328,6 +436,45 @@ public class BillOfMaterial implements IBillOfMaterial {
     }
 
     @Override
+    public void setDocDate(String docDate) {
+        this.docDtae=docDate;
+
+    }
+
+    public String getDeptType() {
+        return deptType;
+    }
+
+    public void setDeptType(String deptType) {
+        this.deptType = deptType;
+    }
+
+    @Override
+    public String getDocDate() {
+        return docDtae;
+    }
+
+    @Override
+    public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
+    }
+
+    @Override
+    public String getContractNo() {
+        return contractNo;
+    }
+
+    @Override
+    public void setContractName(String contractName) {
+        this.contractName = contractName;
+    }
+
+    @Override
+    public String getContractName() {
+        return contractName;
+    }
+
+    @Override
     public String getItemType() {
         return itemType;
     }
@@ -363,6 +510,9 @@ public class BillOfMaterial implements IBillOfMaterial {
                 "\",\" opType\":\"" + opType + '\'' +
                 "\",\" creator\":\"" + creator + '\'' +
                 "\",\" compontOfMaterialListItems\":" + compontOfMaterialListItems +
+                "\",\" docDate\":" + docDtae +
+                "\",\" contractNo\":" + contractNo +
+                "\",\" contractName\":" + contractName +
                 '}';
     }
 }

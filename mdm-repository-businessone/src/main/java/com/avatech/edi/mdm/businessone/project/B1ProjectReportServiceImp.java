@@ -4,11 +4,13 @@ import com.avatech.edi.mdm.bo.IProjectReport;
 import com.avatech.edi.mdm.bo.IProjectReportItem;
 import com.avatech.edi.mdm.businessone.B1Exception;
 import com.avatech.edi.mdm.businessone.BORepositoryBusinessOne;
+import com.avatech.edi.mdm.businessone.approval.B1ApprovalTempleService;
 import com.avatech.edi.mdm.businessone.config.B1Data;
 import com.avatech.edi.mdm.config.B1Connection;
 import com.sap.smb.sbo.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -40,17 +42,38 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
     private final String ATLDURUN = "U_AtlDurUn";
     private final String OBJECT_CODE = "AVA_PM_ACTIVITY";
 
+    @Autowired
+    private B1ApprovalTempleService b1ApprovalTempleService;
+
     @Override
     public String syncProjectReport(IProjectReport projectReport, B1Connection b1Connection) {
         BORepositoryBusinessOne boRepositoryBusinessOne = null;
         ICompany company = null;
+        int tempCode = -1;
         try {
             boRepositoryBusinessOne = BORepositoryBusinessOne.getInstance(b1Connection);
             company = boRepositoryBusinessOne.getCompany();
+            tempCode = b1ApprovalTempleService.getApproveTemple(B1Data.TRANSFER,company,projectReport);
+            if(tempCode > 0){
+                b1ApprovalTempleService.inActiveApproveTemple(company);
+                b1ApprovalTempleService.activeApproveTemple(true,tempCode,company);
+            }
             IStockTransfer document = SBOCOMUtil.newStockTransfer(company, SBOCOMConstants.BoObjectTypes_oStockTransfer);
+            IRecordset res = SBOCOMUtil.newRecordset(company);
             document.setCardCode(B1Data.VISUAL_SUPPLIER);
             document.setDocDate(new Date());
             document.setTaxDate(new Date());
+            document.getApprovalTemplates();
+
+            document.getApprovalTemplates();
+            if(document.getStockTransfer_ApprovalRequests().getCount() > 0 && document.getStockTransfer_ApprovalRequests().getApprovalTemplatesID() > 0){
+                String sqlUser = "select \"U_NAME\" from OUSR where \"USERID\" = %s";
+                res.doQuery(String.format(sqlUser,projectReport.getCreator()));
+                String remarks = "创建人：" + res.getFields().item("U_NAME").getValue()+";["+projectReport.getDocEntry()+"]工时汇报单;工单号："+projectReport.getWorkOrderNo()+";项目:"+projectReport.getProject()
+                        + ";合同号："+projectReport.getContractNo()+";合同名称："+projectReport.getContractName();
+                document.getStockTransfer_ApprovalRequests().setCurrentLine(0);
+                document.getStockTransfer_ApprovalRequests().setRemarks(remarks);
+            }
             if(projectReport.getRemarks() != null)
                 document.setComments(projectReport.getRemarks());
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
@@ -61,7 +84,6 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
                 document.getUserFields().getFields().item(EMPLOYEE_NAME).setValue(projectReport.getEmpName());
             if(projectReport.getDeptName() != null)
                 document.getUserFields().getFields().item(DEPATEMENT_NAME).setValue(projectReport.getDeptName());
-
             for (IProjectReportItem item:projectReport.getProjectReportItems()) {
                 document.getLines().setItemCode(B1Data.VISUAL_ITEMCODE);
                 document.getLines().setWarehouseCode(B1Data.VISUAL_WHSCODE1);
@@ -107,6 +129,13 @@ public class B1ProjectReportServiceImp implements B1ProjectReportService {
         }catch (SBOCOMException e){
             logger.error("同步项目预算发生异常",e);
             throw new B1Exception(e);
+        }finally {
+            if(company != null){
+                if(tempCode > 0){
+                    b1ApprovalTempleService.inActiveApproveTemple(company);
+                }
+               // company.disconnect();
+            }
         }
     }
 }

@@ -6,6 +6,8 @@ package com.avatech.edi.mdm.config;
  */
 public class BusinessType {
 
+    public static final String MATERIAL="4";
+
     /**
      * 会计科目
      */

@@ -29,7 +29,7 @@ public class BillOfMaterialService {
     @Autowired
     private B1BillOfMaterialService b1BillOfMaterialService;
 
-    public SyncResult syncBOM(IBillOfMaterial billOfMaterial){
+    public SyncResult syncBOM(BillOfMaterial billOfMaterial){
         if(billOfMaterial.getCompanyDB().isEmpty()){
             return SyncResult.error(billOfMaterial.getDocEntry().toString(), B1Data.NO_COMPANY);
         }
@@ -61,4 +61,5 @@ public class BillOfMaterialService {
         Optional<BillOfMaterial> billOfMaterial = this.repositoryBillOfMaterial.findById(companDB+"_"+docEntry);
         return billOfMaterial.get();
     }
+
 }

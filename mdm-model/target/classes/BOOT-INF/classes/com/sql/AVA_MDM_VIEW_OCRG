@@ -1,0 +1,11 @@
+CREATE VIEW "ADDON_MID_BASE_TEST"."AVA_MDM_VIEW_OCRG" ( "UNIQUEKEY",
+	 "GROUPCODE",
+	 "GROUPNAME",
+	 "GROUPTYPE",
+	 "LOCKED" ) AS select
+	 "GroupCode",
+	 "GroupCode",
+	 "GroupName",
+	 "GroupType",
+	 "Locked"
+from "SBO_KJS_JT".OCRG

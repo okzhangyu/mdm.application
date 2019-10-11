@@ -1,6 +1,7 @@
 package com.avatech.edi.mdm.bo;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.Date;
 
 public interface ICompontOfMaterialListItem {
 
@@ -75,4 +76,24 @@ public interface ICompontOfMaterialListItem {
     String getUDF5();
 
     void setUDF5(String udf5);
+
+    void setDocDate(Date docDate);
+
+    Date getDocDate();
+
+    String getModelName();
+
+    void setModelName(String modelName);
+
+    Integer getDesDocEntry();
+
+    void setDesDocEntry(Integer desDocEntry);
+
+    Integer getDesLineNum();
+
+    void setDesLineNum(Integer desLineNum);
+
+    String getRemark();
+
+    void setRemark(String remark);
 }

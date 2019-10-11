@@ -2,6 +2,7 @@ package com.avatech.edi.mdm.service;
 
 import com.avatech.edi.mdm.repository.IBORepositoryTaskRecord;
 import com.avatech.edi.mdm.vo.TaskRecord;
+import javafx.concurrent.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,18 @@ public class TaskRecordService {
 
     public List<TaskRecord> fetchTaskRecord(String objectType){
         return taskRepository.findByObjectCodeAndIsSync(objectType,"N");
+    }
+
+    public List<TaskRecord> fetchTaskRecord(int docEntry){
+        return taskRepository.findByDocEntry(docEntry);
+    }
+
+    public List<TaskRecord> fetchTaskRecordByCompany(String companyName){
+        return taskRepository.findAllByCompanyName(companyName);
+    }
+
+    public List<TaskRecord> fetchErrorTaskRecord(){
+        return taskRepository.findTop10ByIsSyncAndErrorTimeBefore("E",5);
     }
 
     public void updateTask(List<TaskRecord> taskRecords,boolean isSync,String message){

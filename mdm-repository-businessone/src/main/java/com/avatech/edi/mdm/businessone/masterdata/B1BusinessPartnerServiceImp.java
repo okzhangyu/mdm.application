@@ -25,6 +25,7 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
     private static final String XTNW="U_Xtnw";
     private static final String JSPBM="U_JSPBM";
 
+
     @Override
     public String syncBusinessPartner(IBusinessPartner businessPartner, B1Connection b1Connection,List<DataTemple> dataTempleList){
         BORepositoryBusinessOne boRepositoryBusinessOne = null;
@@ -44,38 +45,51 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
             businessPartners.setCardName(businessPartner.getCardName());
             businessPartners.setCardType(getTypeValue(businessPartner.getCardType()));
             businessPartners.setGroupCode(businessPartner.getGroupCode());
-            if(businessPartner.getGsbh()!=null && !businessPartner.getGsbh().isEmpty()){
-                businessPartners.getUserFields().getFields().item(GSBH).setValue(businessPartner.getGsbh());
-            }
-            if(businessPartner.getGnw()!=null&& !businessPartner.getGnw().isEmpty()){
-                businessPartners.getUserFields().getFields().item(GNW).setValue(businessPartner.getGnw());
-
-            }
-            if (businessPartner.getXtnw()!=null && !businessPartner.getXtnw().isEmpty()){
-                businessPartners.getUserFields().getFields().item(XTNW).setValue(businessPartner.getGnw());
-
-            }
-            if (businessPartner.getJSPBM() !=null && !businessPartner.getJSPBM().isEmpty()){
-                businessPartners.getUserFields().getFields().item(JSPBM).setValue(businessPartner.getJSPBM());
-            }
-
-            if(businessPartner.getCj() != null&& !businessPartner.getCj().isEmpty() ){
-                businessPartners.getUserFields().getFields().item(CJ).setValue(businessPartner.getCj());
-            }
-            if( businessPartners.getFederalTaxID() != null && !businessPartners.getFederalTaxID().isEmpty()){
-                businessPartners.setFederalTaxID(businessPartners.getFederalTaxID());
-            }
 
 
+            if( businessPartner.getFederalTaxID() != null && !businessPartner.getFederalTaxID().isEmpty()){
+                businessPartners.setFederalTaxID(businessPartner.getFederalTaxID());
+            }
+            businessPartners.setPriceListNum(-1);
             // TODO temple filed
             for (DataTemple temple:dataTempleList) {
                 if(temple.getFieldName().isEmpty() || !B1Data.YES.equals(temple.getIsSync()))
                     continue;
-                if(temple.getFieldName().toUpperCase().equals(CURRENCY)){
+                if(temple.getFieldName().toUpperCase().equals(CURRENCY.toUpperCase())){
                     businessPartners.setCurrency(businessPartner.getCurrency());
+                    continue;
+                }
+                if(temple.getFieldName().toUpperCase().equals(CJ.toUpperCase())){
+                    if(businessPartner.getCj() != null&& !businessPartner.getCj().isEmpty() ){
+                        businessPartners.getUserFields().getFields().item(CJ).setValue(businessPartner.getCj());
+                    }
+                    continue;
+                }
+                if(temple.getFieldName().toUpperCase().equals(JSPBM.toUpperCase())){
+                    if (businessPartner.getJSPBM() !=null && !businessPartner.getJSPBM().isEmpty()){
+                        businessPartners.getUserFields().getFields().item(JSPBM).setValue(businessPartner.getJSPBM());
+                    }
+                    continue;
+                }
+                if(temple.getFieldName().toUpperCase().equals(XTNW.toUpperCase())){
+                    if (businessPartner.getXtnw()!=null && !businessPartner.getXtnw().isEmpty()){
+                        businessPartners.getUserFields().getFields().item(XTNW).setValue(businessPartner.getXtnw());
+                    }
+                    continue;
+                }
+                if(temple.getFieldName().toUpperCase().equals(GNW.toUpperCase())){
+                    if(businessPartner.getGnw()!=null&& !businessPartner.getGnw().isEmpty()){
+                        businessPartners.getUserFields().getFields().item(GNW).setValue(businessPartner.getGnw());
+                    }
+                    continue;
+                }
+                if(temple.getFieldName().toUpperCase().equals(GSBH.toUpperCase())){
+                    if(businessPartner.getGsbh()!=null && !businessPartner.getGsbh().isEmpty()){
+                        businessPartners.getUserFields().getFields().item(GSBH).setValue(businessPartner.getGsbh());
+                    }
+                    continue;
                 }
             }
-            // TODO userfileds
             int rstCode;
             if(isExist){
                 rstCode = businessPartners.update();
@@ -87,7 +101,6 @@ public class B1BusinessPartnerServiceImp implements B1BusinessPartnerService {
             }else {
                 throw new B1Exception(company.getLastErrorCode() + ":" + company.getLastErrorDescription());
             }
-
         }catch (SBOCOMException e){
             logger.info("",e.getMessage());
             throw new B1Exception(e);

@@ -35,7 +35,6 @@ public class B1AccountServiceImp implements B1AccountService {
             company = boRepositoryBusinessOne.getCompany();
 
             IChartOfAccounts chartOfAccounts = SBOCOMUtil.newChartOfAccounts(company);
-
             Boolean isExist;
             if(chartOfAccounts.getByKey(account.getAcctCode())){
                 isExist = true;
@@ -64,7 +63,6 @@ public class B1AccountServiceImp implements B1AccountService {
                     chartOfAccounts.setAccountType(getActType(account.getActType()));
                 }
             }
-
             int rstCode;
             if(isExist){
                 rstCode = chartOfAccounts.update();
@@ -80,6 +78,8 @@ public class B1AccountServiceImp implements B1AccountService {
         }catch (SBOCOMException e){
             logger.error("同步科目发生异常",e);
             throw new B1Exception(e);
+        }finally {
+            //company.disconnect();
         }
     }
 

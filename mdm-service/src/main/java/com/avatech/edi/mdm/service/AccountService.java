@@ -47,7 +47,6 @@ public class AccountService extends AbsMasterDataService{
             result.setCode("-1");
             result.setMessage(e.getMessage());
         }
-
         return result;
     }
 

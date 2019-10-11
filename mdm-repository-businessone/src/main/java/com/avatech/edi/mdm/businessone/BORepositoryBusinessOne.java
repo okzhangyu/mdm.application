@@ -2,6 +2,7 @@ package com.avatech.edi.mdm.businessone;
 
 import com.avatech.edi.mdm.config.B1Connection;
 import com.sap.smb.sbo.api.ICompany;
+import com.sap.smb.sbo.api.SBOCOMConstants;
 import com.sap.smb.sbo.api.SBOCOMUtil;
 import com.sap.smb.sbo.api.SBOErrorMessage;
 import org.slf4j.Logger;
@@ -28,9 +29,9 @@ public class BORepositoryBusinessOne {
 
     public final static BORepositoryBusinessOne getInstance(B1Connection ib1Connection) {
         synchronized (BORepositoryBusinessOne.class) {
-            if (null == boRepositoryBusinessOne ) {
+            if (null == boRepositoryBusinessOne) {
                 boRepositoryBusinessOne = new BORepositoryBusinessOne(ib1Connection);
-            }else if( boRepositoryBusinessOne != null && !boRepositoryBusinessOne.getCompany().getCompanyDB().equals(ib1Connection.getCompanyDB())){
+            }else if( boRepositoryBusinessOne != null && !boRepositoryBusinessOne.companyDB.equals(ib1Connection.getCompanyDB())){
                 boRepositoryBusinessOne.server = ib1Connection.getServer();
                 boRepositoryBusinessOne.companyDB = ib1Connection.getCompanyDB();
                 boRepositoryBusinessOne.userName = ib1Connection.getUserName();
@@ -72,7 +73,7 @@ public class BORepositoryBusinessOne {
                     return this.connect();
                 }
                 if(!company.isConnected())
-                    return this.connect();
+                    return  this.connect();
                 return company;
             }
         }
@@ -88,48 +89,31 @@ public class BORepositoryBusinessOne {
     }
 
     private ICompany connect()throws B1Exception {
-        try{
-            if(company == null)
-                company = SBOCOMUtil.newCompany();
-            company.setServer(this.server);
-            company.setCompanyDB(this.companyDB);
-            company.setUserName(this.userName);
-            company.setPassword(this.password);
-            company.setDbServerType(this.dbServerType);
-            company.setUseTrusted(this.useTrusted);
-            company.setLanguage(this.laguage);
-            company.setDbUserName(this.dbUsername);
-            company.setDbPassword(this.dbPassword);
-            company.setSLDServer(this.sldServer);
-            company.setLicenseServer(this.licenseServer);
 
-            int connectionResult = company.connect();
-            if (connectionResult == 0) {
-                logger.info("Successfully connected to " + company.getCompanyName());
-            } else {
-                SBOErrorMessage errMsg = company.getLastError();
-                throw new B1Exception("Cannot connect to server: "
-                        + errMsg.getErrorMessage()
-                        + " "
-                        + errMsg.getErrorCode());
-            }
-            return company;
-        }catch (Exception e){
-            logger.error("",e);
-            String errorMsg = "server:'" + server + '\'' +
-                    ", companyDB:'" + companyDB + '\'' +
-                    ", userName:'" + userName + '\'' +
-                    ", password:'" + password + '\'' +
-                    ", laguage=" + laguage +
-                    ", licenseServer:'" + licenseServer + '\'' +
-                    ", sldServer:'" + sldServer + '\'' +
-                    ", dbServiceType:" + this.dbServerType +
-                    ", dbUsername:'" + dbUsername + '\'' +
-                    ", dbPassword:'" + dbPassword + '\'' +
-                    ", useTrusted:" + useTrusted +
-                    '}';
-            logger.info("连接DI失败："+ errorMsg);
-            throw new B1Exception(e.getMessage());
+        company = SBOCOMUtil.newCompany();
+        company.setServer(this.server);
+        company.setCompanyDB(this.companyDB);
+        company.setUserName(this.userName);
+        company.setPassword(this.password);
+        company.setDbServerType(this.dbServerType);
+        company.setUseTrusted(this.useTrusted);
+        company.setLanguage(this.laguage);
+        company.setDbUserName(this.dbUsername);
+        company.setDbPassword(this.dbPassword);
+        company.setSLDServer(this.sldServer);
+        company.setLicenseServer(this.licenseServer);
+
+        int connectionResult = company.connect();
+        if (connectionResult == 0) {
+            logger.info("Successfully connected to " + company.getCompanyName());
+        } else {
+            SBOErrorMessage errMsg = company.getLastError();
+            throw new B1Exception("Cannot connect to server: "
+                    + errMsg.getErrorMessage()
+                    + " "
+                    + errMsg.getErrorCode());
         }
+        return company;
+
     }
 }

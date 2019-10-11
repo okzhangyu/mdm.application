@@ -12,6 +12,10 @@ public interface IProjectBudget {
 
     void setDocEntry(Integer docEntry);
 
+    String getWorkOrderNo();
+
+    void setWorkOrderNo(String workOrderNo);
+
     String getPrjCode();
 
     void setPrjCode(String prjCode);
@@ -83,6 +87,14 @@ public interface IProjectBudget {
     String getUdf5();
 
     void setUdf5(String udf5);
+
+    String getContractNo();
+
+    void setContractNo(String contractNo);
+
+    String getContractName();
+
+    void setContractName(String contractName);
 
     List<ProjectBudgetItem> getProjectBudgetItemList();
 

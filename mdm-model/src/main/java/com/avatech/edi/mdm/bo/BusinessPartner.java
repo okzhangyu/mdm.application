@@ -82,6 +82,9 @@ public class BusinessPartner extends MDMMasterData implements IBusinessPartner,S
     @Column(name = "Currency")
     private String currency;
 
+    @Column(name = "Listnum")
+    private String listNum;
+
     @Override
     public String getCurrency() {
         return currency;
@@ -92,17 +95,7 @@ public class BusinessPartner extends MDMMasterData implements IBusinessPartner,S
         this.currency = currency;
     }
 
-    @Override
-    public String getLicTradNum() {
-        return null;
-    }
-
-    @Override
-    public void setLicTradNum(String licTradNum) {
-
-    }
-
-    @Column(name = "Federaltaxid")
+    @Column(name = "LicTradNum")
     private String federalTaxID;
 
     @Override
@@ -166,6 +159,16 @@ public class BusinessPartner extends MDMMasterData implements IBusinessPartner,S
 
     public void setJSPBM(String jsbpm) {
         this.jspbm = jsbpm;
+    }
+
+    @Override
+    public String getListNum() {
+        return listNum;
+    }
+
+    @Override
+    public void setListNum(String listNum) {
+        this.listNum = listNum;
     }
 
     @Override

@@ -64,4 +64,20 @@ public class BOMJob {
         }
     }
 
+    @Scheduled(cron = "0 0/10 * * * ?")
+    private void handleTaskErrorData() {
+        try {
+            List<TaskRecord> errorTaskList = taskRecordService.fetchErrorTaskRecord();
+            logger.info("获取中间表错误" + errorTaskList.size() + "条记录");
+            for (TaskRecord taskRecord:errorTaskList) {
+                taskRecord.setIsSync("N");
+                taskRecord.setErrorTime(taskRecord.getErrorTime() + 1);
+                taskRecordService.updateTask(taskRecord);
+            }
+        } catch (Exception e) {
+            logger.error("处理中间表错误记录异常:", e);
+        }
+    }
+
+
 }

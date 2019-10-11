@@ -4,11 +4,13 @@ import com.avatech.edi.mdm.bo.IProjectBudget;
 import com.avatech.edi.mdm.bo.IProjectBudgetItem;
 import com.avatech.edi.mdm.businessone.B1Exception;
 import com.avatech.edi.mdm.businessone.BORepositoryBusinessOne;
+import com.avatech.edi.mdm.businessone.approval.B1ApprovalTempleService;
 import com.avatech.edi.mdm.businessone.config.B1Data;
 import com.avatech.edi.mdm.config.B1Connection;
 import com.sap.smb.sbo.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -40,17 +42,37 @@ public class B1ProjectBudgetServiceImp implements B1ProjectBudgetService {
     private final String ATLDURUN = "U_AtlDurUn";
 
     private final String OBJECT_CODE = "AVA_PM_TIMEBUDGET";
+
+    @Autowired
+    private B1ApprovalTempleService b1ApprovalTempleService;
+
     @Override
     public String syncProjectBudget(IProjectBudget projectBudget, B1Connection b1Connection) {
         BORepositoryBusinessOne boRepositoryBusinessOne = null;
         ICompany company = null;
+        int tempCode = -1;
         try {
             boRepositoryBusinessOne = BORepositoryBusinessOne.getInstance(b1Connection);
             company = boRepositoryBusinessOne.getCompany();
+            tempCode = b1ApprovalTempleService.getApproveTemple(B1Data.TRANSFER_REQUEST,company,projectBudget);
+            if(tempCode > 0){
+                b1ApprovalTempleService.inActiveApproveTemple(company);
+                b1ApprovalTempleService.activeApproveTemple(true,tempCode,company);
+            }
             IStockTransfer document = SBOCOMUtil.newStockTransfer(company,SBOCOMConstants.BoObjectTypes_StockTransfer_oInventoryTransferRequest);
+            IRecordset res = SBOCOMUtil.newRecordset(company);
             document.setCardCode(B1Data.VISUAL_SUPPLIER);
             document.setDocDate(new Date());
             document.setTaxDate(new Date());
+            document.getApprovalTemplates();
+            if(document.getStockTransfer_ApprovalRequests().getCount() > 0 && document.getStockTransfer_ApprovalRequests().getApprovalTemplatesID() > 0){
+                String sqlUser = "select \"U_NAME\" from OUSR where \"USERID\" = %s";
+                res.doQuery(String.format(sqlUser,projectBudget.getCreator()));
+                String remarks = "创建人：" + res.getFields().item("U_NAME").getValue()+";["+ projectBudget.getDocEntry()+"]工时预算单;工单号："+projectBudget.getWorkOrderNo()+";项目:"+projectBudget.getPrjCode()
+                        +";合同号："+projectBudget.getContractNo()+";合同名称："+projectBudget.getContractName();
+                document.getStockTransfer_ApprovalRequests().setCurrentLine(0);
+                document.getStockTransfer_ApprovalRequests().setRemarks(remarks);
+            }
             if(projectBudget.getRemarks() != null)
                 document.setComments(projectBudget.getRemarks());
             document.getUserFields().getFields().item(BASE_TYPE).setValue(OBJECT_CODE);
@@ -82,8 +104,6 @@ public class B1ProjectBudgetServiceImp implements B1ProjectBudgetService {
                     document.getLines().getUserFields().getFields().item(SUBJECT).setValue(item.getSrvcSbjct());
                 if(item.getSrvcCntnt() != null)
                     document.getLines().getUserFields().getFields().item(CONTENT).setValue(item.getSrvcCntnt());
-//               // if(item.getActType() != null)
-//                  //  document.getLines().getUserFields().getFields().item(ACTIVITY_TYPE).setValue(item.getActType());
                 if(item.getAtlStd() != null)
                     document.getLines().getUserFields().getFields().item(ATLSTD).setValue(item.getAtlStd());
                 if(item.getAtlStt() != null)
@@ -105,6 +125,13 @@ public class B1ProjectBudgetServiceImp implements B1ProjectBudgetService {
         }catch (SBOCOMException e){
             logger.error("同步项目预算发生异常",e);
             throw new B1Exception(e);
+        }finally {
+            if(company != null){
+                if(tempCode > 0){
+                    b1ApprovalTempleService.inActiveApproveTemple(company);
+                }
+               // company.disconnect();
+            }
         }
     }
 }

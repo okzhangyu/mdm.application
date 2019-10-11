@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 public class MasterDataServiceFactory {
 
     @Autowired
+    private MaterialService materialService;
+
+    @Autowired
     private AccountService acountService;
 
     @Autowired
@@ -38,6 +41,8 @@ public class MasterDataServiceFactory {
                 case BusinessType.BUSINESSPARTNERGROUP :service = businessPartnerGroupService;break;
                 case BusinessType.PROFITCENTER :service = profitCenterService;break;
                 case BusinessType.PROFITCENTERTYPE:service = profitCenterTypeService;break;
+                case BusinessType.MATERIAL:service =materialService;break;
+
             }
         }
         return service;

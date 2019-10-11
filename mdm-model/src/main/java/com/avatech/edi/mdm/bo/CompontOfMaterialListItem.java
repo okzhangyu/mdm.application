@@ -1,10 +1,14 @@
 package com.avatech.edi.mdm.bo;
 
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "AVA_PM_VIEW_BOM1")
@@ -70,6 +74,21 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
 
     @Column(name = "Udf5")
     private String udf5;
+
+    @Column(name = "Docdate")
+    private Date docDate;
+
+    @Column(name = "Modelname")
+    private String modelName;
+
+    @Column(name = "Desdocentry")
+    private Integer desDocEntry;
+
+    @Column(name = "Deslinenum")
+    private Integer desLineNum;
+
+    @Column(name = "Remark")
+    private String remark;
 
     public String getUniqueKey() {
         return uniqueKey;
@@ -269,6 +288,58 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
     }
 
     @Override
+    public void setDocDate(Date docDate) {
+        this.docDate=docDate;
+
+    }
+
+    @Override
+    public Integer getDesDocEntry() {
+        return desDocEntry;
+    }
+
+    @Override
+    public void setDesDocEntry(Integer desDocEntry) {
+        this.desDocEntry = desDocEntry;
+    }
+
+    @Override
+    public Integer getDesLineNum() {
+        return desLineNum;
+    }
+
+    @Override
+    public void setDesLineNum(Integer desLineNum) {
+        this.desLineNum = desLineNum;
+    }
+
+    @Override
+    public String getModelName() {
+        return modelName;
+    }
+
+    @Override
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    @Override
+    public Date getDocDate() {
+        return docDate;
+    }
+
+
+    @Override
+    public String getRemark() {
+        return remark;
+    }
+
+    @Override
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    @Override
     public String toString() {
         return "CompontOfMaterialListItem{" +
                 "\"uniqueKey\":\"" + uniqueKey + '\'' +
@@ -291,6 +362,7 @@ public class CompontOfMaterialListItem implements ICompontOfMaterialListItem {
                 "\",\"udf3\":\"" + udf3 + '\'' +
                 "\",\"udf4\":\"" + udf4 + '\'' +
                 "\",\"udf5\":\"" + udf5 + '\'' +
+                "\",\"docDate\":\"" + docDate + '\'' +
                 '}';
     }
 }
